@@ -1467,7 +1467,7 @@ export class ThreadPresenter implements IThreadPresenter {
         modelId: currentModelId,
         temperature: currentTemperature,
         maxTokens: currentMaxTokens,
-        enabledMcpTools: crrentEnabledMcpTools
+        enabledMcpTools: currentEnabledMcpTools
       } = currentConversation.settings
       const stream = this.llmProviderPresenter.startStreamCompletion(
         currentProviderId, // 使用最新的设置
