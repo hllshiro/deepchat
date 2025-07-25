@@ -107,7 +107,7 @@ export class ConversationsTable extends BaseTable {
         is_pinned,
         enabled_mcp_tools
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `)
     const conv_id = nanoid()
     const now = Date.now()
