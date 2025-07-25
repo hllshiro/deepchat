@@ -1476,7 +1476,7 @@ export class ThreadPresenter implements IThreadPresenter {
         state.message.id,
         currentTemperature, // 使用最新的设置
         currentMaxTokens, // 使用最新的设置
-        crrentEnabledMcpTools
+        currentEnabledMcpTools
       )
       for await (const event of stream) {
         const msg = event.data
