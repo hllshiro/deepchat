@@ -7,7 +7,8 @@ import {
   OllamaModel,
   ChatMessage,
   LLMAgentEvent,
-  KeyStatus
+  KeyStatus,
+  LLM_EMBEDDING_ATTRS
 } from '@shared/presenter'
 import { BaseLLMProvider } from './baseProvider'
 import { OpenAIProvider } from './providers/openAIProvider'
@@ -28,6 +29,7 @@ import { ShowResponse } from 'ollama'
 import { CONFIG_EVENTS } from '@/events'
 import { TogetherProvider } from './providers/togetherProvider'
 import { GrokProvider } from './providers/grokProvider'
+import { GroqProvider } from './providers/groqProvider'
 import { presenter } from '@/presenter'
 import { ZhipuProvider } from './providers/zhipuProvider'
 import { LMStudioProvider } from './providers/lmstudioProvider'
@@ -153,6 +155,8 @@ export class LLMProviderPresenter implements ILlmProviderPresenter {
           return new LMStudioProvider(provider, this.configPresenter)
         case 'together':
           return new TogetherProvider(provider, this.configPresenter)
+        case 'groq':
+          return new GroqProvider(provider, this.configPresenter)
         default:
           console.warn(`Unknown provider type: ${provider.apiType}`)
           return undefined
@@ -1066,7 +1070,8 @@ export class LLMProviderPresenter implements ILlmProviderPresenter {
           return { isOk: false, errorMsg: `Model test failed: ${errorMessage}` }
         }
       } else {
-        return { isOk: false, errorMsg: 'Model ID is required' }
+        // 如果没有提供modelId，使用provider的check方法进行基础验证
+        return await provider.check()
       }
     } catch (error) {
       console.error(`Provider ${providerId} check failed:`, error)
@@ -1205,15 +1210,42 @@ export class LLMProviderPresenter implements ILlmProviderPresenter {
   /**
    * 获取文本的 embedding 表示
    * @param providerId 提供商ID
-   * @param texts 文本数组
    * @param modelId 模型ID
+   * @param texts 文本数组
    * @returns embedding 数组
    */
-  async getEmbeddings(providerId: string, texts: string[], modelId: string): Promise<number[][]> {
-    const provider = this.getProviderInstance(providerId)
-    if (!provider.getEmbeddings) {
+  async getEmbeddings(providerId: string, modelId: string, texts: string[]): Promise<number[][]> {
+    try {
+      const provider = this.getProviderInstance(providerId)
+      return await provider.getEmbeddings(modelId, texts)
+    } catch (error) {
+      console.error(`${modelId} embedding 失败:`, error)
       throw new Error('当前 LLM 提供商未实现 embedding 能力')
     }
-    return provider.getEmbeddings(texts, modelId)
+  }
+
+  /**
+   * 获取指定模型的 embedding 维度
+   * @param providerId 提供商ID
+   * @param modelId 模型ID
+   * @returns 模型的 embedding 维度
+   */
+  async getDimensions(
+    providerId: string,
+    modelId: string
+  ): Promise<{ data: LLM_EMBEDDING_ATTRS; errorMsg?: string }> {
+    try {
+      const provider = this.getProviderInstance(providerId)
+      return { data: await provider.getDimensions(modelId) }
+    } catch (error) {
+      console.error(`获取模型 ${modelId} 的 embedding 维度失败:`, error)
+      return {
+        data: {
+          dimensions: 0,
+          normalized: false
+        },
+        errorMsg: error instanceof Error ? error.message : String(error)
+      }
+    }
   }
 }
