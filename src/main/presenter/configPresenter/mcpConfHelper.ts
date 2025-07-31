@@ -355,7 +355,7 @@ export class McpConfHelper {
 
     // 移除不兼容的服务
     const builtinKnowledgeSupported = await presenter.knowledgePresenter.isSupported()
-    if(!builtinKnowledgeSupported) {
+    if (!builtinKnowledgeSupported) {
       console.warn('内置知识库服务不支持当前环境，移除相关服务')
       delete updatedServers.builtinKnowledge
     }
