@@ -1021,6 +1021,9 @@ function onKeydown(e: KeyboardEvent) {
 defineExpose({
   setText: (text: string) => {
     inputText.value = text
+    // 更新输入框内容
+    editor.commands.setContent(text)
+    editor.commands.focus('end')
   }
 })
 </script>
@@ -1028,7 +1031,7 @@ defineExpose({
 <style scoped>
 .transition-all {
   transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transi5tion-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .duration-300 {
