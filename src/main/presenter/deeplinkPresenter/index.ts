@@ -187,6 +187,9 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
     // 如果用户增加了yolo=1或者yolo=true，则自动发送消息
     const yolo = params.get('yolo')
     const autoSend = yolo && yolo.trim() !== ''
+    // 解析简单模式标志
+    const simple = params.get('simple')
+    const isSimpleMode = simple === 'true'
     console.log('msg:', msg)
     console.log('modelId:', modelId)
     console.log('systemPrompt:', systemPrompt)
