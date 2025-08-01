@@ -1,8 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { eventBus } from '@/eventbus'
-import { WINDOW_EVENTS, CONFIG_EVENTS, SYSTEM_EVENTS, TAB_EVENTS } from '@/events'
+import {
+  WINDOW_EVENTS,
+  CONFIG_EVENTS,
+  SYSTEM_EVENTS,
+  TAB_EVENTS,
+  SIMPLE_MODE_EVENTS
+} from '@/events'
 import { is } from '@electron-toolkit/utils'
-import { ITabPresenter, TabCreateOptions, IWindowPresenter, TabData } from '@shared/presenter'
+import { ITabPresenter, TabCreateOptions, TabData } from '@shared/presenter'
+import { WindowPresenter } from './windowPresenter'
 import { BrowserWindow, WebContentsView, shell, nativeImage } from 'electron'
 import { join } from 'path'
 import contextMenu from '@/contextMenuHelper'
@@ -14,6 +21,9 @@ import { stitchImagesVertically } from '@/lib/scrollCapture'
 export class TabPresenter implements ITabPresenter {
   // 全局标签页实例存储
   private tabs: Map<number, WebContentsView> = new Map()
+
+  // 简单模式的窗口id
+  private simpleModeWindowId: number | null = null
 
   // 存储标签页状态
   private tabState: Map<number, TabData> = new Map()
@@ -30,9 +40,9 @@ export class TabPresenter implements ITabPresenter {
   // WebContents ID 到 Tab ID 的映射 (用于IPC调用来源识别)
   private webContentsToTabId: Map<number, number> = new Map()
 
-  private windowPresenter: IWindowPresenter // 窗口管理器实例
+  private windowPresenter: WindowPresenter // 窗口管理器实例
 
-  constructor(windowPresenter: IWindowPresenter) {
+  constructor(windowPresenter: WindowPresenter) {
     this.windowPresenter = windowPresenter // 注入窗口管理器
     this.initBusHandlers()
   }
@@ -64,7 +74,11 @@ export class TabPresenter implements ITabPresenter {
         this.onWindowSizeChange(windowId)
       }, 100)
     })
-
+    // 监听简单模式
+    eventBus.on(SIMPLE_MODE_EVENTS.STATE_CHANGED, (targetWindowId: number) => {
+      // 更新简单窗口的聊天页视图位置
+      this.updateWindowTabBounds(targetWindowId)
+    })
     // 窗口关闭，分离包含的视图
     eventBus.on(WINDOW_EVENTS.WINDOW_CLOSED, (windowId: number) => {
       const views = this.windowTabs.get(windowId)
@@ -611,6 +625,24 @@ export class TabPresenter implements ITabPresenter {
     this.updateViewBounds(window, view)
   }
 
+  private async updateWindowTabBounds(targetWindowId: number): Promise<void> {
+    // 获取目标窗口
+    const window = this.windowPresenter.windows.get(targetWindowId)
+    if (!window || window.isDestroyed()) {
+      console.warn('No target window found for view bounds update')
+      return
+    }
+    this.simpleModeWindowId = window.id
+    // 更新简单窗口的聊天页视图位置
+    const activeTabId = await this.getActiveTabId(window.id)
+    if (activeTabId) {
+      const view = this.tabs.get(activeTabId)
+      if (view) {
+        this.updateViewBounds(window, view)
+      }
+    }
+  }
+
   /**
    * 更新视图大小以适应窗口
    */
@@ -620,11 +652,16 @@ export class TabPresenter implements ITabPresenter {
 
     // 设置视图位置大小（留出顶部标签栏空间）
     const TAB_BAR_HEIGHT = 40 // 标签栏高度，需要根据实际UI调整
+
+    // 根据简单模式状态计算顶部偏移
+    const topOffset = window.id === this.simpleModeWindowId ? 4 : TAB_BAR_HEIGHT
+    const availableHeight = window.id === this.simpleModeWindowId ? height : height - TAB_BAR_HEIGHT
+
     view.setBounds({
       x: 4,
-      y: TAB_BAR_HEIGHT,
+      y: topOffset,
       width: width - 8,
-      height: height - TAB_BAR_HEIGHT - 4
+      height: availableHeight - 8
     })
   }
 
