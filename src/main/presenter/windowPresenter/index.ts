@@ -7,7 +7,7 @@ import { is } from '@electron-toolkit/utils' // Electron 工具库
 import { IWindowPresenter } from '@shared/presenter' // 窗口 Presenter 接口
 import { eventBus } from '@/eventbus' // 事件总线
 import { ConfigPresenter } from '../configPresenter' // 配置 Presenter
-import { CONFIG_EVENTS, SYSTEM_EVENTS, WINDOW_EVENTS } from '@/events' // 系统/窗口/配置 事件常量
+import { CONFIG_EVENTS, SYSTEM_EVENTS, WINDOW_EVENTS, SIMPLE_MODE_EVENTS } from '@/events' // 系统/窗口/配置 事件常量
 import { presenter } from '../' // 全局 presenter 注册中心
 import windowStateManager from 'electron-window-state' // 窗口状态管理器
 import { SHORTCUT_EVENTS } from '@/events' // 快捷键事件常量
@@ -139,6 +139,18 @@ export class WindowPresenter implements IWindowPresenter {
       setTimeout(() => {
         presenter.devicePresenter.restartApp()
       }, 1000)
+    })
+
+    // 监听简单模式状态变更事件
+    eventBus.on(SIMPLE_MODE_EVENTS.STATE_CHANGED, (targetWindowId: number) => {
+      console.log(`Simple mode start, updating window properties.`)
+      // 禁用指定窗口的缩放属性
+      const window = this.windows.get(targetWindowId)
+      if (window && !window.isDestroyed()) {
+        window.setResizable(false)
+      } else {
+        console.warn(`Skipping window resizability update for destroyed window ${targetWindowId}.`)
+      }
     })
   }
 

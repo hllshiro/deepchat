@@ -2,7 +2,7 @@ import { app } from 'electron'
 import { presenter } from '@/presenter'
 import { IDeeplinkPresenter, MCPServerConfig } from '@shared/presenter'
 import path from 'path'
-import { DEEPLINK_EVENTS, MCP_EVENTS, WINDOW_EVENTS } from '@/events'
+import { DEEPLINK_EVENTS, MCP_EVENTS, WINDOW_EVENTS, SIMPLE_MODE_EVENTS } from '@/events'
 import { eventBus, SendTarget } from '@/eventbus'
 
 interface MCPInstallConfig {
@@ -194,6 +194,37 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
     console.log('modelId:', modelId)
     console.log('systemPrompt:', systemPrompt)
     console.log('autoSend:', autoSend)
+
+    if (isSimpleMode) {
+      try {
+        let targetWindow = presenter.windowPresenter.getFocusedWindow()
+        if (!targetWindow?.id) return
+
+        // 通知渲染进程启用简单模式
+        presenter.windowPresenter.sendToWindow(
+          targetWindow.id,
+          SIMPLE_MODE_EVENTS.STATE_CHANGED,
+          isSimpleMode
+        )
+        // 通知主进程启用简单模式
+        eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, targetWindow.id)
+
+        // 销毁托盘图标
+        if (presenter.trayPresenter) {
+          console.log('Deeplinks: Destroying tray during simpleMode.')
+          presenter.trayPresenter.destroy()
+        } else {
+          console.warn('Deeplinks: TrayPresenter not found in presenter during simpleMode.')
+        }
+        // 销毁快捷键
+        presenter.shortcutPresenter.destroy()
+        // 销毁悬浮按钮
+        presenter.floatingButtonPresenter.destroy()
+      } catch (e) {
+        console.error('Deeplinks: Error during simpleMode:', e)
+      }
+    }
+
     eventBus.sendToRenderer(DEEPLINK_EVENTS.START, SendTarget.DEFAULT_TAB, {
       msg,
       modelId,

@@ -185,3 +185,8 @@ export const RAG_EVENTS = {
   FILE_UPDATED: 'rag:file-updated', // File status update
   FILE_PROGRESS: 'rag:file-progress' // File processing progress update
 }
+
+// Simple Mode related events
+export const SIMPLE_MODE_EVENTS = {
+  STATE_CHANGED: 'simple-mode:state-changed' // Shell Simple Mode state change event
+}
