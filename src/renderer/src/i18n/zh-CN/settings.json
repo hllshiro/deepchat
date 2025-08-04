@@ -404,14 +404,14 @@
     "source": "来源",
     "resumeAllPausedTasks": "一键恢复",
     "pauseAllRunningTasks": "一键暂停",
-     "reAddFile": {
-        "title": "重新上传确认",
-        "content": "是否确认重新上传文件 \"{fileName}\"？"
-      },
+    "reAddFile": {
+      "title": "重新上传确认",
+      "content": "是否确认重新上传文件 \"{fileName}\"？"
+    },
     "deleteFile": {
-        "title": "删除文件确认",
-        "content": "是否确认删除文件 \"{fileName}\"？此操作不可恢复。"
-      },
+      "title": "删除文件确认",
+      "content": "是否确认删除文件 \"{fileName}\"？此操作不可恢复。"
+    },
     "dialog": {
       "beforequit": {
         "title": "退出确认",
