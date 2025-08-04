@@ -407,7 +407,20 @@
         "description": "Il y a une tâche de base de connaissances en cours. Êtes-vous sûr de quitter le logiciel? Les tâches abandonnées peuvent être restaurées après le redémarrage du logiciel."
       }
     },
-    "searchError": "La requête a échoué"
+    "searchError": "La requête a échoué",
+    "processing": "Téléchargement",
+    "paused": "Télécharger une pause",
+    "unknown": "Statut inconnu",
+    "reAddFile": {
+      "title": "Re-télécharger la confirmation",
+      "content": "Êtes-vous sûr de télécharger le fichier \"{nom de fichier}\"?"
+    },
+    "deleteFile": {
+      "title": "Supprimer la confirmation du fichier",
+      "content": "Êtes-vous sûr de supprimer le fichier \"{nom de fichier}\"? Cette opération n'est pas restaurée."
+    },
+    "resumeAllPausedTasks": "Récupération en un clic",
+    "pauseAllRunningTasks": "Pause en un clic"
   },
   "mcp": {
     "title": "Paramètres MCP",
