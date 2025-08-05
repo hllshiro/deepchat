@@ -1030,23 +1030,10 @@ const uploadFile = () => {
             name: fileInfo.name,
             type: fileInfo.mimeType,
             size: fileInfo.metadata.fileSize,
-            path: fileInfo.path, // 在实际应用中应该是文件的保存路径
+            path: fileInfo.path,
             description: fileInfo.metadata.fileDescription,
+            content: fileInfo.content,
             createdAt: Date.now()
-          }
-
-          // 读取文件内容（对于文本文件）
-          if (
-            file.type.startsWith('text/') ||
-            ['.txt', '.md', '.csv', '.json', '.xml'].some((ext) =>
-              file.name.toLowerCase().endsWith(ext)
-            )
-          ) {
-            const reader = new FileReader()
-            reader.onload = (event) => {
-              fileItem.content = event.target?.result as string
-            }
-            reader.readAsText(file)
           }
 
           if (!form.files) {
