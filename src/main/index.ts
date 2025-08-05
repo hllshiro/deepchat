@@ -5,7 +5,7 @@ import { ProxyMode, proxyConfig } from './presenter/proxyConfig'
 import path from 'path'
 import fs from 'fs'
 import { eventBus } from './eventbus'
-import { WINDOW_EVENTS, TRAY_EVENTS, FLOATING_BUTTON_EVENTS } from './events'
+import { WINDOW_EVENTS, TRAY_EVENTS, FLOATING_BUTTON_EVENTS, SIMPLE_MODE_EVENTS } from './events'
 import { setLoggingEnabled } from '@shared/logger'
 import { is } from '@electron-toolkit/utils' // 确保导入 is
 import { handleShowHiddenWindow } from './utils'
@@ -106,6 +106,15 @@ app.whenReady().then(async () => {
   // 注册全局快捷键
   presenter.shortcutPresenter.registerShortcuts()
 
+  // 简单模式状态管理
+  let isSimpleModeEnabled = false
+
+  // 监听简单模式状态变化
+  eventBus.on(SIMPLE_MODE_EVENTS.STATE_CHANGED, (enabled: boolean) => {
+    console.log('Main: Simple mode state changed:', enabled)
+    isSimpleModeEnabled = enabled
+  })
+
   // 监听悬浮按钮配置变化事件
   eventBus.on(FLOATING_BUTTON_EVENTS.ENABLED_CHANGED, async (enabled: boolean) => {
     try {
@@ -133,8 +142,10 @@ app.whenReady().then(async () => {
 
   // 监听浏览器窗口获得焦点事件
   app.on('browser-window-focus', () => {
-    // 当任何窗口获得焦点时，注册快捷键
-    presenter.shortcutPresenter.registerShortcuts()
+    // 只有在非简单模式下才注册快捷键
+    if (!isSimpleModeEnabled) {
+      presenter.shortcutPresenter.registerShortcuts()
+    }
     eventBus.sendToMain(WINDOW_EVENTS.APP_FOCUS)
   })
 

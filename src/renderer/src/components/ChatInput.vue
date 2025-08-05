@@ -1169,7 +1169,7 @@ defineExpose({
 <style scoped>
 .transition-all {
   transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transi5tion-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .duration-300 {
