@@ -118,15 +118,32 @@
               >
                 <Icon icon="lucide:pencil" class="w-3.5 h-3.5" />
               </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                class="h-7 w-7 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
-                :title="t('common.delete')"
-                @click="deletePrompt(index)"
-              >
-                <Icon icon="lucide:trash-2" class="w-3.5 h-3.5" />
-              </Button>
+
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    class="h-7 w-7 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                    :title="t('common.delete')"
+                  >
+                    <Icon icon="lucide:trash-2" class="w-3.5 h-3.5" />
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>{{
+                      t('promptSetting.confirmDelete', { name: prompt.name })
+                    }}</AlertDialogTitle>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>{{ t('common.cancel') }}</AlertDialogCancel>
+                    <AlertDialogAction @click="deletePrompt(index)">{{
+                      t('common.confirm')
+                    }}</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
           </div>
 
@@ -491,6 +508,16 @@ import {
   SheetDescription,
   SheetFooter
 } from '@/components/ui/sheet'
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction
+} from '@/components/ui/alert-dialog'
 import { useToast } from '@/components/ui/toast'
 import { usePromptsStore } from '@/stores/prompts'
 import { useSettingsStore } from '@/stores/settings'
@@ -706,13 +733,6 @@ const editPrompt = (idx: number) => {
 
 const deletePrompt = async (idx: number) => {
   const prompt = prompts.value[idx]
-
-  // 确认删除
-  const confirmed = confirm(t('promptSetting.confirmDelete', { name: prompt.name }))
-  if (!confirmed) {
-    return
-  }
-
   try {
     await promptsStore.deletePrompt(prompt.id)
     await loadPrompts()
