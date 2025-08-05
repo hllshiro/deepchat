@@ -499,6 +499,7 @@ import { MessageFile } from '@shared/chat'
 import { usePresenter } from '@/composables/usePresenter'
 import { nanoid } from 'nanoid'
 import { getMimeTypeIcon } from '@/lib/utils'
+import { FileItem } from '@shared/presenter'
 
 const { t } = useI18n()
 const { toast } = useToast()
@@ -509,17 +510,6 @@ const settingsStore = useSettingsStore()
 const defaultSystemPrompt = ref('')
 const defaultPromptSaveStatus = ref<'idle' | 'typing' | 'saving' | 'saved'>('idle')
 const defaultPromptTextarea = ref<HTMLTextAreaElement>()
-
-interface FileItem {
-  id: string
-  name: string
-  type: string
-  size: number
-  path: string
-  description?: string
-  content?: string
-  createdAt: number
-}
 
 interface PromptItem {
   id: string
