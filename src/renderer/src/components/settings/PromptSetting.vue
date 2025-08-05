@@ -409,7 +409,7 @@
                     <div class="pr-8">
                       <div class="flex items-center gap-2 mb-2">
                         <div class="p-1.5 bg-primary/10 rounded">
-                          <Icon :icon="getFileIcon(file.type)" class="w-4 h-4 text-primary" />
+                          <Icon :icon="getMimeTypeIcon(file.type)" class="w-4 h-4 text-primary" />
                         </div>
                         <div class="flex-1 min-w-0">
                           <p class="text-sm font-medium truncate" :title="file.name">
@@ -419,10 +419,11 @@
                       </div>
 
                       <div class="flex items-center justify-between text-xs text-muted-foreground">
-                        <span class="px-2 py-0.5 bg-muted rounded uppercase">{{
-                          file.type || 'unknown'
-                        }}</span>
-                        <span>{{ formatFileSize(file.size) }}</span>
+                        <span
+                          class="px-2 py-0.5 bg-muted rounded truncate text-ellipsis whitespace-nowrap flex-1"
+                          >{{ file.type || 'unknown' }}</span
+                        >
+                        <span class="flex-shrink-0">{{ formatFileSize(file.size) }}</span>
                       </div>
 
                       <p
@@ -494,6 +495,10 @@ import { useToast } from '@/components/ui/toast'
 import { usePromptsStore } from '@/stores/prompts'
 import { useSettingsStore } from '@/stores/settings'
 import { useDebounceFn } from '@vueuse/core'
+import { MessageFile } from '@shared/chat'
+import { usePresenter } from '@/composables/usePresenter'
+import { nanoid } from 'nanoid'
+import { getMimeTypeIcon } from '@/lib/utils'
 
 const { t } = useI18n()
 const { toast } = useToast()
@@ -993,46 +998,53 @@ const getStatusColor = () => {
   }
 }
 
+const filePresenter = usePresenter('filePresenter')
+
 // 文件管理相关方法
 const uploadFile = () => {
   const input = document.createElement('input')
   input.type = 'file'
   input.multiple = true
   input.accept = '.txt,.md,.csv,.json,.xml,.pdf,.doc,.docx'
-  input.onchange = (e) => {
+  input.onchange = async (e) => {
     const files = (e.target as HTMLInputElement).files
     if (files) {
-      Array.from(files).forEach((file) => {
-        const fileItem: FileItem = {
-          id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-          name: file.name,
-          type: file.name.split('.').pop()?.toLowerCase() || 'unknown',
-          size: file.size,
-          path: file.name, // 在实际应用中应该是文件的保存路径
-          description: '',
-          createdAt: Date.now()
-        }
+      await Promise.all(
+        Array.from(files).map(async (file) => {
+          const path = window.api.getPathForFile(file)
+          const mimeType = await filePresenter.getMimeType(path)
+          const fileInfo: MessageFile = await filePresenter.prepareFile(path, mimeType)
 
-        // 读取文件内容（对于文本文件）
-        if (
-          file.type.startsWith('text/') ||
-          ['.txt', '.md', '.csv', '.json', '.xml'].some((ext) =>
-            file.name.toLowerCase().endsWith(ext)
-          )
-        ) {
-          const reader = new FileReader()
-          reader.onload = (event) => {
-            fileItem.content = event.target?.result as string
+          const fileItem: FileItem = {
+            id: nanoid(8),
+            name: fileInfo.name,
+            type: fileInfo.mimeType,
+            size: fileInfo.metadata.fileSize,
+            path: fileInfo.path, // 在实际应用中应该是文件的保存路径
+            description: fileInfo.metadata.fileDescription,
+            createdAt: Date.now()
           }
-          reader.readAsText(file)
-        }
 
-        if (!form.files) {
-          form.files = []
-        }
-        form.files.push(fileItem)
-      })
+          // 读取文件内容（对于文本文件）
+          if (
+            file.type.startsWith('text/') ||
+            ['.txt', '.md', '.csv', '.json', '.xml'].some((ext) =>
+              file.name.toLowerCase().endsWith(ext)
+            )
+          ) {
+            const reader = new FileReader()
+            reader.onload = (event) => {
+              fileItem.content = event.target?.result as string
+            }
+            reader.readAsText(file)
+          }
 
+          if (!form.files) {
+            form.files = []
+          }
+          form.files.push(fileItem)
+        })
+      )
       toast({
         title: t('promptSetting.uploadSuccess'),
         description: `${t('promptSetting.uploadedCount', { count: files.length })}`,
@@ -1047,21 +1059,6 @@ const removeFile = (index: number) => {
   if (form.files) {
     form.files.splice(index, 1)
   }
-}
-
-const getFileIcon = (type: string) => {
-  const iconMap: Record<string, string> = {
-    txt: 'lucide:file-text',
-    md: 'lucide:file-text',
-    csv: 'lucide:file-spreadsheet',
-    json: 'lucide:file-code',
-    xml: 'lucide:file-code',
-    pdf: 'lucide:file-type',
-    doc: 'lucide:file-text',
-    docx: 'lucide:file-text',
-    unknown: 'lucide:file'
-  }
-  return iconMap[type] || 'lucide:file'
 }
 
 const formatFileSize = (bytes: number) => {
