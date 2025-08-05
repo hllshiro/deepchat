@@ -441,8 +441,7 @@
     "unknown": "Statut inconnu",
     "reAddFile": {
       "title": "Re-télécharger la confirmation",
--      "content": "Êtes-vous sûr de télécharger le fichier \"{nom de fichier}\"?"
-+      "content": "Êtes-vous sûr de vouloir re-téléverser le fichier \"{fileName}\" ?"
+      "content": "Êtes-vous sûr de vouloir re-téléverser le fichier \"{fileName}\" ?"
     },
     "deleteFile": {
       "title": "Supprimer la confirmation du fichier",
