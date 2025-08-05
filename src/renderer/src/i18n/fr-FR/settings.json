@@ -76,6 +76,8 @@
     "resetConfirmDescription": "Veuillez sélectionner le type de données à réinitialiser. Cette opération est irréversible et l'application redémarrera automatiquement après la réinitialisation.",
     "resetChatData": "Réinitialiser les données de chat",
     "resetChatDataDesc": "Supprimer tout l'historique des conversations et les enregistrements de dialogue",
+    "resetKnowledgeData": "Réinitialiser les données de base de connaissances",
+    "resetKnowledgeDataDesc": "Supprimer tous les fichiers de base de connaissances et les données vectorielles",
     "resetConfig": "Réinitialiser la configuration",
     "resetConfigDesc": "Supprimer tous les paramètres de l'application, les configurations de modèles et les prompts personnalisés",
     "resetAll": "Réinitialisation complète",
@@ -203,6 +205,8 @@
   },
   "provider": {
     "enable": "Activer le service",
+    "enabled": "Activé",
+    "disabled": "Désactivé",
     "urlPlaceholder": "Veuillez entrer l'URL de l'API",
     "keyPlaceholder": "Veuillez entrer la clé API",
     "verifyKey": "Vérifier la clé",
@@ -321,7 +325,31 @@
     "toast": {
       "modelRunning": "Le modèle est en cours d'exécution",
       "modelRunningDesc": "Veuillez d'abord arrêter le modèle {model}, puis le supprimer."
-    }
+    },
+    "anthropicApiKeyTip": "Veuillez aller à la console anthropique pour obtenir votre clé API",
+    "anthropicConnected": "Connecté anthropique",
+    "anthropicNotConnected": "Anthropique non connecté",
+    "anthropicOAuthTip": "Cliquez sur Autoriser Deepchat pour accéder à votre compte anthropique",
+    "oauthLogin": "Connexion OAuth",
+    "authMethod": "Méthode de certification",
+    "authMethodPlaceholder": "Sélectionner la méthode d'authentification",
+    "apiKeyLabel": "Clé API",
+    "apiUrlLabel": "URL API",
+    "anthropicOAuthFlowTip": "Le système ouvrira automatiquement la fenêtre d'autorisation. Veuillez revenir et saisir le code d'autorisation après l'autorisation.",
+    "anthropicBrowserOpened": "Le navigateur externe est ouvert",
+    "anthropicCodeInstruction": "Veuillez compléter l'autorisation dans un navigateur externe et coller le code d'autorisation obtenu dans la zone d'entrée ci-dessous",
+    "browserOpenedSuccess": "Le navigateur externe est ouvert, veuillez compléter l'autorisation",
+    "codeRequired": "Veuillez saisir le code d'autorisation",
+    "inputOAuthCode": "Entrez le code d'autorisation",
+    "codeExchangeFailed": "Échange de code d'autorisation Échec",
+    "invalidCode": "Code d'autorisation non valide",
+    "oauthCodeHint": "Veuillez coller le code d'autorisation ici après avoir terminé l'autorisation dans un navigateur externe",
+    "oauthCodePlaceholder": "Veuillez saisir le code d'autorisation ...",
+    "verifyConnection": "Vérifier la connexion",
+    "manageModels": "Gérer les modèles",
+    "anthropicOAuthActiveTip": "L'authentification OAuth est activée, vous pouvez utiliser les services Anthropic directement",
+    "oauthVerifySuccess": "Connexion OAuth vérifiée avec succès",
+    "oauthVerifyFailed": "Échec de la vérification de la connexion OAuth"
   },
   "knowledgeBase": {
     "title": "Paramètres de la base de connaissances",
@@ -407,7 +435,20 @@
         "description": "Il y a une tâche de base de connaissances en cours. Êtes-vous sûr de quitter le logiciel? Les tâches abandonnées peuvent être restaurées après le redémarrage du logiciel."
       }
     },
-    "searchError": "La requête a échoué"
+    "searchError": "La requête a échoué",
+    "processing": "Téléchargement",
+    "paused": "Téléchargement en pause",
+    "unknown": "Statut inconnu",
+    "reAddFile": {
+      "title": "Re-télécharger la confirmation",
+      "content": "Êtes-vous sûr de vouloir re-téléverser le fichier \"{fileName}\" ?"
+    },
+    "deleteFile": {
+      "title": "Supprimer la confirmation du fichier",
+      "content": "Êtes-vous sûr de vouloir supprimer le fichier \"{fileName}\" ? Cette action est irréversible."
+    },
+    "resumeAllPausedTasks": "Récupération en un clic",
+    "pauseAllRunningTasks": "Pause en un clic"
   },
   "mcp": {
     "title": "Paramètres MCP",
@@ -585,5 +626,26 @@
     "nextTab": "Passez à l'onglet suivant",
     "previousTab": "Passez à l'onglet précédent",
     "specificTab": "Passez à la page d'onglet spécifiée (1-8)"
+  },
+  "rateLimit": {
+    "title": "Limitation de débit",
+    "description": "Contrôler l'intervalle de temps des requêtes, éviter de dépasser les limites API",
+    "intervalLimit": "Intervalle de requête",
+    "intervalUnit": "secondes",
+    "intervalHelper": "Intervalle minimum entre deux requêtes, désactivez la limitation si pas nécessaire",
+    "lastRequestTime": "Dernière requête",
+    "queueLength": "Longueur de la file",
+    "nextAllowedTime": "Prochaine requête autorisée",
+    "never": "Jamais",
+    "justNow": "À l'instant",
+    "secondsAgo": "secondes passées",
+    "minutesAgo": "minutes passées",
+    "immediately": "Immédiatement",
+    "secondsLater": "secondes plus tard",
+    "confirmDisableTitle": "Confirmer la désactivation de la limitation de débit",
+    "confirmDisableMessage": "La valeur ne peut pas être inférieure ou égale à 0. Désactiver la limitation de débit ?",
+    "confirmDisable": "Désactiver la limitation",
+    "disabled": "Limitation de débit désactivée",
+    "disabledDescription": "La limitation de débit a été désactivée"
   }
 }

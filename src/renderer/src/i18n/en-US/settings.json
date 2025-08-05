@@ -76,6 +76,8 @@
     "resetConfirmDescription": "Please select the type of data to reset. This operation cannot be undone and the application will restart automatically after reset.",
     "resetChatData": "Reset Chat Data",
     "resetChatDataDesc": "Delete all chat history and conversation records",
+    "resetKnowledgeData": "Reset Knowledge Base Data",
+    "resetKnowledgeDataDesc": "Delete all knowledge base files and vector data",
     "resetConfig": "Reset Configuration",
     "resetConfigDesc": "Delete all app settings, model configurations and custom prompts",
     "resetAll": "Complete Reset",
@@ -203,6 +205,8 @@
   },
   "provider": {
     "enable": "Enable Service",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
     "urlPlaceholder": "Please enter API URL",
     "keyPlaceholder": "Please enter API Key",
     "verifyKey": "Verify Key",
@@ -321,7 +325,31 @@
     "toast": {
       "modelRunning": "The model is running",
       "modelRunningDesc": "Please stop the model {model} first and then delete it."
-    }
+    },
+    "anthropicApiKeyTip": "Please go to Anthropic Console to get your API Key",
+    "anthropicConnected": "Anthropic connected",
+    "anthropicNotConnected": "Anthropic Not connected",
+    "anthropicOAuthTip": "Click Authorize DeepChat to access your Anthropic account",
+    "oauthLogin": "OAuth Login",
+    "authMethod": "Certification method",
+    "authMethodPlaceholder": "Select authentication method",
+    "apiKeyLabel": "API Key",
+    "apiUrlLabel": "API URL",
+    "anthropicOAuthFlowTip": "The system will automatically open the authorization window. Please come back and enter the authorization code after authorization.",
+    "anthropicBrowserOpened": "External browser is open",
+    "anthropicCodeInstruction": "Please complete the authorization in an external browser and paste the obtained authorization code into the input box below",
+    "browserOpenedSuccess": "The external browser is open, please complete the authorization",
+    "codeRequired": "Please enter the authorization code",
+    "inputOAuthCode": "Enter the authorization code",
+    "codeExchangeFailed": "Authorization code exchange failed",
+    "invalidCode": "Invalid authorization code",
+    "oauthCodeHint": "Please paste the authorization code here after completing the authorization in an external browser",
+    "oauthCodePlaceholder": "Please enter the authorization code...",
+    "verifyConnection": "Verify Connection",
+    "manageModels": "Manage Models",
+    "anthropicOAuthActiveTip": "OAuth authentication is enabled, you can use Anthropic services directly",
+    "oauthVerifySuccess": "OAuth connection verified successfully",
+    "oauthVerifyFailed": "OAuth connection verification failed"
   },
   "knowledgeBase": {
     "title": "Knowledge Base Settings",
@@ -407,7 +435,20 @@
         "description": "There is a running knowledge base task. Are you sure to exit the software? \nAborted tasks can be restored after restarting the software."
       }
     },
-    "searchError": "Query failed"
+    "searchError": "Query failed",
+    "processing": "Uploading",
+    "paused": "Upload pause",
+    "unknown": "Unknown status",
+    "reAddFile": {
+      "title": "Re-upload confirmation",
+      "content": "Are you sure to re-upload the file \"{fileName}\"?"
+    },
+    "deleteFile": {
+      "title": "Delete file confirmation",
+      "content": "Are you sure to delete the file \"{fileName}\"? \nThis operation is not restored."
+    },
+    "resumeAllPausedTasks": "One-click recovery",
+    "pauseAllRunningTasks": "One-click pause"
   },
   "mcp": {
     "title": "MCP Settings",
@@ -585,5 +626,26 @@
     "previousTab": "Switch to previous tab",
     "specificTab": "Switch to specific tab (1-8)",
     "lastTab": "Switch to last tab"
+  },
+  "rateLimit": {
+    "title": "Rate Limit",
+    "description": "Control request interval to prevent exceeding API limits",
+    "intervalLimit": "Request Interval",
+    "intervalUnit": "seconds",
+    "intervalHelper": "Minimum interval between requests, disable rate limiting if not needed",
+    "lastRequestTime": "Last Request",
+    "queueLength": "Queue Length",
+    "nextAllowedTime": "Next Allowed",
+    "never": "Never",
+    "justNow": "Just now",
+    "secondsAgo": "s ago",
+    "minutesAgo": "m ago",
+    "immediately": "Now",
+    "secondsLater": "s later",
+    "confirmDisableTitle": "Confirm Disable Rate Limit",
+    "confirmDisableMessage": "Value cannot be less than or equal to 0. Do you want to disable rate limiting?",
+    "confirmDisable": "Disable Limit",
+    "disabled": "Rate Limit Disabled",
+    "disabledDescription": "Rate limiting has been disabled"
   }
 }

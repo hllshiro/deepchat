@@ -187,7 +187,7 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
     // 如果用户增加了yolo=1或者yolo=true，则自动发送消息
     const yolo = params.get('yolo')
     const autoSend = yolo && yolo.trim() !== ''
-    // 解析简单模式标志
+    // 如果用户增加了simple=true，则设置简单模式
     const simple = params.get('simple')
     const isSimpleMode = simple === 'true'
     console.log('msg:', msg)
@@ -195,19 +195,25 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
     console.log('systemPrompt:', systemPrompt)
     console.log('autoSend:', autoSend)
 
+    const focusedWindow = presenter.windowPresenter.getFocusedWindow()
+    if (focusedWindow) {
+      focusedWindow.show()
+      focusedWindow.focus()
+    } else {
+      presenter.windowPresenter.show()
+    }
+
+    // 简单模式处理
     if (isSimpleMode) {
       try {
-        let targetWindow = presenter.windowPresenter.getFocusedWindow()
-        if (!targetWindow?.id) return
-
         // 通知渲染进程启用简单模式
         presenter.windowPresenter.sendToWindow(
-          targetWindow.id,
+          focusedWindow.id,
           SIMPLE_MODE_EVENTS.STATE_CHANGED,
           isSimpleMode
         )
         // 通知主进程启用简单模式
-        eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, targetWindow.id)
+        eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, focusedWindow.id)
 
         // 销毁托盘图标
         if (presenter.trayPresenter) {

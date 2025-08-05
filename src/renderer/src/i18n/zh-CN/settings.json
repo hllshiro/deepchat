@@ -76,6 +76,8 @@
     "resetConfirmDescription": "请选择要重置的数据类型。此操作不可撤销，重置后应用将自动重启。",
     "resetChatData": "重置聊天数据",
     "resetChatDataDesc": "删除所有聊天记录和对话历史",
+    "resetKnowledgeData": "重置知识库数据",
+    "resetKnowledgeDataDesc": "删除所有知识库文件和向量数据",
     "resetConfig": "重置配置",
     "resetConfigDesc": "删除所有应用设置、模型配置和自定义提示词",
     "resetAll": "完全重置",
@@ -203,6 +205,8 @@
   },
   "provider": {
     "enable": "开启服务",
+    "enabled": "已启用",
+    "disabled": "已禁用",
     "urlPlaceholder": "请输入API URL",
     "keyPlaceholder": "请输入API Key",
     "verifyKey": "验证密钥",
@@ -321,7 +325,31 @@
     "keyStatus": {
       "usage": "已使用",
       "remaining": "剩余额度"
-    }
+    },
+    "authMethod": "认证方式",
+    "authMethodPlaceholder": "选择认证方式",
+    "apiKeyLabel": "API Key",
+    "apiUrlLabel": "API URL",
+    "anthropicConnected": "Anthropic 已连接",
+    "anthropicNotConnected": "Anthropic 未连接",
+    "anthropicOAuthTip": "点击授权 DeepChat 访问您的 Anthropic 账户",
+    "oauthLogin": "OAuth 登录",
+    "anthropicApiKeyTip": "请前往 Anthropic Console 获取您的 API Key",
+    "anthropicOAuthFlowTip": "系统将自动打开授权窗口，授权后请回来输入授权码",
+    "browserOpenedSuccess": "外部浏览器已打开，请完成授权",
+    "anthropicBrowserOpened": "外部浏览器已打开",
+    "anthropicCodeInstruction": "请在外部浏览器中完成授权，然后将获得的授权码粘贴到下方输入框中",
+    "inputOAuthCode": "输入授权码",
+    "oauthCodeHint": "请在外部浏览器中完成授权后，将获得的授权码粘贴到此处",
+    "oauthCodePlaceholder": "请输入授权码...",
+    "codeRequired": "请输入授权码",
+    "invalidCode": "授权码无效",
+    "codeExchangeFailed": "授权码交换失败",
+    "verifyConnection": "验证连接",
+    "manageModels": "管理模型",
+    "anthropicOAuthActiveTip": "OAuth 认证已启用，您可以直接使用 Anthropic 服务",
+    "oauthVerifySuccess": "OAuth 连接验证成功",
+    "oauthVerifyFailed": "OAuth 连接验证失败"
   },
   "knowledgeBase": {
     "title": "知识库设置",
@@ -393,12 +421,25 @@
     "uploadCompleted": "上传完成",
     "reAdd": "重新上传",
     "uploadError": "上传失败",
+    "processing": "正在上传",
+    "paused": "已暂停",
+    "unknown": "未知状态",
     "delete": "删除",
     "reason": "原因",
     "deleteSuccess": "删除成功",
     "copy": "复制",
     "copySuccess": "复制成功",
     "source": "来源",
+    "resumeAllPausedTasks": "一键恢复",
+    "pauseAllRunningTasks": "一键暂停",
+    "reAddFile": {
+      "title": "重新上传确认",
+      "content": "是否确认重新上传文件 \"{fileName}\"？"
+    },
+    "deleteFile": {
+      "title": "删除文件确认",
+      "content": "是否确认删除文件 \"{fileName}\"？此操作不可恢复。"
+    },
     "dialog": {
       "beforequit": {
         "title": "退出确认",
@@ -585,5 +626,26 @@
     "previousTab": "切换到上一个标签页",
     "specificTab": "切换到指定标签页 (1-8)",
     "lastTab": "切换到最后一个标签页"
+  },
+  "rateLimit": {
+    "title": "速率限制",
+    "description": "控制请求间隔时间，防止超出API限制",
+    "intervalLimit": "请求间隔",
+    "intervalUnit": "秒",
+    "intervalHelper": "两次请求之间的最小间隔时间，不需要时请关闭速率限制",
+    "lastRequestTime": "上次请求",
+    "queueLength": "队列长度",
+    "nextAllowedTime": "下次可请求",
+    "never": "从未",
+    "justNow": "刚刚",
+    "secondsAgo": "秒前",
+    "minutesAgo": "分钟前",
+    "immediately": "立即",
+    "secondsLater": "秒后",
+    "confirmDisableTitle": "确认关闭速率限制",
+    "confirmDisableMessage": "该值不能小于或等于0，是否关闭速率限制功能？",
+    "confirmDisable": "关闭限制",
+    "disabled": "速率限制已关闭",
+    "disabledDescription": "速率限制功能已关闭"
   }
 }

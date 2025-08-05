@@ -76,6 +76,8 @@
     "resetConfirmDescription": "لطفاً نوع داده‌هایی که می‌خواهید بازنشانی کنید را انتخاب کنید. این عملیات غیرقابل بازگشت است و پس از بازنشانی، برنامه به طور خودکار مجدداً راه‌اندازی خواهد شد.",
     "resetChatData": "بازنشانی داده‌های گفت‌وگو",
     "resetChatDataDesc": "حذف تمام تاریخچه گفت‌وگوها و سوابق مکالمات",
+    "resetKnowledgeData": "بازنشانی داده‌های پایگاه دانش",
+    "resetKnowledgeDataDesc": "حذف تمام فایل‌های پایگاه دانش و داده‌های برداری",
     "resetConfig": "بازنشانی پیکربندی",
     "resetConfigDesc": "حذف تمام تنظیمات برنامه، پیکربندی‌های مدل و دستورکارهای سفارشی",
     "resetAll": "بازنشانی کامل",
@@ -203,6 +205,8 @@
   },
   "provider": {
     "enable": "روشن کردن خدمات",
+    "enabled": "فعال",
+    "disabled": "غیرفعال",
     "urlPlaceholder": "لطفاً نشانی API را وارد کنید",
     "keyPlaceholder": "لطفاً کلید API را وارد کنید",
     "verifyKey": "پذیرش کلید",
@@ -321,7 +325,31 @@
     "toast": {
       "modelRunning": "مدل در حال اجرا است",
       "modelRunningDesc": "لطفاً ابتدا مدل {مدل را متوقف کرده و سپس آن را حذف کنید."
-    }
+    },
+    "anthropicApiKeyTip": "لطفاً برای دریافت کلید API خود به کنسول انسان شناسی بروید",
+    "anthropicConnected": "انسان شناسی متصل",
+    "anthropicNotConnected": "انسان شناسی متصل نیست",
+    "anthropicOAuthTip": "برای دسترسی به حساب انسان شناسی خود ، روی مجوز DeepChat کلیک کنید",
+    "oauthLogin": "ورود به سیستم",
+    "authMethod": "روش صدور گواهینامه",
+    "authMethodPlaceholder": "روش احراز هویت را انتخاب کنید",
+    "apiKeyLabel": "کلید API",
+    "apiUrlLabel": "آدرس API",
+    "anthropicOAuthFlowTip": "سیستم به طور خودکار پنجره مجوز را باز می کند. لطفا برگردید و پس از مجوز کد مجوز را وارد کنید.",
+    "anthropicBrowserOpened": "مرورگر خارجی باز است",
+    "anthropicCodeInstruction": "لطفاً مجوز را در یک مرورگر خارجی تکمیل کرده و کد مجوز به دست آمده را در کادر ورودی زیر بچسبانید",
+    "browserOpenedSuccess": "مرورگر خارجی باز است ، لطفاً مجوز را تکمیل کنید",
+    "codeRequired": "لطفاً کد مجوز را وارد کنید",
+    "inputOAuthCode": "کد مجوز را وارد کنید",
+    "codeExchangeFailed": "مبادله کد مجوز انجام نشد",
+    "invalidCode": "کد مجوز نامعتبر",
+    "oauthCodeHint": "لطفاً پس از تکمیل مجوز در یک مرورگر خارجی ، کد مجوز را در اینجا بچسبانید",
+    "oauthCodePlaceholder": "لطفاً کد مجوز را وارد کنید ...",
+    "verifyConnection": "تأیید اتصال",
+    "manageModels": "مدیریت مدل‌ها",
+    "anthropicOAuthActiveTip": "احراز هویت OAuth فعال است، می‌توانید مستقیماً از سرویس‌های Anthropic استفاده کنید",
+    "oauthVerifySuccess": "اتصال OAuth با موفقیت تأیید شد",
+    "oauthVerifyFailed": "تأیید اتصال OAuth ناموفق بود"
   },
   "knowledgeBase": {
     "title": "تنظیمات پایگاه دانش",
@@ -407,7 +435,20 @@
         "description": "یک کار پایه دانش در حال اجرا وجود دارد. آیا مطمئناً از نرم افزار خارج می شوید؟ کارهای سقط شده را می توان پس از شروع مجدد نرم افزار بازگرداند."
       }
     },
-    "searchError": "پرس و جو انجام نشد"
+    "searchError": "پرس و جو انجام نشد",
+    "processing": "بارگذاری",
+    "paused": "مکث",
+    "unknown": "وضعیت ناشناخته",
+    "reAddFile": {
+      "title": "تأیید مجدد",
+      "content": "آیا مطمئن هستید که می‌خواهید پرونده \"{fileName}\" را دوباره بارگذاری کنید؟"
+    },
+    "deleteFile": {
+      "title": "تأیید پرونده را حذف کنید",
+      "content": "آیا مطمئن هستید که می‌خواهید پرونده \"{fileName}\" را حذف کنید؟ این عملیات ترمیم نشده است."
+    },
+    "resumeAllPausedTasks": "بازیابی یک کلیک",
+    "pauseAllRunningTasks": "مکث یک کلیک"
   },
   "mcp": {
     "title": "تنظیمات MCP",
@@ -585,5 +626,26 @@
     "previousTab": "رفتن به برگه پیشین",
     "specificTab": "رفتن به برگه خاص (1-8)",
     "lastTab": "رفتن به آخرین برگه"
+  },
+  "rateLimit": {
+    "title": "محدودیت نرخ",
+    "description": "کنترل فاصله زمانی درخواست‌ها، جلوگیری از تجاوز محدودیت‌های API",
+    "intervalLimit": "فاصله درخواست",
+    "intervalUnit": "ثانیه",
+    "intervalHelper": "حداقل فاصله زمانی بین دو درخواست، در صورت عدم نیاز محدودیت نرخ را غیرفعال کنید",
+    "lastRequestTime": "آخرین درخواست",
+    "queueLength": "طول صف",
+    "nextAllowedTime": "درخواست بعدی مجاز",
+    "never": "هرگز",
+    "justNow": "همین الان",
+    "secondsAgo": "ثانیه پیش",
+    "minutesAgo": "دقیقه پیش",
+    "immediately": "فوری",
+    "secondsLater": "ثانیه بعد",
+    "confirmDisableTitle": "تأیید غیرفعال کردن محدودیت نرخ",
+    "confirmDisableMessage": "مقدار نمی‌تواند کمتر یا مساوی 0 باشد. آیا محدودیت نرخ غیرفعال شود؟",
+    "confirmDisable": "غیرفعال کردن محدودیت",
+    "disabled": "محدودیت نرخ غیرفعال شد",
+    "disabledDescription": "محدودیت نرخ غیرفعال شده است"
   }
 }

@@ -322,6 +322,7 @@ export class WindowPresenter implements IWindowPresenter {
     this.handleWindowRestore(targetWindow.id).catch((error) => {
       console.error(`Error handling restore logic after showing window ${targetWindow!.id}:`, error)
     })
+    this.focusActiveTab(targetWindow.id)
   }
 
   /**
@@ -384,6 +385,26 @@ export class WindowPresenter implements IWindowPresenter {
   isMainWindowFocused(windowId: number): boolean {
     const focusedWindow = this.getFocusedWindow()
     return focusedWindow ? focusedWindow.id === windowId : false
+  }
+
+  /**
+   * 将焦点传递给指定窗口的活动标签页
+   * @param windowId 窗口 ID
+   */
+  private focusActiveTab(windowId: number): void {
+    try {
+      setTimeout(async () => {
+        const tabPresenterInstance = presenter.tabPresenter as TabPresenter
+        const tabsData = await tabPresenterInstance.getWindowTabsData(windowId)
+        const activeTab = tabsData.find((tab) => tab.isActive)
+        if (activeTab) {
+          console.log(`Focusing active tab ${activeTab.id} in window ${windowId}`)
+          await tabPresenterInstance.switchTab(activeTab.id)
+        }
+      }, 50)
+    } catch (error) {
+      console.error(`Error focusing active tab in window ${windowId}:`, error)
+    }
   }
 
   /**
@@ -549,6 +570,7 @@ export class WindowPresenter implements IWindowPresenter {
       if (!shellWindow.isDestroyed()) {
         shellWindow.webContents.send('window-focused', windowId)
       }
+      this.focusActiveTab(windowId)
     })
 
     // 窗口失去焦点
@@ -596,6 +618,7 @@ export class WindowPresenter implements IWindowPresenter {
       this.handleWindowRestore(windowId).catch((error) => {
         console.error(`Error handling restore logic for window ${windowId}:`, error)
       })
+      this.focusActiveTab(windowId)
       eventBus.sendToMain(WINDOW_EVENTS.WINDOW_RESTORED, windowId)
     }
     shellWindow.on('restore', handleRestore)
@@ -983,6 +1006,7 @@ export class WindowPresenter implements IWindowPresenter {
               console.log(`  - Switching to tab ${targetTabData.id}`)
               await tabPresenterInstance.switchTab(targetTabData.id)
             }
+            // switchTab 已经会调用 bringViewToFront 来设置焦点，无需额外调用
           } catch (error) {
             console.error('Error switching to target window/tab:', error)
             // 继续，因为消息发送成功

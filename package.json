@@ -1,6 +1,6 @@
 {
   "name": "DeepChat",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "DeepChat，一个简单易用的AI客户端",
   "main": "./out/main/index.js",
   "author": "ThinkInAIXYZ",
@@ -155,7 +155,7 @@
     "vitest": "^3.2.3",
     "vue": "^3.5.14",
     "vue-i18n": "^11.1.3",
-    "vue-renderer-markdown": "^0.0.30",
+    "vue-renderer-markdown": "^0.0.32",
     "vue-router": "4",
     "vue-tsc": "^2.2.10",
     "vue-use-monaco": "^0.0.6",
