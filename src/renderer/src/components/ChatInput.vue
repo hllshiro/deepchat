@@ -202,7 +202,11 @@ import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import { Mention } from './editor/mention/mention'
-import suggestion, { mentionData, setPromptFilesHandler, getPromptFilesHandler } from './editor/mention/suggestion'
+import suggestion, {
+  mentionData,
+  setPromptFilesHandler,
+  getPromptFilesHandler
+} from './editor/mention/suggestion'
 import { mentionSelected } from './editor/mention/suggestion'
 import Placeholder from '@tiptap/extension-placeholder'
 import HardBreak from '@tiptap/extension-hard-break'
@@ -1023,11 +1027,10 @@ function onKeydown(e: KeyboardEvent) {
 // 通过名称查找mention数据
 const findMentionByName = (name: string): CategorizedData | null => {
   // 在当前的mentionData中查找匹配的项目
-  const foundMention = mentionData.value.find(item => 
-    item.type === 'item' && 
-    (item.label === name || item.id === name)
+  const foundMention = mentionData.value.find(
+    (item) => item.type === 'item' && (item.label === name || item.id === name)
   )
-  
+
   return foundMention || null
 }
 
@@ -1065,8 +1068,6 @@ const insertMentionToEditor = (mentionData: CategorizedData, position: number): 
     return false
   }
 }
-
-// 简化的后续操作处理
 const handlePostInsertActions = async (mentionData: CategorizedData): Promise<void> => {
   // 处理Prompt类型的特殊逻辑
   if (mentionData.category === 'prompts' && mentionData.mcpEntry) {
@@ -1076,7 +1077,7 @@ const handlePostInsertActions = async (mentionData: CategorizedData): Promise<vo
     if (promptEntry.files && Array.isArray(promptEntry.files) && promptEntry.files.length > 0) {
       const handler = getPromptFilesHandler()
       if (handler) {
-        await handler(promptEntry.files).catch(error => {
+        await handler(promptEntry.files).catch((error) => {
           console.error('Failed to handle prompt files:', error)
         })
       }
@@ -1105,7 +1106,7 @@ defineExpose({
     try {
       // 通过name在各个数据源中查找匹配的mention
       const mentionData = findMentionByName(name)
-      
+
       if (!mentionData) {
         console.warn(`Mention not found: ${name}`)
         return false
