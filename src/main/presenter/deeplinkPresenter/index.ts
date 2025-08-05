@@ -207,13 +207,15 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
     if (isSimpleMode) {
       try {
         // 通知渲染进程启用简单模式
-        presenter.windowPresenter.sendToWindow(
-          focusedWindow.id,
-          SIMPLE_MODE_EVENTS.STATE_CHANGED,
-          isSimpleMode
-        )
-        // 通知主进程启用简单模式
-        eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, focusedWindow.id)
+        if (focusedWindow) {
+          presenter.windowPresenter.sendToWindow(
+            focusedWindow.id,
+            SIMPLE_MODE_EVENTS.STATE_CHANGED,
+            isSimpleMode
+          )
+          // 通知主进程启用简单模式
+          eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, focusedWindow.id)
+        }
 
         // 销毁托盘图标
         if (presenter.trayPresenter) {
