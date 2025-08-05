@@ -440,12 +440,12 @@
     "paused": "一時停止をアップロードします",
     "unknown": "不明なステータス",
     "reAddFile": {
-      "title": "確認確認",
-      "content": "ファイル「{filename}」を再アップロードしますか？"
+      "title": "再アップロード確認",
+      "content": "ファイル「{fileName}」を再アップロードしてもよろしいですか？"
     },
     "deleteFile": {
-      "title": "ファイルの確認を削除します",
-      "content": "ファイル「{filename}」を必ず削除しますか？この操作は復元されません。"
+      "title": "ファイル削除の確認",
+      "content": "ファイル「{fileName}」を削除してもよろしいですか？この操作は元に戻せません。"
     },
     "resumeAllPausedTasks": "ワンクリックリカバリ",
     "pauseAllRunningTasks": "ワンクリックの一時停止"
