@@ -106,30 +106,10 @@ app.whenReady().then(async () => {
   // 注册全局快捷键
   presenter.shortcutPresenter.registerShortcuts()
 
-  // 简单模式状态管理
-  let simpleModeWindowId: number | null = null
-
   // 监听简单模式状态变化
-  eventBus.on(SIMPLE_MODE_EVENTS.STATE_CHANGED, (windowId: number) => {
-    console.log('Main: Simple mode enabled for window:', windowId)
-    // 缓存简单模式窗口id
-    simpleModeWindowId = windowId
-    // 禁用简单模式窗口的缩放属性
-    presenter.windowPresenter.disableWindowResize(windowId)
-    // 更新简单模式窗口的聊天页视图位置
-    presenter.tabPresenter.updateWindowTabBounds(windowId)
-    // 销毁托盘图标
-    if (presenter.trayPresenter) {
-      console.log('main: Destroying tray during simple mode.') // 保留关键日志
-      presenter.trayPresenter.destroy()
-    } else {
-      console.warn('main: TrayPresenter not found in presenter during simple mode.') // 保持 warn
-    }
-    // 调用 presenter 的销毁方法进行其他销毁
-    if (presenter.disableFeaturesForSimpleMode) {
-      console.log('main: Calling presenter.disableFeaturesForSimpleMode() during simple mode.') // 保留关键日志
-      presenter.disableFeaturesForSimpleMode()
-    }
+  eventBus.on(SIMPLE_MODE_EVENTS.STATE_CHANGED, (isSimpleMode: boolean) => {
+    console.log('Main: Simple mode enabled:', isSimpleMode)
+    presenter.toggleSimpleMode(isSimpleMode)
   })
 
   // 监听悬浮按钮配置变化事件
@@ -158,9 +138,8 @@ app.whenReady().then(async () => {
   eventBus.on(TRAY_EVENTS.SHOW_HIDDEN_WINDOW, handleShowHiddenWindow)
 
   // 监听浏览器窗口获得焦点事件
-  app.on('browser-window-focus', (_, window) => {
-    // 只有当前窗口不是简单模式窗口时才注册快捷键
-    if (simpleModeWindowId !== window.id) {
+  app.on('browser-window-focus', () => {
+    if (!presenter.isSimpleModeEnabled()) {
       presenter.shortcutPresenter.registerShortcuts()
     }
     eventBus.sendToMain(WINDOW_EVENTS.APP_FOCUS)

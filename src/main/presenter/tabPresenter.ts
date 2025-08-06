@@ -11,13 +11,11 @@ import { getContextMenuLabels } from '@shared/i18n'
 import { app } from 'electron'
 import { addWatermarkToNativeImage } from '@/lib/watermark'
 import { stitchImagesVertically } from '@/lib/scrollCapture'
+import { presenter } from '.'
 
 export class TabPresenter implements ITabPresenter {
   // 全局标签页实例存储
   private tabs: Map<number, WebContentsView> = new Map()
-
-  // 简单模式的窗口id
-  private simpleModeWindowId: number | null = null
 
   // 存储标签页状态
   private tabState: Map<number, TabData> = new Map()
@@ -628,8 +626,8 @@ export class TabPresenter implements ITabPresenter {
     const TAB_BAR_HEIGHT = 40 // 标签栏高度，需要根据实际UI调整
 
     // 根据简单模式状态计算顶部偏移
-    const topOffset = window.id === this.simpleModeWindowId ? 4 : TAB_BAR_HEIGHT
-    const availableHeight = window.id === this.simpleModeWindowId ? height : height - TAB_BAR_HEIGHT
+    const topOffset = presenter.isSimpleModeEnabled() ? 4 : TAB_BAR_HEIGHT
+    const availableHeight = presenter.isSimpleModeEnabled() ? height : height - TAB_BAR_HEIGHT
 
     view.setBounds({
       x: 4,
@@ -947,21 +945,21 @@ export class TabPresenter implements ITabPresenter {
   /**
    * 更新指定窗口的聊天页视图位置
    */
-  async updateWindowTabBounds(windowId: number): Promise<void> {
+  async updateWindowTabBounds(): Promise<void> {
     // 获取目标窗口
-    const window = this.windowPresenter.windows.get(windowId)
-    if (!window || window.isDestroyed()) {
-      console.warn('No target window found for view bounds update')
-      return
-    }
-    this.simpleModeWindowId = windowId
-    // 更新简单窗口的聊天页视图位置
-    const activeTabId = await this.getActiveTabId(windowId)
-    if (activeTabId) {
-      const view = this.tabs.get(activeTabId)
-      if (view) {
-        this.updateViewBounds(window, view)
+    this.windowPresenter.windows.forEach(async (window) => {
+      if (!window || window.isDestroyed()) {
+        console.warn('No target window found for view bounds update')
+        return
       }
-    }
+      // 更新简单窗口的聊天页视图位置
+      const activeTabId = await this.getActiveTabId(window.id)
+      if (activeTabId) {
+        const view = this.tabs.get(activeTabId)
+        if (view) {
+          this.updateViewBounds(window, view)
+        }
+      }
+    })
   }
 }

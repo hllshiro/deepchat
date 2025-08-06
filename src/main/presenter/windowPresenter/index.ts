@@ -1015,17 +1015,14 @@ export class WindowPresenter implements IWindowPresenter {
   }
 
   /**
-   * 禁用指定窗口的缩放属性。
-   * @param windowId 窗口 ID。
+   * 设置窗口的缩放属性
+   * @param windowId 窗口 ID
    */
-  disableWindowResize(windowId: number): void {
-    const window = this.windows.get(windowId)
-    if (window && !window.isDestroyed()) {
-      window.setResizable(false)
-    } else {
-      console.warn(
-        `Cannot disable resize for window ${windowId}, window does not exist or is destroyed.`
-      )
-    }
+  setWindowResizeable(resizeable: boolean): void {
+    this.windows.forEach((window) => {
+      if (window && !window.isDestroyed()) {
+        window.setResizable(resizeable)
+      }
+    })
   }
 }

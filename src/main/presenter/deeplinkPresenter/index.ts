@@ -168,6 +168,14 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
   async handleStart(params: URLSearchParams): Promise<void> {
     console.log('Processing start command, parameters:', Object.fromEntries(params.entries()))
 
+    // 如果用户增加了simple=true，则设置简单模式，优先处理
+    const simple = params.get('simple')
+    const isSimpleMode = simple === 'true'
+
+    // 通知简单模式
+    eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, isSimpleMode)
+    presenter.windowPresenter.sendToAllWindows(SIMPLE_MODE_EVENTS.STATE_CHANGED, isSimpleMode)
+
     let msg = params.get('msg')
     if (!msg) {
       return
@@ -195,9 +203,6 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
     // 如果用户增加了yolo=1或者yolo=true，则自动发送消息
     const yolo = params.get('yolo')
     const autoSend = yolo && yolo.trim() !== ''
-    // 如果用户增加了simple=true，则设置简单模式
-    const simple = params.get('simple')
-    const isSimpleMode = simple === 'true'
     console.log('msg:', msg)
     console.log('modelId:', modelId)
     console.log('systemPrompt:', systemPrompt)
@@ -209,24 +214,6 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
       focusedWindow.focus()
     } else {
       presenter.windowPresenter.show()
-    }
-
-    // 简单模式处理
-    if (isSimpleMode) {
-      try {
-        if (focusedWindow) {
-          // 通知渲染进程启用简单模式
-          presenter.windowPresenter.sendToWindow(
-            focusedWindow.id,
-            SIMPLE_MODE_EVENTS.STATE_CHANGED,
-            isSimpleMode
-          )
-          // 通知主进程启用简单模式
-          eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, focusedWindow.id)
-        }
-      } catch (e) {
-        console.error('Deeplinks: Error during simpleMode:', e)
-      }
     }
 
     const windowId = focusedWindow?.id || 1

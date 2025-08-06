@@ -174,7 +174,7 @@ export interface IWindowPresenter {
   sendToWindow(windowId: number, channel: string, ...args: unknown[]): boolean
   sendToDefaultTab(channel: string, switchToTarget?: boolean, ...args: unknown[]): Promise<boolean>
   closeWindow(windowId: number, forceClose?: boolean): Promise<void>
-  disableWindowResize(windowId: number): void
+  setWindowResizeable(resizeable: boolean): void
 }
 
 export interface ITabPresenter {
@@ -212,7 +212,7 @@ export interface ITabPresenter {
   onRendererTabActivated(threadId: string): Promise<void>
   isLastTabInWindow(tabId: number): Promise<boolean>
   resetTabToBlank(tabId: number): Promise<void>
-  updateWindowTabBounds(windowId: number): Promise<void>
+  updateWindowTabBounds(): Promise<void>
 }
 
 export interface TabCreateOptions {
@@ -327,6 +327,8 @@ export interface IPresenter {
   knowledgePresenter: IKnowledgePresenter
   init(): void
   destroy(): void
+  toggleSimpleMode(enable: boolean): void
+  isSimpleModeEnabled(): boolean
 }
 
 export interface INotificationPresenter {
