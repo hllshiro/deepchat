@@ -1,12 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { eventBus } from '@/eventbus'
-import {
-  WINDOW_EVENTS,
-  CONFIG_EVENTS,
-  SYSTEM_EVENTS,
-  TAB_EVENTS,
-  SIMPLE_MODE_EVENTS
-} from '@/events'
+import { WINDOW_EVENTS, CONFIG_EVENTS, SYSTEM_EVENTS, TAB_EVENTS } from '@/events'
 import { is } from '@electron-toolkit/utils'
 import { ITabPresenter, TabCreateOptions, TabData } from '@shared/presenter'
 import { WindowPresenter } from './windowPresenter'
@@ -73,11 +67,6 @@ export class TabPresenter implements ITabPresenter {
       setTimeout(() => {
         this.onWindowSizeChange(windowId)
       }, 100)
-    })
-    // 监听简单模式
-    eventBus.on(SIMPLE_MODE_EVENTS.STATE_CHANGED, (targetWindowId: number) => {
-      // 更新简单窗口的聊天页视图位置
-      this.updateWindowTabBounds(targetWindowId)
     })
     // 窗口关闭，分离包含的视图
     eventBus.on(WINDOW_EVENTS.WINDOW_CLOSED, (windowId: number) => {
@@ -628,24 +617,6 @@ export class TabPresenter implements ITabPresenter {
     }
   }
 
-  private async updateWindowTabBounds(targetWindowId: number): Promise<void> {
-    // 获取目标窗口
-    const window = this.windowPresenter.windows.get(targetWindowId)
-    if (!window || window.isDestroyed()) {
-      console.warn('No target window found for view bounds update')
-      return
-    }
-    this.simpleModeWindowId = window.id
-    // 更新简单窗口的聊天页视图位置
-    const activeTabId = await this.getActiveTabId(window.id)
-    if (activeTabId) {
-      const view = this.tabs.get(activeTabId)
-      if (view) {
-        this.updateViewBounds(window, view)
-      }
-    }
-  }
-
   /**
    * 更新视图大小以适应窗口
    */
@@ -969,6 +940,27 @@ export class TabPresenter implements ITabPresenter {
         if (windowId) {
           await this.notifyWindowTabsUpdate(windowId)
         }
+      }
+    }
+  }
+
+  /**
+   * 更新指定窗口的聊天页视图位置
+   */
+  async updateWindowTabBounds(windowId: number): Promise<void> {
+    // 获取目标窗口
+    const window = this.windowPresenter.windows.get(windowId)
+    if (!window || window.isDestroyed()) {
+      console.warn('No target window found for view bounds update')
+      return
+    }
+    this.simpleModeWindowId = windowId
+    // 更新简单窗口的聊天页视图位置
+    const activeTabId = await this.getActiveTabId(windowId)
+    if (activeTabId) {
+      const view = this.tabs.get(activeTabId)
+      if (view) {
+        this.updateViewBounds(window, view)
       }
     }
   }

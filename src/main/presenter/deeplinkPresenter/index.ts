@@ -206,8 +206,8 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
     // 简单模式处理
     if (isSimpleMode) {
       try {
-        // 通知渲染进程启用简单模式
         if (focusedWindow) {
+          // 通知渲染进程启用简单模式
           presenter.windowPresenter.sendToWindow(
             focusedWindow.id,
             SIMPLE_MODE_EVENTS.STATE_CHANGED,
@@ -216,18 +216,6 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
           // 通知主进程启用简单模式
           eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, focusedWindow.id)
         }
-
-        // 销毁托盘图标
-        if (presenter.trayPresenter) {
-          console.log('Deeplinks: Destroying tray during simpleMode.')
-          presenter.trayPresenter.destroy()
-        } else {
-          console.warn('Deeplinks: TrayPresenter not found in presenter during simpleMode.')
-        }
-        // 销毁快捷键
-        presenter.shortcutPresenter.destroy()
-        // 销毁悬浮按钮
-        presenter.floatingButtonPresenter.destroy()
       } catch (e) {
         console.error('Deeplinks: Error during simpleMode:', e)
       }

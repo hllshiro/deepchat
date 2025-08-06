@@ -17,12 +17,10 @@ export const useSimpleModeStore = defineStore('simpleMode', () => {
   }
 
   // 监听主进程的状态变更通知
-  if (typeof window !== 'undefined' && window.electron) {
-    window.electron.ipcRenderer.on('simple-mode:state-changed', (_, enabled: boolean) => {
-      console.log('Shell SimpleMode Store: Received state change from main process:', enabled)
-      isEnabled.value = enabled
-    })
-  }
+  window.electron.ipcRenderer.on('simple-mode:state-changed', (_, enabled: boolean) => {
+    console.log('Shell SimpleMode Store: Received state change from main process:', enabled)
+    isEnabled.value = enabled
+  })
   return {
     isEnabled,
     setEnabled,

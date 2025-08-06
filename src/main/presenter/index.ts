@@ -179,6 +179,12 @@ export class Presenter implements IPresenter {
     // 注意: trayPresenter.destroy() 在 main/index.ts 的 will-quit 事件中处理
     // 此处不销毁 trayPresenter，其生命周期由 main/index.ts 管理
   }
+
+  // 启动简单模式时禁用非核心功能
+  disableFeaturesForSimpleMode() {
+    presenter.floatingButtonPresenter.destroy() // 销毁悬浮按钮
+    presenter.shortcutPresenter.destroy() // 销毁快捷键监听
+  }
 }
 
 export const presenter = new Presenter()
