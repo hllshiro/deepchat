@@ -3,7 +3,7 @@
     class="w-screen h-screen"
     :class="[isMacOS ? 'bg-transparent' : themeStore.isDark ? 'bg-zinc-900' : 'bg-zinc-200']"
   >
-    <AppBar v-if="!simpleModeStore.isEnabled"/>
+    <AppBar v-if="!simpleModeStore.isEnabled" />
     <main class="content-container">
       <!-- WebContentsView will be rendered here by the main process -->
     </main>
