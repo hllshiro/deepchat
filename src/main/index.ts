@@ -110,11 +110,14 @@ app.whenReady().then(async () => {
   let simpleModeWindowId: number | null = null
 
   // 监听简单模式状态变化
-  eventBus.on(SIMPLE_MODE_EVENTS.STATE_CHANGED, (targetWindowId: number) => {
-    console.log('Main: Simple mode enabled for window:', targetWindowId)
+  eventBus.on(SIMPLE_MODE_EVENTS.STATE_CHANGED, (windowId: number) => {
+    console.log('Main: Simple mode enabled for window:', windowId)
     // 缓存简单模式窗口id
-    simpleModeWindowId = targetWindowId
-
+    simpleModeWindowId = windowId
+    // 禁用简单模式窗口的缩放属性
+    presenter.windowPresenter.disableWindowResize(windowId)
+    // 更新简单模式窗口的聊天页视图位置
+    presenter.tabPresenter.updateWindowTabBounds(windowId)
     // 销毁托盘图标
     if (presenter.trayPresenter) {
       console.log('main: Destroying tray during simple mode.') // 保留关键日志
