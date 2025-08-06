@@ -706,7 +706,6 @@ export class ThreadPresenter implements IThreadPresenter {
 
     return conversation
   }
-
   async createConversation(
     title: string,
     settings: Partial<CONVERSATION_SETTINGS> = {},
@@ -739,11 +738,16 @@ export class ThreadPresenter implements IThreadPresenter {
       }
     })
     const mergedSettings = { ...defaultSettings, ...settings }
-    const defaultModelsSettings = this.configPresenter.getModelConfig(mergedSettings.modelId)
+    const defaultModelsSettings = this.configPresenter.getModelConfig(
+      mergedSettings.modelId,
+      mergedSettings.providerId
+    )
     if (defaultModelsSettings) {
       mergedSettings.maxTokens = defaultModelsSettings.maxTokens
       mergedSettings.contextLength = defaultModelsSettings.contextLength
       mergedSettings.temperature = defaultModelsSettings.temperature
+      // 重置 thinkingBudget 为模型默认配置，如果模型配置中没有则设为 undefined
+      mergedSettings.thinkingBudget = defaultModelsSettings.thinkingBudget
     }
     if (settings.artifacts) {
       mergedSettings.artifacts = settings.artifacts
@@ -1467,16 +1471,19 @@ export class ThreadPresenter implements IThreadPresenter {
         providerId: currentProviderId,
         modelId: currentModelId,
         temperature: currentTemperature,
-        maxTokens: currentMaxTokens
+        maxTokens: currentMaxTokens,
+        enabledMcpTools: currentEnabledMcpTools,
+        thinkingBudget: currentThinkingBudget
       } = currentConversation.settings
-
       const stream = this.llmProviderPresenter.startStreamCompletion(
         currentProviderId, // 使用最新的设置
         finalContent,
         currentModelId, // 使用最新的设置
         state.message.id,
         currentTemperature, // 使用最新的设置
-        currentMaxTokens // 使用最新的设置
+        currentMaxTokens, // 使用最新的设置
+        currentEnabledMcpTools,
+        currentThinkingBudget
       )
       for await (const event of stream) {
         const msg = event.data
@@ -1574,7 +1581,8 @@ export class ThreadPresenter implements IThreadPresenter {
       this.throwIfCancelled(state.message.id)
 
       // 7. 准备提示内容
-      const { providerId, modelId, temperature, maxTokens } = conversation.settings
+      const { providerId, modelId, temperature, maxTokens, enabledMcpTools, thinkingBudget } =
+        conversation.settings
       const modelConfig = this.configPresenter.getModelConfig(modelId, providerId)
 
       const { finalContent, promptTokens } = await this.preparePromptContent(
@@ -1641,7 +1649,9 @@ export class ThreadPresenter implements IThreadPresenter {
         modelId,
         state.message.id,
         temperature,
-        maxTokens
+        maxTokens,
+        enabledMcpTools,
+        thinkingBudget
       )
       for await (const event of stream) {
         const msg = event.data
@@ -1789,7 +1799,7 @@ export class ThreadPresenter implements IThreadPresenter {
     finalContent: ChatMessage[]
     promptTokens: number
   }> {
-    const { systemPrompt, contextLength, artifacts } = conversation.settings
+    const { systemPrompt, contextLength, artifacts, enabledMcpTools } = conversation.settings
 
     const searchPrompt = searchResults ? generateSearchPrompt(userContent, searchResults) : ''
     const enrichedUserMessage =
@@ -1801,7 +1811,7 @@ export class ThreadPresenter implements IThreadPresenter {
     const searchPromptTokens = searchPrompt ? approximateTokenSize(searchPrompt ?? '') : 0
     const systemPromptTokens = systemPrompt ? approximateTokenSize(systemPrompt ?? '') : 0
     const userMessageTokens = approximateTokenSize(userContent + enrichedUserMessage)
-    const mcpTools = await presenter.mcpPresenter.getAllToolDefinitions()
+    const mcpTools = await presenter.mcpPresenter.getAllToolDefinitions(enabledMcpTools)
     const mcpToolsTokens = mcpTools.reduce(
       (acc, tool) => acc + approximateTokenSize(JSON.stringify(tool)),
       0
@@ -2726,30 +2736,47 @@ export class ThreadPresenter implements IThreadPresenter {
     // 1. 获取所有会话 (假设9999足够大)
     const result = await this.sqlitePresenter.getConversationList(1, this.fetchThreadLength)
 
-    // 2. 对列表进行排序 (置顶优先, 然后按更新时间)
-    result.list.sort((a, b) => {
-      const aIsPinned = a.is_pinned === 1
-      const bIsPinned = b.is_pinned === 1
-      if (aIsPinned && !bIsPinned) return -1
-      if (!aIsPinned && bIsPinned) return 1
-      return b.updatedAt - a.updatedAt
+    // 2. 分离置顶和非置顶会话
+    const pinnedConversations: CONVERSATION[] = []
+    const normalConversations: CONVERSATION[] = []
+
+    result.list.forEach((conv) => {
+      if (conv.is_pinned === 1) {
+        pinnedConversations.push(conv)
+      } else {
+        normalConversations.push(conv)
+      }
     })
 
-    // 3. 按日期分组
+    // 3. 对置顶会话按更新时间排序
+    pinnedConversations.sort((a, b) => b.updatedAt - a.updatedAt)
+
+    // 4. 对普通会话按更新时间排序
+    normalConversations.sort((a, b) => b.updatedAt - a.updatedAt)
+
+    // 5. 按日期分组
     const groupedThreads: Map<string, CONVERSATION[]> = new Map()
-    result.list.forEach((conv) => {
+
+    // 先添加置顶分组（如果有置顶会话）
+    if (pinnedConversations.length > 0) {
+      groupedThreads.set('Pinned', pinnedConversations)
+    }
+
+    // 再添加普通会话的日期分组
+    normalConversations.forEach((conv) => {
       const date = new Date(conv.updatedAt).toISOString().split('T')[0]
       if (!groupedThreads.has(date)) {
         groupedThreads.set(date, [])
       }
       groupedThreads.get(date)!.push(conv)
     })
+
     const finalGroupedList = Array.from(groupedThreads.entries()).map(([dt, dtThreads]) => ({
       dt,
       dtThreads
     }))
 
-    // 4. 广播这个格式化好的完整列表
+    // 6. 广播这个格式化好的完整列表
     eventBus.sendToRenderer(
       CONVERSATION_EVENTS.LIST_UPDATED,
       SendTarget.ALL_WINDOWS,
@@ -3632,7 +3659,8 @@ export class ThreadPresenter implements IThreadPresenter {
         throw new Error(errorMsg)
       }
 
-      const { providerId, modelId, temperature, maxTokens } = conversation.settings
+      const { providerId, modelId, temperature, maxTokens, enabledMcpTools, thinkingBudget } =
+        conversation.settings
       const modelConfig = this.configPresenter.getModelConfig(modelId, providerId)
 
       if (!modelConfig) {
@@ -3685,7 +3713,9 @@ export class ThreadPresenter implements IThreadPresenter {
         modelId,
         messageId,
         temperature,
-        maxTokens
+        maxTokens,
+        enabledMcpTools,
+        thinkingBudget
       )
 
       for await (const event of stream) {

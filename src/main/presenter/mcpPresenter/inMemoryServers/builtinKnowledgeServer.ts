@@ -2,7 +2,7 @@ import { Server } from '@modelcontextprotocol/sdk/server/index.js'
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js'
 import { z } from 'zod'
 import { zodToJsonSchema } from 'zod-to-json-schema'
-import { Transport } from '@modelcontextprotocol/sdk/shared/transport'
+import { Transport } from '@modelcontextprotocol/sdk/shared/transport.js'
 import { BuiltinKnowledgeConfig, MCPTextContent, QueryResult } from '@shared/presenter'
 import { presenter } from '@/presenter'
 
@@ -16,9 +16,7 @@ export class BuiltinKnowledgeServer {
   private server: Server
   private configs: Array<BuiltinKnowledgeConfig> = []
 
-  constructor(env?: {
-    configs: BuiltinKnowledgeConfig[]
-  }) {
+  constructor(env?: { configs: BuiltinKnowledgeConfig[] }) {
     if (!env) {
       throw new Error('需要提供Builtin知识库配置')
     }
@@ -125,7 +123,7 @@ export class BuiltinKnowledgeServer {
           if (result.metadata.filePath) {
             resultText += `文件: ${result.metadata.filePath}\n`
           }
-          resultText += `相似度: ${(1 - result.distance)}\n\n`
+          resultText += `相似度: ${1 - result.distance}\n\n`
         })
       }
       return {

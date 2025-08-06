@@ -70,7 +70,22 @@
     "importing": "インポート中...",
     "confirmImport": "インポートを確認",
     "importSuccessTitle": "インポート成功",
-    "importErrorTitle": "インポート失敗"
+    "importErrorTitle": "インポート失敗",
+    "resetData": "データをリセット",
+    "resetConfirmTitle": "データリセットの確認",
+    "resetConfirmDescription": "リセットするデータの種類を選択してください。この操作は元に戻せません。リセット後、アプリケーションは自動的に再起動されます。",
+    "resetChatData": "チャットデータをリセット",
+    "resetChatDataDesc": "すべてのチャット履歴と会話記録を削除",
+    "resetKnowledgeData": "ナレッジベースデータをリセット",
+    "resetKnowledgeDataDesc": "すべてのナレッジベースファイルとベクターデータを削除",
+    "resetConfig": "設定をリセット",
+    "resetConfigDesc": "すべてのアプリ設定、モデル設定、カスタムプロンプトを削除",
+    "resetAll": "完全リセット",
+    "resetAllDesc": "チャット履歴、設定、キャッシュファイルを含むすべてのデータを削除",
+    "resetting": "リセット中...",
+    "confirmReset": "リセットを確認",
+    "resetCompleteDevTitle": "データリセット完了",
+    "resetCompleteDevMessage": "開発環境では手動でアプリケーションを再起動してください。現在のプロセスを停止して pnpm run dev を再実行してください"
   },
   "model": {
     "title": "モデル設定",
@@ -120,6 +135,33 @@
         "description": "モデルは推論能力をサポートしていますか？",
         "label": "推論能力"
       },
+      "thinkingBudget": {
+        "label": "思考予算",
+        "description": "モデルの思考長を制限する",
+        "dynamic": "動的思考",
+        "range": "範囲: {min} - {max}",
+        "onlySupported": "Gemini 2.5 Flash、2.5 Pro、2.5 Flash-Liteでのみサポート",
+        "valueLabel": "思考予算値",
+        "placeholder": "思考予算値を入力",
+        "forceEnabled": "Gemini 2.5 シリーズモデルは思考予算を強制的に有効にします",
+        "dynamicPrefix": "-1 = 動的思考",
+        "notice": "注意：",
+        "warnings": {
+          "proNoDisable": "このモデルは思考の無効化をサポートしていません、最小値 128",
+          "proCannotDisable": "Gemini 2.5 Pro は思考機能を無効にできません",
+          "flashLiteCannotSetZero": "Gemini 2.5 Flash-Lite は 0 に設定できません、最小値は 512",
+          "modelCannotDisable": "このモデルは思考機能を無効にできません",
+          "flashLiteMinValue": "思考予算を具体的な値に設定する場合、512 未満にはできません（または 0 で思考を無効、-1 で動的思考を有効）",
+          "belowMin": "思考予算は {min} 未満にはできません{hint}",
+          "aboveMax": "思考予算は {max} を超えることはできません"
+        },
+        "hints": {
+          "flashLiteDisable": "、0 = 思考を無効、具体的な値の最小値 512",
+          "normalDisable": "、0 = 思考を無効",
+          "withZeroAndDynamic": "（または 0 で思考を無効、-1 で動的思考を有効）",
+          "withDynamic": "（または -1 で動的思考を有効）"
+        }
+      },
       "resetConfirm": {
         "confirm": "リセットを確認します",
         "message": "このモデルの構成をデフォルトにリセットする必要がありますか？この操作は取消不能です。",
@@ -127,6 +169,8 @@
       },
       "resetToDefault": "デフォルトにリセットします",
       "saveConfig": "構成を保存します",
+      "useModelDefault": "モデルのデフォルト設定を使用",
+      "currentUsingModelDefault": "現在モデルのデフォルト設定を使用中",
       "temperature": {
         "description": "出力のランダム性を制御します。ほとんどのモデルは0-1で、0〜2の間のサポートがあります。ランダム性が高くなるほど。",
         "label": "温度"
@@ -161,6 +205,8 @@
   },
   "provider": {
     "enable": "サービスを有効にする",
+    "enabled": "有効",
+    "disabled": "無効",
     "urlPlaceholder": "API URLを入力してください",
     "keyPlaceholder": "API Keyを入力してください",
     "verifyKey": "キーを検証",
@@ -279,7 +325,31 @@
     "toast": {
       "modelRunning": "モデルが実行されています",
       "modelRunningDesc": "最初にモデル{model}を停止してから削除してください。"
-    }
+    },
+    "anthropicApiKeyTip": "APIキーを取得するには、人類コンソールにアクセスしてください",
+    "anthropicConnected": "人類接続",
+    "anthropicNotConnected": "人類は接続されていません",
+    "anthropicOAuthTip": "[deepchatの承認]をクリックして、人類アカウントにアクセスします",
+    "oauthLogin": "oauthログイン",
+    "authMethod": "認証方法",
+    "authMethodPlaceholder": "認証方法を選択",
+    "apiKeyLabel": "API Key",
+    "apiUrlLabel": "API URL",
+    "anthropicOAuthFlowTip": "システムは自動的に承認ウィンドウを開きます。承認後、戻って承認コードを入力してください。",
+    "anthropicBrowserOpened": "外部ブラウザが開いています",
+    "anthropicCodeInstruction": "外部ブラウザで承認を完了し、取得した認証コードを下の入力ボックスに貼り付けてください",
+    "browserOpenedSuccess": "外部ブラウザが開いています。承認を完了してください",
+    "codeRequired": "承認コードを入力してください",
+    "inputOAuthCode": "承認コードを入力します",
+    "codeExchangeFailed": "認証コード交換は失敗しました",
+    "invalidCode": "無効な承認コード",
+    "oauthCodeHint": "外部ブラウザで承認を完了した後、ここに承認コードを貼り付けてください",
+    "oauthCodePlaceholder": "承認コードを入力してください...",
+    "verifyConnection": "接続を確認",
+    "manageModels": "モデル管理",
+    "anthropicOAuthActiveTip": "OAuth認証が有効になっており、Anthropicサービスを直接使用できます",
+    "oauthVerifySuccess": "OAuth接続の確認が成功しました",
+    "oauthVerifyFailed": "OAuth接続の確認に失敗しました"
   },
   "knowledgeBase": {
     "title": "ナレッジベース設定",
@@ -365,7 +435,20 @@
         "description": "実行中のナレッジベースタスクがあります。ソフトウェアを終了しますか？ソフトウェアを再起動した後、中止されたタスクを復元できます。"
       }
     },
-    "searchError": "クエリに失敗しました"
+    "searchError": "クエリに失敗しました",
+    "processing": "アップロード",
+    "paused": "一時停止をアップロードします",
+    "unknown": "不明なステータス",
+    "reAddFile": {
+      "title": "再アップロード確認",
+      "content": "ファイル「{fileName}」を再アップロードしてもよろしいですか？"
+    },
+    "deleteFile": {
+      "title": "ファイル削除の確認",
+      "content": "ファイル「{fileName}」を削除してもよろしいですか？この操作は元に戻せません。"
+    },
+    "resumeAllPausedTasks": "ワンクリックリカバリ",
+    "pauseAllRunningTasks": "ワンクリックの一時停止"
   },
   "mcp": {
     "title": "MCP設定",
@@ -494,6 +577,47 @@
     "maxDefaultServersReached": "せいぜい3つのデフォルトサーバーのみを設定できます",
     "removeDefaultFirst": "最初にいくつかのデフォルトサーバーを削除してください",
     "higressMarket": "Higress MCPのインストールに移動します",
+    "npmRegistry": {
+      "title": "NPMソース設定",
+      "currentSource": "現在のソース",
+      "cached": "キャッシュ",
+      "lastChecked": "最終チェック",
+      "refresh": "更新",
+      "advanced": "詳細設定",
+      "advancedSettings": "詳細設定",
+      "advancedSettingsDesc": "自動検出やカスタムソース設定を含むNPMソースの詳細オプションを設定",
+      "autoDetect": "最適なソースを自動検出",
+      "autoDetectDesc": "起動時に自動的に最速のNPMソースを検出して使用",
+      "customSource": "カスタムソース",
+      "customSourcePlaceholder": "カスタムNPMソースアドレスを入力",
+      "currentCustom": "現在のカスタムソース",
+      "justNow": "たった今",
+      "minutesAgo": "{minutes}分前",
+      "hoursAgo": "{hours}時間前",
+      "daysAgo": "{days}日前",
+      "refreshSuccess": "NPMソースの更新が成功しました",
+      "refreshSuccessDesc": "最適なNPMソースを再検出して更新しました",
+      "refreshFailed": "NPMソースの更新に失敗しました",
+      "autoDetectUpdated": "自動検出設定が更新されました",
+      "autoDetectEnabled": "最適なNPMソースの自動検出が有効になりました",
+      "autoDetectDisabled": "自動検出が無効になり、デフォルトソースを使用します",
+      "updateFailed": "設定の更新に失敗しました",
+      "customSourceSet": "カスタムソースが設定されました",
+      "customSourceSetDesc": "カスタムNPMソースが設定されました：{registry}",
+      "customSourceCleared": "カスタムソースがクリアされました",
+      "customSourceClearedDesc": "カスタムNPMソースをクリアし、自動検出を使用します",
+      "invalidUrl": "無効なURL",
+      "invalidUrlDesc": "有効なHTTPまたはHTTPSアドレスを入力してください",
+      "testing": "NPMソースをテスト中",
+      "testingDesc": "ソース {registry} の接続性をテスト中...",
+      "testFailed": "NPMソーステストに失敗しました",
+      "testFailedDesc": "{registry} に接続できません。エラー：{error}。URLが正しいかネットワーク接続を確認してください。",
+      "redetectingOptimal": "最適なNPMソースを再検出中...",
+      "redetectComplete": "再検出完了",
+      "redetectCompleteDesc": "現在最適なNPMソースを検出して設定しました",
+      "redetectFailed": "再検出に失敗しました",
+      "redetectFailedDesc": "最適なソースを再検出できません。デフォルト設定を使用します"
+    },
     "technicalDetails": "技術的詳細",
     "httpServer": "HTTPサーバー",
     "localProcess": "ローカルプロセス",
@@ -543,5 +667,26 @@
     "nextTab": "次のタブに切り替えます",
     "previousTab": "前のタブに切り替えます",
     "specificTab": "指定されたタブページ（1-8）に切り替える"
+  },
+  "rateLimit": {
+    "title": "レート制限",
+    "description": "リクエストの時間間隔を制御し、API制限の超過を防ぐ",
+    "intervalLimit": "リクエスト間隔",
+    "intervalUnit": "秒",
+    "intervalHelper": "2つのリクエスト間の最小間隔、不要な場合はレート制限を無効にしてください",
+    "lastRequestTime": "最後のリクエスト",
+    "queueLength": "キューの長さ",
+    "nextAllowedTime": "次の許可されたリクエスト",
+    "never": "なし",
+    "justNow": "たった今",
+    "secondsAgo": "秒前",
+    "minutesAgo": "分前",
+    "immediately": "すぐに",
+    "secondsLater": "秒後",
+    "confirmDisableTitle": "レート制限の無効化を確認",
+    "confirmDisableMessage": "値は0以下にできません。レート制限機能を無効にしますか？",
+    "confirmDisable": "制限を無効化",
+    "disabled": "レート制限が無効化されました",
+    "disabledDescription": "レート制限機能が無効化されました"
   }
 }

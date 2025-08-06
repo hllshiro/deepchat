@@ -340,34 +340,37 @@ export const defaultModelsSettings: DefaultModelSetting[] = [
     id: 'gemini-2.5-pro',
     name: 'Gemini 2.5 Pro',
     temperature: 0.7,
-    maxTokens: 65536,
+    maxTokens: 65535,
     contextLength: 1048576,
     match: ['gemini-2.5-pro'],
     vision: true,
     functionCall: true,
-    reasoning: true
+    reasoning: true,
+    thinkingBudget: -1 // 动态思维
   },
   {
     id: 'models/gemini-2.5-flash',
     name: 'Gemini 2.5 Flash',
     temperature: 0.7,
-    maxTokens: 65536,
+    maxTokens: 65535,
     contextLength: 1048576,
     match: ['models/gemini-2.5-flash', 'gemini-2.5-flash'],
     vision: true,
     functionCall: true,
-    reasoning: true
+    reasoning: true,
+    thinkingBudget: -1 // 动态思维
   },
   {
     id: 'models/gemini-2.5-flash-lite-preview-06-17',
     name: 'Gemini 2.5 Flash-Lite Preview',
     temperature: 0.7,
-    maxTokens: 64000,
-    contextLength: 1000000,
+    maxTokens: 65536,
+    contextLength: 1048576,
     match: ['models/gemini-2.5-flash-lite-preview-06-17', 'gemini-2.5-flash-lite-preview'],
     vision: true,
     functionCall: true,
-    reasoning: true
+    reasoning: true,
+    thinkingBudget: 0 // 默认不思考
   },
   {
     id: 'models/gemini-2.0-flash',
@@ -587,6 +590,17 @@ export const defaultModelsSettings: DefaultModelSetting[] = [
 
   // Claude系列模型配置
   {
+    id: 'claude-opus-4-1',
+    name: 'Claude Opus 4.1',
+    temperature: 0.7,
+    maxTokens: 32000,
+    contextLength: 204800,
+    match: ['claude-opus-4-1', 'claude-opus-4-1-20250805'],
+    vision: true,
+    functionCall: true,
+    reasoning: true
+  },
+  {
     id: 'claude-opus-4',
     name: 'Claude Opus 4',
     temperature: 0.7,
@@ -654,6 +668,28 @@ export const defaultModelsSettings: DefaultModelSetting[] = [
   },
 
   // OpenAI GPT系列模型配置
+  {
+    id: 'gpt-oss-120b',
+    name: 'GPT OSS 120B',
+    temperature: 0.7,
+    maxTokens: 131000,
+    contextLength: 131000,
+    match: ['gpt-oss-120b'],
+    vision: false,
+    functionCall: true,
+    reasoning: false
+  },
+  {
+    id: 'gpt-oss-20b',
+    name: 'GPT OSS 20B',
+    temperature: 0.7,
+    maxTokens: 33000,
+    contextLength: 131000,
+    match: ['gpt-oss-20b'],
+    vision: false,
+    functionCall: true,
+    reasoning: false
+  },
   {
     id: 'o4-mini-high',
     name: 'OpenAI o4 Mini High',
@@ -1363,6 +1399,63 @@ export const defaultModelsSettings: DefaultModelSetting[] = [
     vision: false,
     functionCall: true,
     reasoning: false
+  },
+
+  // Zhipu
+  {
+    id: 'glm-4.5',
+    name: 'GLM-4.5',
+    temperature: 0.7,
+    maxTokens: 8192,
+    contextLength: 128000,
+    match: ['glm-4.5'],
+    vision: false,
+    functionCall: true,
+    reasoning: true
+  },
+  {
+    id: 'glm-4.5-air',
+    name: 'GLM-4.5-Air',
+    temperature: 0.7,
+    maxTokens: 8192,
+    contextLength: 128000,
+    match: ['glm-4.5-air'],
+    vision: false,
+    functionCall: true,
+    reasoning: true
+  },
+  {
+    id: 'glm-4.5-x',
+    name: 'GLM-4.5-X',
+    temperature: 0.7,
+    maxTokens: 8192,
+    contextLength: 128000,
+    match: ['glm-4.5-x'],
+    vision: false,
+    functionCall: true,
+    reasoning: true
+  },
+  {
+    id: 'glm-4.5-airx',
+    name: 'GLM-4.5-AirX',
+    temperature: 0.7,
+    maxTokens: 8192,
+    contextLength: 128000,
+    match: ['glm-4.5-airx'],
+    vision: false,
+    functionCall: true,
+    reasoning: true
+  },
+  {
+    id: 'glm-4.5-flash',
+    name: 'GLM-4.5-Flash',
+    temperature: 0.7,
+    maxTokens: 8192,
+    contextLength: 128000,
+    match: ['glm-4.5-flash'],
+    vision: false,
+    functionCall: true,
+    reasoning: true
   },
   {
     id: 'glm-4-plus',
