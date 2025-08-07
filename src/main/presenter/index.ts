@@ -179,6 +179,28 @@ export class Presenter implements IPresenter {
     // 注意: trayPresenter.destroy() 在 main/index.ts 的 will-quit 事件中处理
     // 此处不销毁 trayPresenter，其生命周期由 main/index.ts 管理
   }
+
+  private isSimpleMode: boolean = false
+
+  isSimpleModeEnabled(): boolean {
+    return this.isSimpleMode
+  }
+
+  // 启动简单模式时禁用非核心功能
+  toggleSimpleMode(enable: boolean) {
+    this.isSimpleMode = enable
+    this.windowPresenter.setWindowResizeable(!enable) // 禁用窗口缩放
+    this.tabPresenter.updateWindowTabBounds() // 更新简单模式窗口的聊天页视图位置
+    if (enable) {
+      this.floatingButtonPresenter.destroy() // 销毁悬浮按钮
+      this.shortcutPresenter.destroy() // 销毁快捷键监听
+      this.trayPresenter.destroy() // 销毁托盘图标
+    } else {
+      this.floatingButtonPresenter.initialize() // 重新初始化悬浮按钮
+      this.shortcutPresenter.registerShortcuts() // 重新初始化快捷键监听
+      this.trayPresenter.init() // 重新初始化托盘图标
+    }
+  }
 }
 
 export const presenter = new Presenter()

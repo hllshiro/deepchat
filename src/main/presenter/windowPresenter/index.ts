@@ -1013,4 +1013,16 @@ export class WindowPresenter implements IWindowPresenter {
       return false // 过程中发生错误
     }
   }
+
+  /**
+   * 设置窗口的缩放属性
+   * @param windowId 窗口 ID
+   */
+  setWindowResizeable(resizeable: boolean): void {
+    this.windows.forEach((window) => {
+      if (window && !window.isDestroyed()) {
+        window.setResizable(resizeable)
+      }
+    })
+  }
 }
