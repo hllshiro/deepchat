@@ -26,6 +26,10 @@ export class ShortcutPresenter {
   }
 
   registerShortcuts(): void {
+    if (presenter.isSimpleModeEnabled()) {
+      return
+    }
+
     if (this.isActive) return
     console.log('reg shortcuts')
 

@@ -4,6 +4,7 @@ import { ConfigPresenter } from '../configPresenter'
 import { ipcMain } from 'electron'
 import { FLOATING_BUTTON_EVENTS } from '@/events'
 import { handleShowHiddenWindow } from '@/utils'
+import { presenter } from '..'
 
 export class FloatingButtonPresenter {
   private floatingWindow: FloatingButtonWindow | null = null
@@ -21,6 +22,10 @@ export class FloatingButtonPresenter {
    * 初始化悬浮按钮功能
    */
   public async initialize(config?: Partial<FloatingButtonConfig>): Promise<void> {
+    if (presenter.isSimpleModeEnabled()) {
+      return
+    }
+
     const floatingButtonEnabled = this.configPresenter.getFloatingButtonEnabled()
     try {
       this.config = {

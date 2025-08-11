@@ -2,7 +2,7 @@ import { app } from 'electron'
 import { presenter } from '@/presenter'
 import { IDeeplinkPresenter, MCPServerConfig } from '@shared/presenter'
 import path from 'path'
-import { DEEPLINK_EVENTS, MCP_EVENTS, WINDOW_EVENTS, SIMPLE_MODE_EVENTS } from '@/events'
+import { DEEPLINK_EVENTS, MCP_EVENTS, WINDOW_EVENTS } from '@/events'
 import { eventBus, SendTarget } from '@/eventbus'
 
 interface MCPInstallConfig {
@@ -38,7 +38,18 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
     // 过滤启动参数
     const deepLinkUrl = process.argv.find((arg) => arg.startsWith('deepchat://'))
     if (deepLinkUrl) {
-      this.startupUrl = deepLinkUrl
+      console.log('[deeplink] Found DeepLink URL:', deepLinkUrl)
+      // 直接解析simple参数
+      const urlObj = new URL(deepLinkUrl)
+      if (urlObj.searchParams.has('simple')) {
+        const simple = urlObj.searchParams.get('simple')
+        const isSimpleMode = simple === 'true' || simple === '1'
+        // 通知简单模式
+        presenter.setSimpleMode(isSimpleMode)
+        urlObj.searchParams.delete('simple') // 删除simple参数，避免影响后续处理
+        this.startupUrl = urlObj.toString()
+      } else {
+      }
     }
     // 注册协议处理器
     if (process.defaultApp) {
@@ -176,11 +187,7 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
     // 如果用户增加了simple=true，则设置简单模式，优先处理
     if (params.has('simple')) {
       const simple = params.get('simple')
-      const isSimpleMode = simple === 'true'
-
-      // 通知简单模式
-      eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, isSimpleMode)
-      presenter.windowPresenter.sendToAllWindows(SIMPLE_MODE_EVENTS.STATE_CHANGED, isSimpleMode)
+      presenter.toggleSimpleMode(simple === 'true' || simple === '1')
     }
 
     let msg = params.get('msg')

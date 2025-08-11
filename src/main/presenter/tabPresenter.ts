@@ -945,7 +945,7 @@ export class TabPresenter implements ITabPresenter {
   /**
    * 更新指定窗口的聊天页视图位置
    */
-  async updateWindowTabBounds(): Promise<void> {
+  async updateTabViewBounds(): Promise<void> {
     // 获取目标窗口
     this.windowPresenter.windows.forEach(async (window) => {
       if (!window || window.isDestroyed()) {

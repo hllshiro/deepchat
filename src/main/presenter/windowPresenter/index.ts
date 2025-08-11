@@ -520,7 +520,9 @@ export class WindowPresenter implements IWindowPresenter {
         sandbox: false, // 禁用沙箱，允许 preload 访问 Node.js API
         devTools: is.dev // 开发模式下启用 DevTools
       },
-      roundedCorners: true // Windows 11 圆角
+      roundedCorners: true, // Windows 11 圆角
+      resizable: !presenter.isSimpleModeEnabled(),
+      movable: !presenter.isSimpleModeEnabled()
     })
 
     if (!shellWindow) {
@@ -1014,14 +1016,15 @@ export class WindowPresenter implements IWindowPresenter {
     }
   }
 
-  /**
-   * 设置窗口的缩放属性
-   * @param windowId 窗口 ID
-   */
-  setWindowResizeable(resizeable: boolean): void {
+  isSimpleModeEnabled(): boolean {
+    return presenter.isSimpleModeEnabled()
+  }
+
+  toggleSimpleMode(enable: boolean): void {
     this.windows.forEach((window) => {
       if (window && !window.isDestroyed()) {
-        window.setResizable(resizeable)
+        window.setResizable(!enable)
+        window.setMovable(!enable)
       }
     })
   }

@@ -21,7 +21,7 @@ import { TabPresenter } from './tabPresenter'
 import { TrayPresenter } from './trayPresenter'
 import { OAuthPresenter } from './oauthPresenter'
 import { FloatingButtonPresenter } from './floatingButtonPresenter'
-import { CONFIG_EVENTS, WINDOW_EVENTS } from '@/events'
+import { CONFIG_EVENTS, SIMPLE_MODE_EVENTS, WINDOW_EVENTS } from '@/events'
 import { KnowledgePresenter } from './knowledgePresenter'
 
 // IPC调用上下文接口
@@ -186,11 +186,19 @@ export class Presenter implements IPresenter {
     return this.isSimpleMode
   }
 
-  // 启动简单模式时禁用非核心功能
+  setSimpleMode(enabled: boolean) {
+    this.isSimpleMode = enabled
+  }
+
+  // 简单模式状态切换
   toggleSimpleMode(enable: boolean) {
-    this.isSimpleMode = enable
-    this.windowPresenter.setWindowResizeable(!enable) // 禁用窗口缩放
-    this.tabPresenter.updateWindowTabBounds() // 更新简单模式窗口的聊天页视图位置
+    if (enable === this.isSimpleMode) {
+      // 无变化，忽略
+      return
+    }
+    this.setSimpleMode(enable)
+    this.windowPresenter.toggleSimpleMode(enable)
+    this.tabPresenter.updateTabViewBounds()
     if (enable) {
       this.floatingButtonPresenter.destroy() // 销毁悬浮按钮
       this.shortcutPresenter.destroy() // 销毁快捷键监听
@@ -200,6 +208,7 @@ export class Presenter implements IPresenter {
       this.shortcutPresenter.registerShortcuts() // 重新初始化快捷键监听
       this.trayPresenter.init() // 重新初始化托盘图标
     }
+    this.windowPresenter.sendToAllWindows(SIMPLE_MODE_EVENTS.STATE_CHANGED, enable)
   }
 }
 
