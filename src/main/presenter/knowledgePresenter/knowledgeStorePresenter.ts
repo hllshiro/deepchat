@@ -132,7 +132,7 @@ export class KnowledgeStorePresenter {
 
       // 6. 创建chunk记录
       const chunkMessages = chunks.map((content, index) => ({
-        id: nanoid(),
+        id: fileMessage.id + '_' + index,
         fileId: fileMessage.id,
         chunkIndex: index,
         content,
