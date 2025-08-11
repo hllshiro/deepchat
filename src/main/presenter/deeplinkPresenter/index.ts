@@ -2,7 +2,7 @@ import { app } from 'electron'
 import { presenter } from '@/presenter'
 import { IDeeplinkPresenter, MCPServerConfig } from '@shared/presenter'
 import path from 'path'
-import { DEEPLINK_EVENTS, MCP_EVENTS, WINDOW_EVENTS } from '@/events'
+import { DEEPLINK_EVENTS, MCP_EVENTS, WINDOW_EVENTS, SIMPLE_MODE_EVENTS } from '@/events'
 import { eventBus, SendTarget } from '@/eventbus'
 
 interface MCPInstallConfig {
@@ -168,6 +168,14 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
   async handleStart(params: URLSearchParams): Promise<void> {
     console.log('Processing start command, parameters:', Object.fromEntries(params.entries()))
 
+    // 如果用户增加了simple=true，则设置简单模式，优先处理
+    const simple = params.get('simple')
+    const isSimpleMode = simple === 'true'
+
+    // 通知简单模式
+    eventBus.sendToMain(SIMPLE_MODE_EVENTS.STATE_CHANGED, isSimpleMode)
+    presenter.windowPresenter.sendToAllWindows(SIMPLE_MODE_EVENTS.STATE_CHANGED, isSimpleMode)
+
     let msg = params.get('msg')
     if (!msg) {
       return
@@ -210,6 +218,7 @@ export class DeeplinkPresenter implements IDeeplinkPresenter {
 
     const windowId = focusedWindow?.id || 1
     await this.ensureChatTabActive(windowId)
+
     eventBus.sendToRenderer(DEEPLINK_EVENTS.START, SendTarget.DEFAULT_TAB, {
       msg,
       modelId,
