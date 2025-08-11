@@ -14,6 +14,10 @@ export class TrayPresenter {
   }
 
   private createTray() {
+    if (presenter.isSimpleModeEnabled()) {
+      return
+    }
+
     // 根据平台选择不同的图标
     let image: NativeImage | undefined = undefined
 

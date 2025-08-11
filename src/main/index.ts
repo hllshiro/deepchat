@@ -5,7 +5,7 @@ import { ProxyMode, proxyConfig } from './presenter/proxyConfig'
 import path from 'path'
 import fs from 'fs'
 import { eventBus } from './eventbus'
-import { WINDOW_EVENTS, TRAY_EVENTS, FLOATING_BUTTON_EVENTS, SIMPLE_MODE_EVENTS } from './events'
+import { WINDOW_EVENTS, TRAY_EVENTS, FLOATING_BUTTON_EVENTS } from './events'
 import { setLoggingEnabled } from '@shared/logger'
 import { is } from '@electron-toolkit/utils' // 确保导入 is
 import { handleShowHiddenWindow } from './utils'
@@ -105,12 +105,6 @@ app.whenReady().then(async () => {
 
   // 注册全局快捷键
   presenter.shortcutPresenter.registerShortcuts()
-
-  // 监听简单模式状态变化
-  eventBus.on(SIMPLE_MODE_EVENTS.STATE_CHANGED, (isSimpleMode: boolean) => {
-    console.log('Main: Simple mode enabled:', isSimpleMode)
-    presenter.toggleSimpleMode(isSimpleMode)
-  })
 
   // 监听悬浮按钮配置变化事件
   eventBus.on(FLOATING_BUTTON_EVENTS.ENABLED_CHANGED, async (enabled: boolean) => {
