@@ -582,8 +582,7 @@ export class WindowPresenter implements IWindowPresenter {
         devTools: is.dev // 开发模式下启用 DevTools
       },
       roundedCorners: true, // Windows 11 圆角
-      movable: !presenter.isSimpleModeEnabled(),
-      fullscreen: presenter.isSimpleModeEnabled()
+      movable: !presenter.isSimpleModeEnabled()
     })
 
     if (!shellWindow) {
@@ -1089,7 +1088,6 @@ export class WindowPresenter implements IWindowPresenter {
     this.windows.forEach((window) => {
       if (window && !window.isDestroyed()) {
         window.setMovable(!enable)
-        window.setFullScreen(enable)
       }
     })
   }
