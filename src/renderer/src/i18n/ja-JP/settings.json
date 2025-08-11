@@ -20,8 +20,8 @@
     "invalidProxyUrl": "無効なプロキシURL、有効なhttp/https URLを入力してください",
     "contentProtection": "画面キャプチャ保護",
     "contentProtectionDialogTitle": "画面保護の切り替え確認",
-    "contentProtectionEnableDesc": "画面保護を有効にすると、画面共有ソフトウェアがDeepChatウィンドウをキャプチャするのを防ぎ、コンテンツのプライバシーを保護します。この機能はすべてのインターフェイスを完全に隠すわけではありません。責任を持って規制に準拠して使用してください。また、画面共有ソフトウェアがこの機能をサポートしない場合があります。また、一部の環境では黒いウィンドウが残る可能性があります。",
-    "contentProtectionDisableDesc": "画面保護を無効にすると、画面共有ソフトウェアがDeepChatウィンドウをキャプチャできるようになります。",
+    "contentProtectionEnableDesc": "DeepChatウィンドウの画面共有によるキャプチャを防止し、プライバシー保護に役立ちます。すべてのアプリがこの設定に対応するわけではなく、環境によっては黒いウィンドウが残る場合があります。",
+    "contentProtectionDisableDesc": "画面共有アプリによるDeepChatウィンドウのキャプチャを許可します。",
     "contentProtectionRestartNotice": "この設定を変更するとアプリケーションが再起動します。続行しますか？",
     "soundEnabled": "サウンドを有効にする",
     "copyWithCotEnabled": "COT情報をコピー",
@@ -51,7 +51,7 @@
       "title": "ショートカットキー設定"
     },
     "notifications": "システム通知",
-    "notificationsDesc": "Deepchatが前景にない場合、セッションが生成された場合、システム通知が送信されます"
+    "notificationsDesc": "DeepChatがバックグラウンドのとき、応答が完了すると通知を送信します"
   },
   "data": {
     "title": "データ設定",
@@ -108,10 +108,10 @@
     },
     "artifacts": {
       "description": "Artifacts機能を有効にすると、AIはより豊かなコンテンツを生成できます",
-      "title": "アーティファクト効果"
+      "title": "Artifacts"
     },
-    "addModel": "モデルを追加します",
-    "configureModel": "構成モデル",
+    "addModel": "モデルを追加",
+    "configureModel": "モデルを構成",
     "modelList": "モデルリスト",
     "provider": "サービスプロバイダー",
     "providerSetting": "サービスプロバイダーの設定",
@@ -120,7 +120,7 @@
       "cancel": "キャンセル",
       "contextLength": {
         "description": "モデルが処理できるコンテキスト長を設定します",
-        "label": "コンテキストの長さ"
+        "label": "コンテキスト長"
       },
       "description": "この構成は現在のモデルに対してのみ有効であり、他のモデルには影響しないことに注意してください。注意して変更してください。パラメーターが誤っていると、モデルが適切に機能しない場合があります。",
       "functionCall": {
@@ -167,12 +167,33 @@
         "message": "このモデルの構成をデフォルトにリセットする必要がありますか？この操作は取消不能です。",
         "title": "リセットを確認します"
       },
+      "reasoningEffort": {
+        "label": "推論努力度",
+        "description": "モデルの推論の深さを制御します。より高い努力度はより良い結果を生成しますが、応答が遅くなります",
+        "placeholder": "推論努力度を選択",
+        "options": {
+          "minimal": "Minimal - 最速応答",
+          "low": "Low - 低努力",
+          "medium": "Medium - 中程度の努力",
+          "high": "High - 高努力"
+        }
+      },
+      "verbosity": {
+        "label": "詳細度",
+        "description": "モデル応答の詳細レベルと長さを制御します",
+        "placeholder": "詳細度を選択",
+        "options": {
+          "low": "Low - 簡潔な回答",
+          "medium": "Medium - バランスの取れた詳細",
+          "high": "High - 詳細な回答"
+        }
+      },
       "resetToDefault": "デフォルトにリセットします",
       "saveConfig": "構成を保存します",
       "useModelDefault": "モデルのデフォルト設定を使用",
       "currentUsingModelDefault": "現在モデルのデフォルト設定を使用中",
       "temperature": {
-        "description": "出力のランダム性を制御します。ほとんどのモデルは0-1で、0〜2の間のサポートがあります。ランダム性が高くなるほど。",
+        "description": "出力のランダム性を制御します。値が高いほどランダム性が増します。",
         "label": "温度"
       },
       "title": "カスタムモデルパラメーター",
@@ -183,7 +204,7 @@
           "chat": "言語モデル",
           "embedding": "埋め込みモデル",
           "imageGeneration": "画像生成モデル",
-          "rerank": "モデルを並べ替えます"
+          "rerank": "リランクモデル"
         }
       },
       "validation": {
@@ -232,7 +253,8 @@
         "confirm": "無効にする"
       },
       "configModels": {
-        "title": "モデルリストを構成"
+        "title": "モデルリストを構成",
+        "description": "有効または無効にするモデルを選択"
       },
       "disableAllModels": {
         "title": "すべてのモデルを無効にする確認",
@@ -242,7 +264,9 @@
       "verify": {
         "missingFields": "API KeyとAPI URLを入力してください",
         "failed": "検証に失敗しました",
-        "success": "検証に成功しました"
+        "success": "検証に成功しました",
+        "failedDesc": "APIキーまたは設定の検証に失敗しました。設定を確認してください",
+        "successDesc": "APIキーと設定の検証に成功しました。使用可能です"
       },
       "addCustomProvider": {
         "title": "カスタムプロバイダーを追加",
@@ -269,6 +293,7 @@
       },
       "pullModel": {
         "title": "モデルを取得",
+        "description": "ローカルにダウンロードするモデルを選択",
         "pull": "取得"
       },
       "modelCheck": {
