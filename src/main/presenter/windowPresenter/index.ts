@@ -582,8 +582,8 @@ export class WindowPresenter implements IWindowPresenter {
         devTools: is.dev // 开发模式下启用 DevTools
       },
       roundedCorners: true, // Windows 11 圆角
-      resizable: !presenter.isSimpleModeEnabled(),
-      movable: !presenter.isSimpleModeEnabled()
+      movable: !presenter.isSimpleModeEnabled(),
+      fullscreen: presenter.isSimpleModeEnabled()
     })
 
     if (!shellWindow) {
@@ -1088,8 +1088,8 @@ export class WindowPresenter implements IWindowPresenter {
   toggleSimpleMode(enable: boolean): void {
     this.windows.forEach((window) => {
       if (window && !window.isDestroyed()) {
-        window.setResizable(!enable)
         window.setMovable(!enable)
+        window.setFullScreen(enable)
       }
     })
   }
