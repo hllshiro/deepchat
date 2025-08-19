@@ -361,15 +361,12 @@ export class KnowledgePresenter implements IKnowledgePresenter {
   }
 
   async getSupportedLanguages(): Promise<string[]> {
-    return ['default', ...SupportedTextSplitterLanguages]
+    return [...SupportedTextSplitterLanguages]
   }
 
   separators: string[] = ['\n\n', '\n', ' ', '']
 
   async getSeparatorsForLanguage(language: string): Promise<string[]> {
-    if (language === 'default') {
-      return this.separators
-    }
     try {
       return RecursiveCharacterTextSplitter.getSeparatorsForLanguage(
         language as SupportedTextSplitterLanguage

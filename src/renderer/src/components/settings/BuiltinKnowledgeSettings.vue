@@ -344,7 +344,7 @@
                           />
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>{{ t('settings.knowledgeBase.normalizedHelper') }}</p>
+                          <p>⚠️ {{ t('settings.knowledgeBase.normalizedHelper') }}</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -362,6 +362,34 @@
                     <p>{{ t('settings.knowledgeBase.advanced') }}</p>
                   </AccordionTrigger>
                   <AccordionContent class="space-y-4">
+                    <div class="space-y-2">
+                      <div class="flex items-center gap-1">
+                        <Label
+                          class="text-xs text-muted-foreground"
+                          for="edit-builtin-config-separators"
+                        >
+                          {{ t('settings.knowledgeBase.separators') }}
+                        </Label>
+                        <TooltipProvider>
+                          <Tooltip :delay-duration="200">
+                            <TooltipTrigger as-child>
+                              <Icon
+                                icon="lucide:circle-question-mark"
+                                class="cursor-pointer text-primary outline-none focus:outline-none"
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p class="w-64">{{ t('settings.knowledgeBase.separatorsHelper') }}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+                      <Input
+                        id="edit-builtin-config-separators"
+                        v-model="separators"
+                        Placeholder="'\n\n', '\n', ' ', ''"
+                      ></Input>
+                    </div>
                     <div class="space-y-2">
                       <div class="flex items-center gap-1">
                         <Label
@@ -540,6 +568,7 @@ const mcpStore = useMcpStore()
 const settingsStore = useSettingsStore()
 const themeStore = useThemeStore()
 const llmP = usePresenter('llmproviderPresenter')
+const knowledgeP = usePresenter('knowledgePresenter')
 const emit = defineEmits<{
   (e: 'showDetail', config: BuiltinKnowledgeConfig): void
 }>()
@@ -718,7 +747,28 @@ const saveBuiltinConfig = async () => {
   if (!isEditingBuiltinConfigValid.value) return
   editingBuiltinConfig.value.fragmentsNumber = fragmentsNumber.value[0]
   submitLoading.value = true
-
+  // 转换separators格式
+  if (separators.value && separators.value.trim() !== '') {
+    const separatorsArray = Array.from(
+      new Set(
+        separators.value
+          .trim()
+          .split(',')
+          .map((s) => s.trim().replace(/['"]/g, ''))
+      )
+    )
+    if (separatorsArray.length === 0) {
+      toast({
+        title: t('settings.knowledgeBase.invalidSeparators'),
+        variant: 'destructive',
+        duration: 3000
+      })
+      submitLoading.value = false
+      return
+    }
+    console.log('输入的分隔符:', separatorsArray)
+    editingBuiltinConfig.value.separators = separatorsArray
+  }
   // 自动获取dimensions
   if (autoDetectDimensionsSwitch.value) {
     const result = await llmP.getDimensions(
@@ -861,6 +911,19 @@ const loadBuiltinConfigFromMcp = async () => {
     console.error('加载BuiltinKnowledge配置失败:', error)
   }
 }
+
+const separators = ref('')
+const supportedLanguages = ref<string[]>([])
+knowledgeP.getSupportedLanguages().then((res) => {
+  supportedLanguages.value = res
+  console.log('支持的语言:', supportedLanguages.value)
+})
+
+/* const getSeparatorsForLanguage = (language: string) => {
+  knowledgeP.getSeparatorsForLanguage(language).then((res) => {
+    console.log(`支持的分隔符 (${language}):`, res)
+  })
+} */
 
 const route = useRoute()
 

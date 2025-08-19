@@ -540,7 +540,10 @@
       "content": "\"{filename}\"파일을 삭제해야합니까? 이 작업은 복원되지 않습니다."
     },
     "resumeAllPausedTasks": "원 클릭 복구",
-    "pauseAllRunningTasks": "한 번의 클릭 일시 중지"
+    "pauseAllRunningTasks": "한 번의 클릭 일시 중지",
+    "separators": "블록 분리기",
+    "separatorsHelper": "문서 분할 구분 기호, 단일 구분 기호는 큰따옴표( \" ) 또는 작은따옴표( ' )로 묶고, 구분 기호는 쉼표( , )로 구분합니다.",
+    "invalidSeparators": "잘못된 분리기"
   },
   "mcp": {
     "title": "MCP 설정",

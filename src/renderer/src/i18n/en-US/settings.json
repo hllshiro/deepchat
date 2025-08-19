@@ -540,7 +540,10 @@
       "content": "Are you sure to delete the file \"{fileName}\"? \nThis operation is not restored."
     },
     "resumeAllPausedTasks": "One-click recovery",
-    "pauseAllRunningTasks": "One-click pause"
+    "pauseAllRunningTasks": "One-click pause",
+    "separators": "Block separator",
+    "separatorsHelper": "Document segmentation delimiter, a single delimiter is enclosed in double quotes ( \" ) or single quotes ( ' ), and delimiters are separated by commas ( , )",
+    "invalidSeparators": "Invalid separator"
   },
   "mcp": {
     "title": "MCP Settings",

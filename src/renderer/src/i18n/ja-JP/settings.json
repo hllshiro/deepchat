@@ -540,7 +540,10 @@
       "content": "ファイル「{fileName}」を削除してもよろしいですか？この操作は元に戻せません。"
     },
     "resumeAllPausedTasks": "ワンクリックリカバリ",
-    "pauseAllRunningTasks": "ワンクリックの一時停止"
+    "pauseAllRunningTasks": "ワンクリックの一時停止",
+    "separators": "ブロックセパレーター",
+    "separatorsHelper": "文書分割区切り文字。単一の区切り文字は二重引用符（ \" ）または一重引用符（ ' ）で囲み、区切り文字はカンマ（ , ）で区切られます。",
+    "invalidSeparators": "無効な分離器"
   },
   "mcp": {
     "title": "MCP設定",
