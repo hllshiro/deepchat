@@ -18,6 +18,11 @@ import { KnowledgeTaskPresenter } from './knowledgeTaskPresenter'
 import { getMetric } from '@/utils/vector'
 import { presenter } from '..'
 import { DIALOG_WARN } from '@shared/dialog'
+import {
+  RecursiveCharacterTextSplitter,
+  SupportedTextSplitterLanguages,
+  type SupportedTextSplitterLanguage
+} from '@/lib/textsplitters'
 
 export class KnowledgePresenter implements IKnowledgePresenter {
   /**
@@ -353,5 +358,24 @@ export class KnowledgePresenter implements IKnowledgePresenter {
   async resumeAllPausedTasks(id: string): Promise<void> {
     const rag = await this.getOrCreateStorePresenter(id)
     await rag.resumeAllPausedTasks()
+  }
+
+  async getSupportedLanguages(): Promise<string[]> {
+    return ['default', ...SupportedTextSplitterLanguages]
+  }
+
+  separators: string[] = ['\n\n', '\n', ' ', '']
+
+  async getSeparatorsForLanguage(language: string): Promise<string[]> {
+    if (language === 'default') {
+      return this.separators
+    }
+    try {
+      return RecursiveCharacterTextSplitter.getSeparatorsForLanguage(
+        language as SupportedTextSplitterLanguage
+      )
+    } catch {
+      return this.separators
+    }
   }
 }

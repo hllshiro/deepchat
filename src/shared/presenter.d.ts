@@ -1548,6 +1548,15 @@ export interface IKnowledgePresenter {
    * Destroy the instance and release resources
    */
   destroy(): Promise<void>
+  /**
+   * Get the list of supported programming languages
+   */
+  getSupportedLanguages(): Promise<string[]>
+  /**
+   * Get the list of separators for a specific programming language
+   * @param language The programming language to get separators for
+   */
+  getSeparatorsForLanguage(language: string): Promise<string[]>
 }
 
 type ModelProvider = {
@@ -1565,6 +1574,7 @@ export type BuiltinKnowledgeConfig = {
   chunkSize?: number
   chunkOverlap?: number
   fragmentsNumber: number
+  separators?: string[]
   enabled: boolean
 }
 export type MetricType = 'l2' | 'cosine' | 'ip'
