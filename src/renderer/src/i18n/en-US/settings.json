@@ -225,6 +225,7 @@
     }
   },
   "provider": {
+    "search": "Search provider platforms…",
     "enable": "Enable Service",
     "enabled": "Enabled",
     "disabled": "Disabled",
@@ -239,6 +240,10 @@
     "enableModels": "Enable Models",
     "disableAllModels": "Disable All Models",
     "modelsEnabled": "Models have been enabled",
+    "noModelsEnabled": {
+      "title": "No models enabled",
+      "description": "Please click the \"Enable Models\" button to manually select the models you want to use."
+    },
     "verifyLink": "Verify Link",
     "syncModelsFailed": "Failed to sync models...",
     "addCustomProvider": "Add Custom Provider",
@@ -266,7 +271,10 @@
         "failed": "Verification failed",
         "success": "Verification successful",
         "failedDesc": "API key or configuration verification failed, please check your configuration",
-        "successDesc": "API key and configuration verified successfully, ready to use"
+        "successDesc": "API key and configuration verified successfully, ready to use",
+        "connectionError": "Connection error, please check the network connection and API address",
+        "serverError": "Server error, please try again later",
+        "unauthorized": "Authentication failed, API Key is invalid or expired"
       },
       "addCustomProvider": {
         "title": "Add Custom Provider",
@@ -351,6 +359,58 @@
       "modelRunning": "The model is running",
       "modelRunningDesc": "Please stop the model {model} first and then delete it."
     },
+    "modelscope": {
+      "mcpSync": {
+        "title": "Sync MCP Services",
+        "description": "Sync MCP servers from ModelScope to local configuration, allowing quick addition of common MCP tools.",
+        "sync": "Start Sync",
+        "syncing": "Syncing...",
+        "pageSize": "Page Size",
+        "imported": "Imported {count} services",
+        "skipped": "Skipped {count} services",
+        "errors": "{count} errors",
+        "errorDetails": "Error Details",
+        "noApiKey": "Please configure ModelScope API Key first",
+        "noServersFound": "No available MCP services found",
+        "authenticationFailed": "Authentication failed, please check API Key",
+        "convertingServers": "Converting server configuration...",
+        "fetchingServers": "Getting the list of MCP servers...",
+        "importingServers": "Importing server configuration...",
+        "noOperationalUrls": "No available operating address found",
+        "pageNumber": "page number",
+        "pageNumberPlaceholder": "Please enter the page number",
+        "serverAlreadyExists": "The server already exists, skip import",
+        "syncComplete": "Synchronous completion",
+        "invalidServerData": "Invalid server data"
+      },
+      "apiKey": "API Key",
+      "apiKeyHelper": "Get your API Key in the ModelScope console",
+      "apiKeyPlaceholder": "Please enter ModelScope API Key",
+      "baseUrl": "API Address",
+      "baseUrlHelper": "ModelScope API service address",
+      "connected": "Connected",
+      "connecting": "Connecting...",
+      "description": "ModelScope is a model-as-a-service sharing platform launched by Alibaba Damo Academy",
+      "details": {
+        "apiConfig": "API Configuration",
+        "mcpSync": "MCP Synchronization",
+        "modelManagement": "Model Management",
+        "operationalDescription": "Synchronize MCP servers that can be used directly on the ModelScope platform",
+        "operationalServers": "Operating a server",
+        "rateLimitConfig": "Rate limit configuration",
+        "safetySettings": "Security settings",
+        "specialConfig": "Special configuration",
+        "syncFromModelScope": "Sync from ModelScope",
+        "title": "Provider settings details"
+      },
+      "invalidKey": "Invalid API Key",
+      "keyRequired": "Please enter API Key",
+      "name": "ModelScope",
+      "networkError": "Network connection error",
+      "notConnected": "Not connected",
+      "verifyFailed": "Verification failed",
+      "verifySuccess": "Verification is successful"
+    },
     "anthropicApiKeyTip": "Please go to Anthropic Console to get your API Key",
     "anthropicConnected": "Anthropic connected",
     "anthropicNotConnected": "Anthropic not connected",
@@ -374,7 +434,14 @@
     "manageModels": "Manage Models",
     "anthropicOAuthActiveTip": "OAuth authentication is enabled, you can use Anthropic services directly",
     "oauthVerifySuccess": "OAuth connection verified successfully",
-    "oauthVerifyFailed": "OAuth connection verification failed"
+    "oauthVerifyFailed": "OAuth connection verification failed",
+    "configurationSaved": "Configuration saved",
+    "configurationUpdated": "Configuration updated",
+    "dataRefreshed": "Data has been refreshed",
+    "operationFailed": "Operation failed",
+    "operationSuccess": "Operation is successful",
+    "settingsApplied": "Settings applied",
+    "bedrockLimitTip": "* Only Anthropic Claude supported (including Opus, Sonnet, Haiku models)"
   },
   "knowledgeBase": {
     "title": "Knowledge Base Settings",
@@ -563,6 +630,7 @@
       "imageModel": "Choose a vision model",
       "customHeadersParseError": "Custom Header parsing failed",
       "customHeaders": "Custom Request Headers",
+      "clickToEdit": "Click to edit and view full content",
       "invalidKeyValueFormat": "Incorrect request header format, please check whether the input is correct.",
       "npmRegistry": "Custom NPM Registry",
       "npmRegistryPlaceholder": "Set up a custom NPM Registry, leave the system to automatically select the fastest one",
