@@ -119,7 +119,8 @@ export class KnowledgeStorePresenter {
       // 3. 分片
       const chunker = new RecursiveCharacterTextSplitter({
         chunkSize: this.config.chunkSize,
-        chunkOverlap: this.config.chunkOverlap
+        chunkOverlap: this.config.chunkOverlap,
+        separators: this.config.separators
       })
       const chunks = await chunker.splitText(sanitizeText(fileInfo.content))
 
