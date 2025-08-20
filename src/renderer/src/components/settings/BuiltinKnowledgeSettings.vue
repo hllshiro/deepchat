@@ -400,7 +400,7 @@
                               class="whitespace-nowrap"
                               :title="t('settings.knowledgeBase.separatorsPreset')"
                             >
-                              <Icon icon="lucide:star" class="w-4 h-4 text-primary" />
+                              <Icon icon="lucide:book-marked" class="w-4 h-4 text-primary" />
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent class="w-80 p-2">
@@ -667,6 +667,7 @@ function openAddConfig() {
     fragmentsNumber: 6,
     enabled: true
   }
+  separators.value = ''
   fragmentsNumber.value = [6]
   selectEmbeddingModel.value = null
   selectRerankModel.value = null
