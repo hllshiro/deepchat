@@ -404,7 +404,7 @@
                           </PopoverTrigger>
                           <PopoverContent class="w-40 p-2">
                             <div class="space-y-2">
-                              <div class="text-sm text-secoudary">
+                              <div class="text-sm text-muted-foreground">
                                 {{ t('settings.knowledgeBase.selectLanguage') }}
                               </div>
                               <div class="max-h-48 overflow-y-auto space-y-1">
@@ -745,6 +745,8 @@ const editBuiltinConfig = async (index: number) => {
   }
   if (config.separators) {
     separators.value = separatorsArray2String(config.separators)
+  } else {
+    separators.value = ''
   }
 
   isEditing.value = true
@@ -802,6 +804,8 @@ const saveBuiltinConfig = async () => {
       return
     }
     editingBuiltinConfig.value.separators = separatorsArray
+  } else {
+    delete editingBuiltinConfig.value.separators
   }
   // 自动获取dimensions
   if (autoDetectDimensionsSwitch.value) {
