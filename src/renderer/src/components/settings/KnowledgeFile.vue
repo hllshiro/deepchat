@@ -53,7 +53,7 @@
           {{ fileList.length }}
         </span>
       </div>
-      <div className="flex flex-col gap-2 text-balance">
+      <div class="flex flex-col gap-2 text-balance">
         <label for="upload">
           <div
             @dragover.prevent
@@ -105,7 +105,7 @@
           <DialogHeader>
             <DialogTitle> {{ t('settings.knowledgeBase.searchKnowledge') }} </DialogTitle>
           </DialogHeader>
-          <div className="flex w-full items-center gap-1 relative">
+          <div class="flex w-full items-center gap-1 relative">
             <Input
               v-model="searchKey"
               :placeholder="t('settings.knowledgeBase.searchKnowledgePlaceholder')"

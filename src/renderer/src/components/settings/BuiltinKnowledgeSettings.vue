@@ -388,7 +388,7 @@
                         <Input
                           id="edit-builtin-config-separators"
                           v-model="separators"
-                          Placeholder='"\n\n", "\n", " ", ""'
+                          placeholder='"\n\n", "\n", " ", ""'
                           class="flex-1"
                         ></Input>
                         <Popover v-model:open="separatorsPopoverOpen">
@@ -452,7 +452,7 @@
                         :min="1"
                         :max="selectEmbeddingModel?.maxTokens"
                         v-model="editingBuiltinConfig.chunkSize"
-                        :Placeholder="t('settings.knowledgeBase.chunkSizePlaceholder')"
+                        :placeholder="t('settings.knowledgeBase.chunkSizePlaceholder')"
                         :step="128"
                       ></Input>
                     </div>
