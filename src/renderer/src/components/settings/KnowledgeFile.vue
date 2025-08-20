@@ -69,7 +69,7 @@
               </div>
               <div class="flex items-center gap-1">
                 <Icon icon="lucide:clipboard" class="w-4 h-4" />
-                <span class="text-sm">
+                <span class="text-sm" :title="acceptExts.join(', ')">
                   {{
                     t('settings.knowledgeBase.fileSupport', {
                       accept: acceptExts.slice(0, 5).join('，'),
