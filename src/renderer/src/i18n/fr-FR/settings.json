@@ -542,8 +542,10 @@
     "resumeAllPausedTasks": "Récupération en un clic",
     "pauseAllRunningTasks": "Pause en un clic",
     "separators": "Séparateur de blocage",
-    "separatorsHelper": "Délimiteur de segmentation de document, un seul délimiteur est entouré de guillemets doubles ( \" ) ou de guillemets simples ( ' ), et les délimiteurs sont séparés par des virgules ( , )",
-    "invalidSeparators": "Séparateur non valide"
+    "separatorsHelper": "Document Séliquant séparateur, le séparateur unique est enveloppé dans des citations doubles à demi-largeur (\"\"), et le séparateur est divisé par une virgule à demi-largeur (,)",
+    "invalidSeparators": "Séparateur non valide",
+    "selectLanguage": "Sélectionnez un préréglage",
+    "separatorsPreset": "Chargement des préréglages"
   },
   "mcp": {
     "title": "Paramètres MCP",

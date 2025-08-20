@@ -542,8 +542,10 @@
     "resumeAllPausedTasks": "One-click recovery",
     "pauseAllRunningTasks": "One-click pause",
     "separators": "Block separator",
-    "separatorsHelper": "Document segmentation delimiter, a single delimiter is enclosed in double quotes ( \" ) or single quotes ( ' ), and delimiters are separated by commas ( , )",
-    "invalidSeparators": "Invalid separator"
+    "separatorsHelper": "Document segmentation delimiter, a single delimiter is enclosed in double quotes (\"\"), and delimiters are separated by commas (,)",
+    "invalidSeparators": "Invalid separator",
+    "selectLanguage": "Select a preset",
+    "separatorsPreset": "Loading presets"
   },
   "mcp": {
     "title": "MCP Settings",

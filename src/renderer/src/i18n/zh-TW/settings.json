@@ -542,8 +542,10 @@
     "resumeAllPausedTasks": "一鍵恢復",
     "pauseAllRunningTasks": "一鍵暫停",
     "separators": "塊分隔符",
-    "separatorsHelper": "文檔切分分隔符，單個分隔符用半角符號雙引號( \" )或單引號( ' )包裹，分隔符之間用半角符號逗號( , )分割",
-    "invalidSeparators": "無效的分隔符"
+    "separatorsHelper": "文檔切分分隔符，單個分隔符用半角符號雙引號(\"\")包裹，分隔符之間用半角符號逗號(,)分割",
+    "invalidSeparators": "無效的分隔符",
+    "selectLanguage": "選擇預設",
+    "separatorsPreset": "加載預設"
   },
   "mcp": {
     "title": "MCP設定",

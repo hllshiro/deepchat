@@ -542,8 +542,10 @@
     },
     "searchError": "查询失败",
     "separators": "块分隔符",
-    "separatorsHelper": "文档切分分隔符，单个分隔符用半角符号双引号( \" )或单引号( ' )包裹，分隔符之间用半角符号逗号( , )分割",
-    "invalidSeparators": "无效的分隔符"
+    "separatorsHelper": "文档切分分隔符，单个分隔符用半角符号双引号(\"\")包裹，分隔符之间用半角符号逗号(,)分割",
+    "invalidSeparators": "无效的分隔符",
+    "selectLanguage": "选择预设",
+    "separatorsPreset": "加载预设"
   },
   "mcp": {
     "title": "MCP设置",
