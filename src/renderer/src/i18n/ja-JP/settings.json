@@ -502,7 +502,7 @@
     "embeddingModel": "埋め込みモデル",
     "return": "戻る",
     "uploadHelper": "クリックしてここでファイルをアップロードまたはドラッグします",
-    "onlySupport": "サポートのみ",
+    "fileSupport": "{accept} およびその他の {count} 形式をサポートします",
     "searchKnowledge": "ナレッジベースを検索します",
     "searchKnowledgePlaceholder": "クエリコンテンツを入力してください",
     "noData": "まだデータはありません",

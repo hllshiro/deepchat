@@ -70,8 +70,12 @@
               <div class="flex items-center gap-1">
                 <Icon icon="lucide:clipboard" class="w-4 h-4" />
                 <span class="text-sm">
-                  {{ t('settings.knowledgeBase.onlySupport') }}
-                  {{ acceptExts.join('，') }}
+                  {{
+                    t('settings.knowledgeBase.fileSupport', {
+                      accept: acceptExts.slice(0, 5).join('，'),
+                      count: acceptExts.length
+                    })
+                  }}
                 </span>
               </div>
             </div>
@@ -283,17 +287,21 @@ const clearSearchKey = () => {
   searchKey.value = ''
 }
 
+const defaultSupported = ['txt', 'md', 'markdown', 'docx', 'pptx', 'pdf']
+
 // 加载支持的文件扩展名
 const loadSupportedExtensions = async () => {
   try {
     console.log('[KnowledgeFile] Loading supported extensions from backend')
     const extensions = await knowledgePresenter.getSupportedFileExtensions()
-    acceptExts.value = extensions
+    // 保证 defaultSupported 排在最前，且不重复
+    const uniqueExts = extensions.filter((ext) => !defaultSupported.includes(ext))
+    acceptExts.value = [...defaultSupported, ...uniqueExts]
     console.log(`[KnowledgeFile] Loaded ${extensions.length} supported extensions:`, extensions)
   } catch (error) {
     console.error('[KnowledgeFile] Failed to load supported extensions:', error)
     // 使用回退扩展名列表
-    acceptExts.value = ['txt', 'md', 'markdown', 'docx', 'pptx', 'pdf']
+    acceptExts.value = [...defaultSupported]
   }
 }
 
@@ -336,9 +344,7 @@ const handleFileUpload = async (files: File[]) => {
         )
         toast({
           title: `"${file.name}" ${t('settings.knowledgeBase.uploadError')}`,
-          description:
-            validationResult.error ||
-            `${t('settings.knowledgeBase.onlySupport')} ${acceptExts.value.join('，')}`,
+          description: validationResult.error,
           variant: 'destructive',
           duration: 3000
         })

@@ -502,7 +502,7 @@
     "embeddingModel": "Embed Model",
     "return": "return",
     "uploadHelper": "Click to upload or drag the file here",
-    "onlySupport": "Supported only",
+    "fileSupport": "Support {accept} and {count} other formats",
     "searchKnowledge": "Search the Knowledge Base",
     "searchKnowledgePlaceholder": "Please enter the query content",
     "noData": "No data yet",

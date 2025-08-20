@@ -69,7 +69,7 @@ export class FileValidationService implements IFileValidationService {
           isSupported: false,
           mimeType,
           adapterType,
-          error: `File type not supported for knowledge base processing (${adapterType})`,
+          error: 'File type not supported',
           suggestedExtensions: this.getSupportedExtensions()
         }
       }

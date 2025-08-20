@@ -502,7 +502,7 @@
     "embeddingModel": "Modèle d'intégration",
     "return": "retour",
     "uploadHelper": "Cliquez pour télécharger ou faire glisser le fichier ici",
-    "onlySupport": "Soutenu uniquement",
+    "fileSupport": "Prend en charge {accept} et {count} autres formats",
     "searchKnowledge": "Rechercher la base de connaissances",
     "searchKnowledgePlaceholder": "Veuillez saisir le contenu de la requête",
     "noData": "Pas encore de données",

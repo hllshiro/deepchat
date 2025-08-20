@@ -502,7 +502,7 @@
     "embeddingModel": "مدل",
     "return": "بازگشت",
     "uploadHelper": "برای بارگذاری یا کشیدن پرونده در اینجا کلیک کنید",
-    "onlySupport": "فقط پشتیبانی می شود",
+    "fileSupport": "پشتیبانی از {accept} و {count} فرمت‌های دیگر",
     "searchKnowledge": "پایگاه دانش را جستجو کنید",
     "searchKnowledgePlaceholder": "لطفاً محتوای پرس و جو را وارد کنید",
     "noData": "هنوز اطلاعاتی وجود ندارد",
