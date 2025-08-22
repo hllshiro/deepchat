@@ -2,8 +2,7 @@
 import { eventBus } from '@/eventbus'
 import { WINDOW_EVENTS, CONFIG_EVENTS, SYSTEM_EVENTS, TAB_EVENTS } from '@/events'
 import { is } from '@electron-toolkit/utils'
-import { ITabPresenter, TabCreateOptions, TabData } from '@shared/presenter'
-import { WindowPresenter } from './windowPresenter'
+import { ITabPresenter, TabCreateOptions, IWindowPresenter, TabData } from '@shared/presenter'
 import { BrowserWindow, WebContentsView, shell, nativeImage } from 'electron'
 import { join } from 'path'
 import contextMenu from '@/contextMenuHelper'
@@ -32,9 +31,9 @@ export class TabPresenter implements ITabPresenter {
   // WebContents ID 到 Tab ID 的映射 (用于IPC调用来源识别)
   private webContentsToTabId: Map<number, number> = new Map()
 
-  private windowPresenter: WindowPresenter // 窗口管理器实例
+  private windowPresenter: IWindowPresenter // 窗口管理器实例
 
-  constructor(windowPresenter: WindowPresenter) {
+  constructor(windowPresenter: IWindowPresenter) {
     this.windowPresenter = windowPresenter // 注入窗口管理器
     this.initBusHandlers()
   }
@@ -66,6 +65,7 @@ export class TabPresenter implements ITabPresenter {
         this.onWindowSizeChange(windowId)
       }, 100)
     })
+
     // 窗口关闭，分离包含的视图
     eventBus.on(WINDOW_EVENTS.WINDOW_CLOSED, (windowId: number) => {
       const views = this.windowTabs.get(windowId)
@@ -263,7 +263,7 @@ export class TabPresenter implements ITabPresenter {
     }
 
     // 销毁视图
-    view.webContents.closeDevTools()
+    view.webContents.close()
     // Note: view.destroy() is also an option depending on Electron version/behavior
     return true
   }
@@ -948,12 +948,48 @@ export class TabPresenter implements ITabPresenter {
     }
   }
 
+  registerFloatingWindow(webContentsId: number, webContents: Electron.WebContents): void {
+    try {
+      console.log(`TabPresenter: Registering floating window as virtual tab, ID: ${webContentsId}`)
+      if (this.tabs.has(webContentsId)) {
+        console.warn(`TabPresenter: Tab ${webContentsId} already exists, skipping registration`)
+        return
+      }
+      const virtualView = {
+        webContents: webContents,
+        setVisible: () => {},
+        setBounds: () => {},
+        getBounds: () => ({ x: 0, y: 0, width: 400, height: 600 })
+      } as any
+      this.webContentsToTabId.set(webContentsId, webContentsId)
+      this.tabs.set(webContentsId, virtualView)
+      console.log(
+        `TabPresenter: Virtual tab registered successfully for floating window ${webContentsId}`
+      )
+    } catch (error) {
+      console.error('TabPresenter: Failed to register floating window:', error)
+    }
+  }
+
+  unregisterFloatingWindow(webContentsId: number): void {
+    try {
+      console.log(`TabPresenter: Unregistering floating window virtual tab, ID: ${webContentsId}`)
+      this.webContentsToTabId.delete(webContentsId)
+      this.tabs.delete(webContentsId)
+      console.log(
+        `TabPresenter: Virtual tab unregistered successfully for floating window ${webContentsId}`
+      )
+    } catch (error) {
+      console.error('TabPresenter: Failed to unregister floating window:', error)
+    }
+  }
+
   /**
    * 更新指定窗口的聊天页视图位置
    */
   async updateTabViewBounds(): Promise<void> {
     // 获取目标窗口
-    this.windowPresenter.windows.forEach(async (window) => {
+    this.windowPresenter.getAllWindows().forEach(async (window) => {
       if (!window || window.isDestroyed()) {
         console.warn('No target window found for view bounds update')
         return
