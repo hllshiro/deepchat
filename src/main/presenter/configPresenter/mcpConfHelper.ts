@@ -129,30 +129,6 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
     env: {},
     disable: false
   },
-  bochaSearch: {
-    args: [],
-    descriptions: 'DeepChat内置博查搜索服务',
-    icons: '🔍',
-    autoApprove: ['all'],
-    type: 'inmemory' as MCPServerType,
-    command: 'bochaSearch',
-    env: {
-      apiKey: 'YOUR_BOCHA_API_KEY' // 需要用户提供实际的API Key
-    },
-    disable: false
-  },
-  braveSearch: {
-    args: [],
-    descriptions: 'DeepChat内置Brave搜索服务',
-    icons: '🦁',
-    autoApprove: ['all'],
-    type: 'inmemory' as MCPServerType,
-    command: 'braveSearch',
-    env: {
-      apiKey: 'YOUR_BRAVE_API_KEY' // 需要用户提供实际的API Key
-    },
-    disable: false
-  },
   difyKnowledge: {
     args: [],
     descriptions: 'DeepChat内置Dify知识库检索服务',
@@ -242,19 +218,6 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
     },
     disable: false
   },
-  'deepchat-inmemory/deep-research-server': {
-    args: [],
-    descriptions:
-      'DeepChat内置深度研究服务，使用博查搜索(注意该服务需要较长的上下文模型，请勿在短上下文的模型中使用)',
-    icons: '🔬',
-    autoApprove: ['all'],
-    type: 'inmemory' as MCPServerType,
-    command: 'deepchat-inmemory/deep-research-server',
-    env: {
-      BOCHA_API_KEY: 'YOUR_BOCHA_API_KEY'
-    },
-    disable: false
-  },
   'deepchat-inmemory/auto-prompting-server': {
     args: [],
     descriptions: 'DeepChat内置自动模板提示词服务',
@@ -292,18 +255,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
 const DEFAULT_MCP_SERVERS = {
   mcpServers: {
     // 先定义内置MCP服务器
-    ...DEFAULT_INMEMORY_SERVERS,
-    // 之后是默认的三方MCP服务器
-    memory: {
-      command: 'npx',
-      args: ['-y', '@modelcontextprotocol/server-memory'],
-      env: {},
-      descriptions: '内存存储服务',
-      icons: '🧠',
-      autoApprove: ['all'],
-      disable: true,
-      type: 'stdio' as MCPServerType
-    }
+    ...DEFAULT_INMEMORY_SERVERS
   },
   defaultServers: [
     'Artifacts',

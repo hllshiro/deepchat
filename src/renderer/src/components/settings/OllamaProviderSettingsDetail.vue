@@ -131,7 +131,7 @@
                   :model-name="model.name"
                   :model-id="model.name"
                   :provider-id="provider.id"
-                  :is-custom-model="true"
+                  :is-custom-model="false"
                   :type="
                     model.capabilities.indexOf('embedding') > -1
                       ? ModelType.Embedding
