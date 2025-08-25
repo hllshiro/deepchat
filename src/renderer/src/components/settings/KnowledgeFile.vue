@@ -316,6 +316,7 @@ const handleChange = async (event: Event) => {
 // 加载文件列表
 const loadList = async () => {
   fileList.value = (await knowledgePresenter.listFiles(props.builtinKnowledgeDetail.id)) || []
+  console.log('[KnowledgeFile] Loaded file list:', fileList.value)
 }
 
 const toggleStatus = async (run: boolean) => {

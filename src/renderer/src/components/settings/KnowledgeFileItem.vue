@@ -27,11 +27,12 @@
         class="h-7 w-7 flex items-center justify-center rounded-full transition-colors"
         :title="file.metadata.errorReason || getStatusTitle(file.status)"
       >
-        <Icon
+        <Badge
           v-if="file.status === 'completed'"
-          icon="lucide:circle-check-big"
-          class="text-base text-green-500"
-        />
+          class="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums bg-green-500 flex justify-center overflow-hidden hover:bg-green-500"
+        >
+          <span>{{ file.metadata.totalChunks }}</span>
+        </Badge>
         <Icon
           v-else-if="file.status === 'processing'"
           icon="lucide:loader"
@@ -121,6 +122,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import dayjs from 'dayjs'
 
