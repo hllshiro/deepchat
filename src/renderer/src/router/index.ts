@@ -71,7 +71,7 @@ const router = createRouter({
             icon: 'lucide:server'
           }
         },
-        {
+        /* {
           path: 'mcp-market',
           name: 'settings-mcp-market',
           component: () => import('@/components/settings/McpBuiltinMarket.vue'),
@@ -79,7 +79,7 @@ const router = createRouter({
             titleKey: 'routes.settings-mcp-market',
             icon: 'lucide:shopping-bag'
           }
-        },
+        }, */
         {
           path: 'prompt',
           name: 'settings-prompt',
