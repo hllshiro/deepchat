@@ -200,7 +200,7 @@ export class TabPresenter implements ITabPresenter {
    * 销毁标签页
    */
   async closeTabs(windowId: number): Promise<void> {
-    const tabs = this.windowTabs.get(windowId) || []
+    const tabs = [...(this.windowTabs.get(windowId) ?? [])]
     tabs.forEach((t) => this.closeTab(t))
   }
 
