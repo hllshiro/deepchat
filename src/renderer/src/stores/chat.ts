@@ -39,6 +39,7 @@ export const useChatStore = defineStore('chat', () => {
   const messagesMap = ref<Map<number, AssistantMessage[] | UserMessage[]>>(new Map())
   const generatingThreadIds = ref(new Set<string>())
   const isSidebarOpen = ref(false)
+  const isMessageNavigationOpen = ref(false)
 
   // 使用Map来存储会话工作状态
   const threadsWorkingStatusMap = ref<Map<number, Map<string, WorkingStatus>>>(new Map())
@@ -81,6 +82,11 @@ export const useChatStore = defineStore('chat', () => {
   const getMessages = () => messagesMap.value.get(getTabId()) ?? []
   const setMessages = (msgs: AssistantMessage[] | UserMessage[]) => {
     messagesMap.value.set(getTabId(), msgs)
+  }
+  const getCurrentThreadMessages = () => {
+    const activeThreadId = getActiveThreadId()
+    if (!activeThreadId) return []
+    return getMessages()
   }
   const getThreadsWorkingStatus = () => {
     if (!threadsWorkingStatusMap.value.has(getTabId())) {
@@ -1102,6 +1108,13 @@ export const useChatStore = defineStore('chat', () => {
     window.electron.ipcRenderer.on(CONVERSATION_EVENTS.MESSAGE_EDITED, (_, msgId: string) => {
       handleMessageEdited(msgId)
     })
+
+    window.electron.ipcRenderer.on(CONVERSATION_EVENTS.DEACTIVATED, (_, msg) => {
+      if (msg.tabId !== getTabId()) {
+        return
+      }
+      setActiveThreadId(null)
+    })
   }
 
   onMounted(() => {
@@ -1184,6 +1197,7 @@ export const useChatStore = defineStore('chat', () => {
     // 状态
     createNewEmptyThread,
     isSidebarOpen,
+    isMessageNavigationOpen,
     activeThreadIdMap,
     threads,
     messagesMap,
@@ -1218,6 +1232,7 @@ export const useChatStore = defineStore('chat', () => {
     getActiveThreadId,
     getGeneratingMessagesCache,
     getMessages,
+    getCurrentThreadMessages,
     exportThread,
     showProviderSelector
   }

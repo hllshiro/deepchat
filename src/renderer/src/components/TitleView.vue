@@ -43,6 +43,20 @@
     </div>
 
     <div class="flex items-center gap-2">
+      <!-- 消息导航按钮 -->
+      <Button
+        class="w-7 h-7 rounded-md relative !p-0"
+        size="icon"
+        variant="outline"
+        :class="{ 'bg-accent': chatStore.isMessageNavigationOpen }"
+        @click="chatStore.isMessageNavigationOpen = !chatStore.isMessageNavigationOpen"
+      >
+        <Icon
+          icon="lucide:list"
+          class="w-4 h-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        />
+      </Button>
+
       <ScrollablePopover align="end" content-class="w-80" :enable-scrollable="true">
         <template #trigger>
           <Button class="w-7 h-7 rounded-md" size="icon" variant="outline">
@@ -51,15 +65,18 @@
         </template>
         <ChatConfig
           v-model:system-prompt="systemPrompt"
-          :temperature="temperature"
-          :context-length="contextLength"
-          :max-tokens="maxTokens"
-          :artifacts="artifacts"
-          :thinking-budget="thinkingBudget"
-          :reasoning-effort="reasoningEffort"
-          :verbosity="verbosity"
+          v-model:temperature="temperature"
+          v-model:context-length="contextLength"
+          v-model:max-tokens="maxTokens"
+          v-model:artifacts="artifacts"
+          v-model:thinking-budget="thinkingBudget"
+          v-model:reasoning-effort="reasoningEffort"
+          v-model:verbosity="verbosity"
+          :context-length-limit="contextLengthLimit"
+          :max-tokens-limit="maxTokensLimit"
           :model-id="chatStore.chatConfig.modelId"
           :provider-id="chatStore.chatConfig.providerId"
+          :model-type="modelType"
           @update:temperature="updateTemperature"
           @update:context-length="updateContextLength"
           @update:max-tokens="updateMaxTokens"
@@ -88,6 +105,7 @@ import { onMounted, onUnmounted, ref, watch, computed } from 'vue'
 import { useChatStore } from '@/stores/chat'
 import { usePresenter } from '@/composables/usePresenter'
 import { useThemeStore } from '@/stores/theme'
+import { useSettingsStore } from '@/stores/settings'
 import { ModelType } from '@shared/model'
 import { RATE_LIMIT_EVENTS } from '@/events'
 
@@ -97,6 +115,7 @@ const llmPresenter = usePresenter('llmproviderPresenter')
 const { t } = useI18n()
 const chatStore = useChatStore()
 const themeStore = useThemeStore()
+const settingsStore = useSettingsStore()
 // Chat configuration state
 const temperature = ref(chatStore.chatConfig.temperature)
 const contextLength = ref(chatStore.chatConfig.contextLength)
@@ -106,8 +125,8 @@ const artifacts = ref(chatStore.chatConfig.artifacts)
 const thinkingBudget = ref(chatStore.chatConfig.thinkingBudget)
 const reasoningEffort = ref(chatStore.chatConfig.reasoningEffort)
 const verbosity = ref(chatStore.chatConfig.verbosity)
-
-// 获取模型配置来初始化默认值
+const modelType = ref(ModelType.Chat)
+// 获取模型配置来初始化默认值并智能调整当前参数
 const loadModelConfig = async () => {
   const modelId = chatStore.chatConfig.modelId
   const providerId = chatStore.chatConfig.providerId
@@ -115,13 +134,40 @@ const loadModelConfig = async () => {
   if (modelId && providerId) {
     try {
       const config = await configPresenter.getModelDefaultConfig(modelId, providerId)
+      modelType.value = config.type
+
+      contextLengthLimit.value = config.contextLength
+      maxTokensLimit.value = config.maxTokens
+
+      if (contextLength.value > config.contextLength) {
+        contextLength.value = config.contextLength
+      } else if (contextLength.value < 2048) {
+        contextLength.value = Math.max(2048, config.contextLength)
+      }
+
+      const maxTokensMax = !config.maxTokens || config.maxTokens < 8192 ? 8192 : config.maxTokens
+      if (maxTokens.value > maxTokensMax) {
+        maxTokens.value = maxTokensMax
+      } else if (maxTokens.value < 1024) {
+        maxTokens.value = 1024
+      }
+      // reset to default temperature
+      temperature.value = config.temperature ?? 0.6
+
       if (config.thinkingBudget !== undefined) {
         if (thinkingBudget.value === undefined) {
           thinkingBudget.value = config.thinkingBudget
+        } else {
+          if (thinkingBudget.value < -1) {
+            thinkingBudget.value = -1
+          } else if (thinkingBudget.value > 32768) {
+            thinkingBudget.value = 32768
+          }
         }
       } else {
         thinkingBudget.value = undefined
       }
+
       if (config.reasoningEffort !== undefined) {
         if (reasoningEffort.value === undefined) {
           reasoningEffort.value = config.reasoningEffort
@@ -129,6 +175,7 @@ const loadModelConfig = async () => {
       } else {
         reasoningEffort.value = undefined
       }
+
       if (config.verbosity !== undefined) {
         if (verbosity.value === undefined) {
           verbosity.value = config.verbosity
@@ -341,8 +388,19 @@ const handleModelUpdate = (model: MODEL_META) => {
   modelSelectOpen.value = false
 }
 
+const isRateLimitEnabled = () => {
+  if (!props.model?.providerId) return false
+  const provider = settingsStore.providers.find((p) => p.id === props.model?.providerId)
+  return provider?.rateLimit?.enabled ?? false
+}
+
 const loadRateLimitStatus = async () => {
   if (props.model?.providerId) {
+    if (!isRateLimitEnabled()) {
+      rateLimitStatus.value = null
+      return
+    }
+
     try {
       const status = await llmPresenter.getProviderRateLimitStatus(props.model.providerId)
       rateLimitStatus.value = status
@@ -354,11 +412,32 @@ const loadRateLimitStatus = async () => {
 
 const handleRateLimitEvent = (data: any) => {
   if (data.providerId === props.model?.providerId) {
-    loadRateLimitStatus()
+    if (data.config && !data.config.enabled) {
+      rateLimitStatus.value = null
+    } else {
+      loadRateLimitStatus()
+    }
+    startRateLimitPolling()
   }
 }
 
-let statusInterval: number | null = null
+let statusInterval: ReturnType<typeof setInterval> | null = null
+
+const startRateLimitPolling = () => {
+  if (statusInterval) {
+    clearInterval(statusInterval)
+  }
+  if (isRateLimitEnabled()) {
+    statusInterval = setInterval(loadRateLimitStatus, 1000)
+  }
+}
+
+const stopRateLimitPolling = () => {
+  if (statusInterval) {
+    clearInterval(statusInterval)
+    statusInterval = null
+  }
+}
 
 onMounted(async () => {
   if (props.model) {
@@ -377,26 +456,32 @@ onMounted(async () => {
   window.electron.ipcRenderer.on(RATE_LIMIT_EVENTS.REQUEST_EXECUTED, handleRateLimitEvent)
   window.electron.ipcRenderer.on(RATE_LIMIT_EVENTS.REQUEST_QUEUED, handleRateLimitEvent)
 
-  statusInterval = window.setInterval(loadRateLimitStatus, 1000)
+  // 只有在速率限制启用时才开始轮询
+  startRateLimitPolling()
 })
 
 onUnmounted(() => {
-  if (statusInterval) {
-    clearInterval(statusInterval)
-  }
-  window.electron.ipcRenderer.removeListener(RATE_LIMIT_EVENTS.CONFIG_UPDATED, handleRateLimitEvent)
-  window.electron.ipcRenderer.removeListener(
-    RATE_LIMIT_EVENTS.REQUEST_EXECUTED,
-    handleRateLimitEvent
-  )
-  window.electron.ipcRenderer.removeListener(RATE_LIMIT_EVENTS.REQUEST_QUEUED, handleRateLimitEvent)
+  stopRateLimitPolling()
+  window.electron.ipcRenderer.removeAllListeners(RATE_LIMIT_EVENTS.CONFIG_UPDATED)
+  window.electron.ipcRenderer.removeAllListeners(RATE_LIMIT_EVENTS.REQUEST_EXECUTED)
+  window.electron.ipcRenderer.removeAllListeners(RATE_LIMIT_EVENTS.REQUEST_QUEUED)
 })
 
 watch(
   () => props.model?.providerId,
   () => {
     loadRateLimitStatus()
+    startRateLimitPolling()
   }
+)
+
+watch(
+  () => settingsStore.providers,
+  () => {
+    loadRateLimitStatus()
+    startRateLimitPolling()
+  },
+  { deep: true }
 )
 </script>
 
