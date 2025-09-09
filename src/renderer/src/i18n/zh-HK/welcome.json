@@ -2,7 +2,7 @@
   "steps": {
     "welcome": {
       "title": "歡迎",
-      "description": "讓我們開始設置 DeepChat"
+      "description": "讓我們開始設置 Star-Agent"
     },
     "provider": {
       "title": "模型服務商",
@@ -17,7 +17,7 @@
       "description": "一切就緒，可以開始使用了！"
     }
   },
-  "title": "歡迎使用 DeepChat",
+  "title": "歡迎使用 Star-Agent",
   "description": "讓我們一起完成設置過程",
   "provider": {
     "select": "選擇服務商",

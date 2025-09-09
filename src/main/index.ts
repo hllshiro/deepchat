@@ -29,7 +29,7 @@ let presenter: Presenter
 // Start the lifecycle management system instead of using app.whenReady()
 app.whenReady().then(async () => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.wefonk.deepchat')
+  electronApp.setAppUserModelId('com.senjone.staragent')
   try {
     console.log('main: Application lifecycle startup')
     await lifecycleManager.start()

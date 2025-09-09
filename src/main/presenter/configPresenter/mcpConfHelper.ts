@@ -63,7 +63,7 @@ const PLATFORM_SPECIFIC_SERVERS: Record<string, MCPServerConfig> = {
     ? {
         'deepchat/apple-server': {
           args: [],
-          descriptions: 'DeepChat内置Apple系统集成服务 (仅macOS)',
+          descriptions: 'Star-Agent内置Apple系统集成服务 (仅macOS)',
           icons: '🍎',
           autoApprove: ['all'],
           type: 'inmemory' as MCPServerType,
@@ -79,7 +79,7 @@ const PLATFORM_SPECIFIC_SERVERS: Record<string, MCPServerConfig> = {
     ? {
         // 'deepchat-inmemory/windows-server': {
         //   args: [],
-        //   descriptions: 'DeepChat built-in Windows system integration service (Windows only)',
+        //   descriptions: 'Star-Agent内置Windows系统集成服务 (仅Windows)',
         //   icons: '🪟',
         //   autoApprove: ['all'],
         //   type: 'inmemory' as MCPServerType,
@@ -95,7 +95,7 @@ const PLATFORM_SPECIFIC_SERVERS: Record<string, MCPServerConfig> = {
     ? {
         // 'deepchat-inmemory/linux-server': {
         //   args: [],
-        //   descriptions: 'DeepChat built-in Linux system integration service (Linux only)',
+        //   descriptions: 'Star-Agent内置Linux系统集成服务 (仅Linux)',
         //   icons: '🐧',
         //   autoApprove: ['all'],
         //   type: 'inmemory' as MCPServerType,
@@ -111,7 +111,7 @@ const PLATFORM_SPECIFIC_SERVERS: Record<string, MCPServerConfig> = {
 const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   buildInFileSystem: {
     args: [app.getPath('home')],
-    descriptions: 'DeepChat内置文件系统mcp服务',
+    descriptions: 'Star-Agent内置文件系统mcp服务',
     icons: '📁',
     autoApprove: ['read'],
     type: 'inmemory' as MCPServerType,
@@ -121,7 +121,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   Artifacts: {
     args: [],
-    descriptions: 'DeepChat内置 artifacts mcp服务',
+    descriptions: 'Star-Agent内置 artifacts mcp服务',
     icons: '🎨',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -131,7 +131,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   bochaSearch: {
     args: [],
-    descriptions: 'DeepChat内置博查搜索服务',
+    descriptions: 'Star-Agent内置博查搜索服务',
     icons: '🔍',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -143,7 +143,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   braveSearch: {
     args: [],
-    descriptions: 'DeepChat内置Brave搜索服务',
+    descriptions: 'Star-Agent内置Brave搜索服务',
     icons: '🦁',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -155,7 +155,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   difyKnowledge: {
     args: [],
-    descriptions: 'DeepChat内置Dify知识库检索服务',
+    descriptions: 'Star-Agent内置Dify知识库检索服务',
     icons: '📚',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -184,7 +184,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   powerpack: {
     args: [],
-    descriptions: 'DeepChat内置增强工具包',
+    descriptions: 'Star-Agent内置增强工具包',
     icons: '🛠️',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -194,7 +194,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   ragflowKnowledge: {
     args: [],
-    descriptions: 'DeepChat内置RAGFlow知识库检索服务',
+    descriptions: 'Star-Agent内置RAGFlow知识库检索服务',
     icons: '📚',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -213,7 +213,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   fastGptKnowledge: {
     args: [],
-    descriptions: 'DeepChat内置FastGPT知识库检索服务',
+    descriptions: 'Star-Agent内置FastGPT知识库检索服务',
     icons: '📚',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -232,7 +232,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   builtinKnowledge: {
     args: [],
-    descriptions: 'DeepChat内置知识库检索服务',
+    descriptions: 'Star-Agent内置知识库检索服务',
     icons: '📚',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -245,7 +245,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   'deepchat-inmemory/deep-research-server': {
     args: [],
     descriptions:
-      'DeepChat内置深度研究服务，使用博查搜索(注意该服务需要较长的上下文模型，请勿在短上下文的模型中使用)',
+      'Star-Agent内置深度研究服务，使用博查搜索(注意该服务需要较长的上下文模型，请勿在短上下文的模型中使用)',
     icons: '🔬',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -257,7 +257,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   'deepchat-inmemory/auto-prompting-server': {
     args: [],
-    descriptions: 'DeepChat内置自动模板提示词服务',
+    descriptions: 'Star-Agent内置自动模板提示词服务',
     icons: '📜',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -267,7 +267,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   'deepchat-inmemory/conversation-search-server': {
     args: [],
-    descriptions: 'DeepChat built-in conversation history search service',
+    descriptions: 'Star-Agent built-in conversation history search service',
     icons: '🔍',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,
@@ -277,7 +277,7 @@ const DEFAULT_INMEMORY_SERVERS: Record<string, MCPServerConfig> = {
   },
   'deepchat-inmemory/meeting-server': {
     args: [],
-    descriptions: 'DeepChat内置会议服务，用于组织多Agent讨论',
+    descriptions: 'Star-Agent内置会议服务，用于组织多Agent讨论',
     icons: '👥',
     autoApprove: ['all'],
     type: 'inmemory' as MCPServerType,

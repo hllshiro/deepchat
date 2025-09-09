@@ -1,5 +1,5 @@
-appId: com.wefonk.deepchat
-productName: DeepChat
+appId: com.senjone.staragent
+productName: Star-Agent
 directories:
   buildResources: build
 files:
@@ -50,11 +50,11 @@ electronLanguages:
   - fa-IR
   - fa
 win:
-  executableName: DeepChat
+  executableName: Star-Agent
 nsis:
   artifactName: ${name}-${version}-windows-${arch}.${ext}
-  shortcutName: ${productName}
-  uninstallDisplayName: ${productName}
+  shortcutName: Star-Agent
+  uninstallDisplayName: Star-Agent
   createDesktopShortcut: always
   allowToChangeInstallationDirectory: true
   oneClick: false
@@ -88,4 +88,4 @@ linux:
 npmRebuild: true
 publish:
   provider: generic
-  url: https://cdn.deepchatai.cn/upgrade/
+  url: https://cdn.senjone.com/upgrade/

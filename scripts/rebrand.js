@@ -505,6 +505,11 @@ function main() {
 }
 
 // 运行
+/* console.log(import.meta.url)
+console.log(`file://${process.argv[1]}`)
 if (import.meta.url === `file://${process.argv[1]}`) {
   main()
 }
+ */
+
+main()

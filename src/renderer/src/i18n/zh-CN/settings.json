@@ -39,8 +39,8 @@
     },
     "contentProtection": "投屏保护",
     "contentProtectionDialogTitle": "投屏保护切换确认",
-    "contentProtectionEnableDesc": "开启投屏保护可以防止投屏软件捕获DeepChat主窗口，用来保护您的内容隐私。请注意，此功能不会彻底隐藏所有界面，请合理合规使用。并且，并不是所有投屏软件都遵守用户隐私设定，该功能可能会在一些不遵守隐私设定的投屏软件上失效，且部分环境中可能会残留一个黑色窗体。",
-    "contentProtectionDisableDesc": "关闭投屏保护将允许投屏软件捕获DeepChat窗口。",
+    "contentProtectionEnableDesc": "开启投屏保护可以防止投屏软件捕获Star-Agent主窗口，用来保护您的内容隐私。请注意，此功能不会彻底隐藏所有界面，请合理合规使用。并且，并不是所有投屏软件都遵守用户隐私设定，该功能可能会在一些不遵守隐私设定的投屏软件上失效，且部分环境中可能会残留一个黑色窗体。",
+    "contentProtectionDisableDesc": "关闭投屏保护将允许投屏软件捕获Star-Agent窗口。",
     "contentProtectionRestartNotice": "切换此设置将导致程序重启，请确认是否继续？",
     "soundEnabled": "启用音效",
     "copyWithCotEnabled": "复制COT信息",
@@ -54,7 +54,7 @@
     "loggingRestartNotice": "切换此设置将导致程序重启，请确认是否继续？",
     "openLogFolder": "打开日志文件夹",
     "notifications": "系统通知",
-    "notificationsDesc": "当 DeepChat 不在前台时，如有会话生成完毕会发送系统通知"
+    "notificationsDesc": "当 Star-Agent 不在前台时，如有会话生成完毕会发送系统通知"
   },
   "data": {
     "title": "数据设置",
@@ -140,7 +140,7 @@
       },
       "functionCall": {
         "label": "函数调用",
-        "description": "模型是否原生支持函数调用(关闭这个选项后DeepChat会自动模拟函数调用)"
+        "description": "模型是否原生支持函数调用(关闭这个选项后Star-Agent会自动模拟函数调用)"
       },
       "reasoning": {
         "label": "推理能力",
@@ -440,7 +440,7 @@
     "githubCopilotNotConnected": "GitHub Copilot 未连接",
     "loginWithGitHub": "使用 GitHub 登录",
     "loggingIn": "登录中...",
-    "githubCopilotLoginTip": "点击授权 DeepChat 访问您的 GitHub Copilot 订阅",
+    "githubCopilotLoginTip": "点击授权 Star-Agent 访问您的 GitHub Copilot 订阅",
     "loginSuccess": "登录成功",
     "loginFailed": "登录失败",
     "tokenValid": "令牌有效",
@@ -458,7 +458,7 @@
     "apiUrlLabel": "API URL",
     "anthropicConnected": "Anthropic 已连接",
     "anthropicNotConnected": "Anthropic 未连接",
-    "anthropicOAuthTip": "点击授权 DeepChat 访问您的 Anthropic 账户",
+    "anthropicOAuthTip": "点击授权 Star-Agent 访问您的 Anthropic 账户",
     "oauthLogin": "OAuth 登录",
     "anthropicApiKeyTip": "请前往 Anthropic Console 获取您的 API Key",
     "anthropicOAuthFlowTip": "系统将自动打开授权窗口，授权后请回来输入授权码",
@@ -477,7 +477,7 @@
     "oauthVerifySuccess": "OAuth 连接验证成功",
     "oauthVerifyFailed": "OAuth 连接验证失败",
     "bedrockLimitTip": "* 仅支持 Anthropic Claude（包括 Opus，Sonnet，Haiku 模型）",
-    "bedrockVerifyTip": "DeepChat 使用 Claude 3.5 Sonnet 模型验证，若您无此模型的调用权限验证将失败。这不会影响其他模型的使用。"
+    "bedrockVerifyTip": "Star-Agent 使用 Claude 3.5 Sonnet 模型验证，若您无此模型的调用权限验证将失败。这不会影响其他模型的使用。"
   },
   "knowledgeBase": {
     "title": "知识库设置",

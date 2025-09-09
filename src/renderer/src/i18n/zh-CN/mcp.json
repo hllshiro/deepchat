@@ -168,15 +168,15 @@
     },
     "buildInFileSystem": {
       "name": "文件系统",
-      "desc": "让 DeepChat 能够操作本地文件"
+      "desc": "让 Star-Agent 能够操作本地文件"
     },
     "Artifacts": {
       "name": "Artifacts",
-      "desc": "让你的 DeepChat 输出的多样化的 Artifacts 内容"
+      "desc": "让你的 Star-Agent 输出的多样化的 Artifacts 内容"
     },
     "imageServer": {
       "name": "图片服务",
-      "desc": "开启后 DeepChat 中任意模型都能看懂图片，能生成图片"
+      "desc": "开启后 Star-Agent 中任意模型都能看懂图片，能生成图片"
     },
     "braveSearch": {
       "name": "Brave搜索",
@@ -200,15 +200,15 @@
     },
     "builtinKnowledge": {
       "name": "内置知识库检索",
-      "desc": "DeepChat内置知识库检索服务，可以对DeepChat内置知识库内容进行检索"
+      "desc": "Star-Agent内置知识库检索服务，可以对Star-Agent内置知识库内容进行检索"
     },
     "deepchat-inmemory/custom-prompts-server": {
       "name": "自定义提示词",
-      "desc": "DeepChat内置自定义提示词服务"
+      "desc": "Star-Agent内置自定义提示词服务"
     },
     "deepchat-inmemory/deep-research-server": {
       "name": "DeepResearch",
-      "desc": "基于博查搜索的DeepChat内置深度研究服务，（注意需要长上下文模型才能使用，上下文不足的模型可能会失败）"
+      "desc": "基于博查搜索的Star-Agent内置深度研究服务，（注意需要长上下文模型才能使用，上下文不足的模型可能会失败）"
     },
     "deepchat-inmemory/auto-prompting-server": {
       "name": "自动模板提示词",
@@ -216,11 +216,11 @@
     },
     "deepchat-inmemory/conversation-search-server": {
       "name": "对话历史搜索",
-      "desc": "DeepChat内置对话历史搜索服务，可搜索历史对话记录和消息内容"
+      "desc": "Star-Agent内置对话历史搜索服务，可搜索历史对话记录和消息内容"
     },
     "deepchat-inmemory/meeting-server": {
       "name": "多智能体会议",
-      "desc": "DeepChat 内置会议服务，支持发起和主持多智能体讨论"
+      "desc": "Star-Agent 内置会议服务，支持发起和主持多智能体讨论"
     },
     "deepchat/apple-server": {
       "name": "macOS系统助手",

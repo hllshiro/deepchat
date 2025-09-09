@@ -2,7 +2,7 @@
   "steps": {
     "welcome": {
       "title": "ようこそ",
-      "description": "DeepChatの設定を始めましょう"
+      "description": "Star-Agentの設定を始めましょう"
     },
     "provider": {
       "title": "モデルプロバイダー",
@@ -17,7 +17,7 @@
       "description": "すべての準備が整いました！"
     }
   },
-  "title": "DeepChatへようこそ",
+  "title": "Star-Agentへようこそ",
   "description": "セットアップを完了しましょう",
   "provider": {
     "select": "プロバイダーを選択",

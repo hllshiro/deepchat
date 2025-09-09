@@ -2,7 +2,7 @@
   "steps": {
     "welcome": {
       "title": "환영합니다",
-      "description": "DeepChat 설정을 시작합시다"
+      "description": "Star-Agent 설정을 시작합시다"
     },
     "provider": {
       "title": "모델 서비스 제공업체",
@@ -17,7 +17,7 @@
       "description": "모든 설정이 완료되었습니다!"
     }
   },
-  "title": "DeepChat에 오신 것을 환영합니다",
+  "title": "Star-Agent에 오신 것을 환영합니다",
   "description": "설정 과정을 완료합시다",
   "provider": {
     "select": "서비스 제공업체 선택",

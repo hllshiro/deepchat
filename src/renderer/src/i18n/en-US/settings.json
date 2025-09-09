@@ -34,8 +34,8 @@
     "themeSelect": "Select theme",
     "closeToQuit": "Exit app when closing window",
     "contentProtectionDialogTitle": "Confirm Screen Protection Change",
-    "contentProtectionEnableDesc": "Prevent screen sharing apps from capturing the DeepChat window to help protect your privacy. Not all apps honor this setting; in some environments a black window may remain.",
-    "contentProtectionDisableDesc": "Allow screen sharing apps to capture the DeepChat window.",
+    "contentProtectionEnableDesc": "Prevent screen sharing apps from capturing the Star-Agent window to help protect your privacy. Not all apps honor this setting; in some environments a black window may remain.",
+    "contentProtectionDisableDesc": "Allow screen sharing apps to capture the Star-Agent window.",
     "contentProtectionRestartNotice": "Changing this setting will restart the application. Do you want to continue?",
     "soundEnabled": "Enable Sound Effects",
     "copyWithCotEnabled": "Copy COT Details",
@@ -53,7 +53,7 @@
       "title": "Shortcut key settings"
     },
     "notifications": "System Notifications",
-    "notificationsDesc": "When DeepChat is not in the foreground, if a session is generated, a system notification will be sent",
+    "notificationsDesc": "When Star-Agent is not in the foreground, if a session is generated, a system notification will be sent",
     "contentProtection": "Screen capture protection"
   },
   "data": {
@@ -127,7 +127,7 @@
       },
       "description": "Please note that this configuration is only valid for the current model and will not affect other models. Please modify it with caution. Incorrect parameters may cause the model to not work properly.",
       "functionCall": {
-        "description": "Whether the model supports function calls natively (DeepChat will automatically simulate function calls after turning off this option)",
+        "description": "Whether the model supports function calls natively (Star-Agent will automatically simulate function calls after turning off this option)",
         "label": "Function Calls"
       },
       "maxTokens": {
@@ -377,7 +377,7 @@
     "githubCopilotNotConnected": "GitHub Copilot Not Connected",
     "loginWithGitHub": "Login with GitHub",
     "loggingIn": "Logging in...",
-    "githubCopilotLoginTip": "Authorize DeepChat to access your GitHub Copilot subscription. 'read:user' and 'read:org' permissions are required to access the Copilot API.",
+    "githubCopilotLoginTip": "Authorize Star-Agent to access your GitHub Copilot subscription. 'read:user' and 'read:org' permissions are required to access the Copilot API.",
     "loginSuccess": "Login successful",
     "loginFailed": "Login failed",
     "tokenValid": "Token is valid",
@@ -449,7 +449,7 @@
     "anthropicApiKeyTip": "Please go to Anthropic Console to get your API Key",
     "anthropicConnected": "Anthropic connected",
     "anthropicNotConnected": "Anthropic not connected",
-    "anthropicOAuthTip": "Click to authorize DeepChat to access your Anthropic account",
+    "anthropicOAuthTip": "Click to authorize Star-Agent to access your Anthropic account",
     "oauthLogin": "OAuth Login",
     "authMethod": "Authentication Method",
     "authMethodPlaceholder": "Select authentication method",
@@ -477,7 +477,7 @@
     "operationSuccess": "Operation is successful",
     "settingsApplied": "Settings applied",
     "bedrockLimitTip": "* Only Anthropic Claude supported (including Opus, Sonnet, Haiku models)",
-    "bedrockVerifyTip": "DeepChat uses Claude 3.5 Sonnet for verification. If you do not have permission to invoke, the verification will fail. This will not affect the use of other models."
+    "bedrockVerifyTip": "Star-Agent uses Claude 3.5 Sonnet for verification. If you do not have permission to invoke, the verification will fail. This will not affect the use of other models."
   },
   "knowledgeBase": {
     "title": "Knowledge Base Settings",

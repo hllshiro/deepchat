@@ -35,8 +35,8 @@
     "closeToQuit": "닫기 버튼을 클릭할 때 프로그램 종료",
     "contentProtection": "화면 보호",
     "contentProtectionDialogTitle": "화면 보호 전환 확인",
-    "contentProtectionEnableDesc": "화면 보호를 활성화하면 화면 공유 소프트웨어가 DeepChat 창을 캡쳐할 수 없습니다. 이 기능은 모든 인터페이스를 완전히 숨기지 않습니다. 이 기능을 사용할 때는 항상 규정을 준수하세요. 또한, 모든 화면 공유 소프트웨어가 이 기능을 지원하지 않을 수 있습니다. 또한, 일부 환경에서는 검은색 창이 남을 수 있습니다.",
-    "contentProtectionDisableDesc": "화면 보호를 비활성화하면 화면 공유 소프트웨어가 DeepChat 창을 캡쳐할 수 있습니다.",
+    "contentProtectionEnableDesc": "화면 보호를 활성화하면 화면 공유 소프트웨어가 Star-Agent 창을 캡쳐할 수 없습니다. 이 기능은 모든 인터페이스를 완전히 숨기지 않습니다. 이 기능을 사용할 때는 항상 규정을 준수하세요. 또한, 모든 화면 공유 소프트웨어가 이 기능을 지원하지 않을 수 있습니다. 또한, 일부 환경에서는 검은색 창이 남을 수 있습니다.",
+    "contentProtectionDisableDesc": "화면 보호를 비활성화하면 화면 공유 소프트웨어가 Star-Agent 창을 캡쳐할 수 있습니다.",
     "contentProtectionRestartNotice": "이 설정을 변경하면 프로그램이 재시작됩니다. 계속하시겠습니까?",
     "soundEnabled": "소리 활성화",
     "copyWithCotEnabled": "COT 정보 복사",
@@ -54,7 +54,7 @@
       "title": "바로 가기 키 설정"
     },
     "notifications": "시스템 알림",
-    "notificationsDesc": "DeepChat이 전경에 있지 않으면 세션이 생성되면 시스템 알림이 전송됩니다."
+    "notificationsDesc": "Star-Agent이 전경에 있지 않으면 세션이 생성되면 시스템 알림이 전송됩니다."
   },
   "data": {
     "title": "데이터 설정",
@@ -127,7 +127,7 @@
       },
       "description": "이 구성은 현재 모델에만 유효하며 다른 모델에는 영향을 미치지 않습니다. 주의해서 수정하십시오. 잘못된 매개 변수로 인해 모델이 제대로 작동하지 않을 수 있습니다.",
       "functionCall": {
-        "description": "모델이 기능을 지원하는지 여부는 기본적으로 호출을 지원합니다 (DeepChat은이 옵션을 끄면 기능 호출을 자동으로 시뮬레이션합니다).",
+        "description": "모델이 기능을 지원하는지 여부는 기본적으로 호출을 지원합니다 (Star-Agent은이 옵션을 끄면 기능 호출을 자동으로 시뮬레이션합니다).",
         "label": "기능 호출"
       },
       "maxTokens": {
@@ -377,7 +377,7 @@
     "githubCopilotNotConnected": "GitHub Copilot 연결되지 않음",
     "loginWithGitHub": "GitHub로 로그인",
     "loggingIn": "로그인 중...",
-    "githubCopilotLoginTip": "DeepChat이 GitHub Copilot 구독에 액세스하도록 허용하세요. Copilot API에 액세스하려면 'read:user' 및 'read:org' 권한이 필요합니다.",
+    "githubCopilotLoginTip": "Star-Agent이 GitHub Copilot 구독에 액세스하도록 허용하세요. Copilot API에 액세스하려면 'read:user' 및 'read:org' 권한이 필요합니다.",
     "loginSuccess": "로그인 성공",
     "loginFailed": "로그인 실패",
     "tokenValid": "토큰이 유효합니다",
@@ -397,7 +397,7 @@
     "anthropicApiKeyTip": "API 키를 얻으려면 Anthropic Console으로 이동하십시오.",
     "anthropicConnected": "인류 연결",
     "anthropicNotConnected": "인류가 연결되어 있지 않습니다",
-    "anthropicOAuthTip": "인류 계정에 액세스하려면 DeepChat 인증을 클릭하십시오",
+    "anthropicOAuthTip": "인류 계정에 액세스하려면 Star-Agent 인증을 클릭하십시오",
     "oauthLogin": "OAUTH 로그인",
     "authMethod": "인증 방법",
     "authMethodPlaceholder": "인증 방법 선택",
@@ -477,7 +477,7 @@
     "operationSuccess": "운영이 성공적입니다",
     "settingsApplied": "설정이 적용됩니다",
     "bedrockLimitTip": "* Anthropic Claude(Opus, Sonnet, Haiku 모델 포함)만 지원합니다.",
-    "bedrockVerifyTip": "DeepChat은 검증을 위해 Claude 3.5 Sonnet을 사용합니다. 호출 권한이 없으면 검증이 실패합니다. 이는 다른 모델 사용에는 영향을 미치지 않습니다."
+    "bedrockVerifyTip": "Star-Agent은 검증을 위해 Claude 3.5 Sonnet을 사용합니다. 호출 권한이 없으면 검증이 실패합니다. 이는 다른 모델 사용에는 영향을 미치지 않습니다."
   },
   "knowledgeBase": {
     "title": "지식 베이스 설정",

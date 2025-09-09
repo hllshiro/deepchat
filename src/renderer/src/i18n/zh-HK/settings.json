@@ -35,8 +35,8 @@
     "closeToQuit": "點擊關閉按鈕時退出程序",
     "contentProtection": "投屏保護",
     "contentProtectionDialogTitle": "確認切換投屏保護",
-    "contentProtectionEnableDesc": "開啟投屏保護可以防止投屏軟件捕獲DeepChat主窗口，用來保護您的內容隱私。請注意，此功能不會徹底隱藏所有界面，請合理合規使用。並且，並不是所有投屏軟件都遵守用戶隱私設定，該功能可能在一些不遵守隱私設定的投屏軟件上失效，且部分環境中可能會殘留一個黑色窗體。",
-    "contentProtectionDisableDesc": "關閉投屏保護將允許投屏軟件捕獲DeepChat窗口。",
+    "contentProtectionEnableDesc": "開啟投屏保護可以防止投屏軟件捕獲Star-Agent主窗口，用來保護您的內容隱私。請注意，此功能不會徹底隱藏所有界面，請合理合規使用。並且，並不是所有投屏軟件都遵守用戶隱私設定，該功能可能在一些不遵守隱私設定的投屏軟件上失效，且部分環境中可能會殘留一個黑色窗體。",
+    "contentProtectionDisableDesc": "關閉投屏保護將允許投屏軟件捕獲Star-Agent窗口。",
     "contentProtectionRestartNotice": "切換此設置將導致程序重啟，請確認是否繼續？",
     "soundEnabled": "啟用音效",
     "copyWithCotEnabled": "複製COT資訊",
@@ -54,7 +54,7 @@
       "title": "快捷鍵設置"
     },
     "notifications": "系統通知",
-    "notificationsDesc": "當 DeepChat 不在前台時，如有會話生成完畢會發送系統通知"
+    "notificationsDesc": "當 Star-Agent 不在前台時，如有會話生成完畢會發送系統通知"
   },
   "data": {
     "title": "數據設置",
@@ -127,7 +127,7 @@
       },
       "description": "請注意，此配置僅對當前模型有效，不會影響其他模型，請謹慎修改，錯誤的參數可能導致模型無法正常工作。",
       "functionCall": {
-        "description": "模型是否原生支持函數調用(關閉這個選項後DeepChat會自動模擬函數調用)",
+        "description": "模型是否原生支持函數調用(關閉這個選項後Star-Agent會自動模擬函數調用)",
         "label": "函數調用"
       },
       "maxTokens": {
@@ -377,7 +377,7 @@
     "githubCopilotNotConnected": "GitHub Copilot 未連接",
     "loginWithGitHub": "用 GitHub 登入",
     "loggingIn": "登入中...",
-    "githubCopilotLoginTip": "請授權 DeepChat 存取你的 GitHub Copilot 訂閱。需要 'read:user' 及 'read:org' 權限才能正常使用 Copilot API。",
+    "githubCopilotLoginTip": "請授權 Star-Agent 存取你的 GitHub Copilot 訂閱。需要 'read:user' 及 'read:org' 權限才能正常使用 Copilot API。",
     "loginSuccess": "登入成功",
     "loginFailed": "登入失敗",
     "tokenValid": "Token 有效",
@@ -397,7 +397,7 @@
     "anthropicApiKeyTip": "請前往 Anthropic Console 獲取您的 API Key",
     "anthropicConnected": "Anthropic 已連接",
     "anthropicNotConnected": "Anthropic 未連接",
-    "anthropicOAuthTip": "點擊授權 DeepChat 訪問您的 Anthropic 賬戶",
+    "anthropicOAuthTip": "點擊授權 Star-Agent 訪問您的 Anthropic 賬戶",
     "oauthLogin": "OAuth 登錄",
     "authMethod": "認證方式",
     "authMethodPlaceholder": "選擇認證方式",
@@ -477,7 +477,7 @@
     "operationSuccess": "操作成功",
     "settingsApplied": "設置已應用",
     "bedrockLimitTip": "* 僅支持 Anthropic Claude（包括 Opus，Sonnet，Haiku 模型）",
-    "bedrockVerifyTip": "DeepChat 使用 Claude 3.5 Sonnet 模型驗證，若您無此模型的調用權限驗證將失敗。這不會影響其他模型的使用。"
+    "bedrockVerifyTip": "Star-Agent 使用 Claude 3.5 Sonnet 模型驗證，若您無此模型的調用權限驗證將失敗。這不會影響其他模型的使用。"
   },
   "knowledgeBase": {
     "fastgptTitle": "FastGPT知識庫",

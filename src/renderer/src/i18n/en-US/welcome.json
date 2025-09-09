@@ -2,7 +2,7 @@
   "steps": {
     "welcome": {
       "title": "Welcome",
-      "description": "Let's start setting up DeepChat"
+      "description": "Let's start setting up Star-Agent"
     },
     "provider": {
       "title": "Provider",
@@ -17,7 +17,7 @@
       "description": "All set and ready to go!"
     }
   },
-  "title": "Welcome to DeepChat",
+  "title": "Welcome to Star-Agent",
   "description": "Let's walk you through the setup.",
   "provider": {
     "select": "Select a Provider",

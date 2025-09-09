@@ -1,5 +1,5 @@
-appId: com.wefonk.deepchat
-productName: DeepChat
+appId: com.senjone.staragent
+productName: Star-Agent
 directories:
   buildResources: build
 files:
@@ -68,4 +68,4 @@ mac:
 npmRebuild: true
 publish:
   provider: generic
-  url: https://cdn.deepchatai.cn/upgrade/
+  url: https://cdn.senjone.com/upgrade/
