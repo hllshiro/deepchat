@@ -1,0 +1,157 @@
+<template>
+  <div class="flex flex-col overflow-hidden h-0 flex-1">
+    <!-- 消息列表区域 -->
+    <MessageList
+      :key="chatStore.getActiveThreadId() ?? 'default'"
+      ref="messageList"
+      :messages="chatStore.getMessages()"
+    />
+
+    <!-- 输入框区域 -->
+    <div class="flex-none px-0 pb-0">
+      <ChatInput
+        ref="chatInput"
+        variant="chat"
+        :context-length="chatStore.chatConfig.contextLength"
+        :disabled="!chatStore.getActiveThreadId() || isGenerating"
+        @send="handleSend"
+        @file-upload="handleFileUpload"
+      />
+    </div>
+  </div>
+  <!-- Clean messages dialog -->
+  <Dialog v-model:open="cleanDialog.isOpen.value">
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>{{ t('dialog.cleanMessages.title') }}</DialogTitle>
+        <DialogDescription>
+          {{ t('dialog.cleanMessages.description') }}
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <Button variant="outline" @click="cleanDialog.cancel">{{ t('dialog.cancel') }}</Button>
+        <Button variant="destructive" @click="cleanDialog.confirm">{{
+          t('dialog.cleanMessages.confirm')
+        }}</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted, watch, computed, nextTick } from 'vue'
+import MessageList from './message/MessageList.vue'
+import ChatInput from './chat-input/ChatInput.vue'
+import { useRoute } from 'vue-router'
+import { UserMessageContent } from '@shared/chat'
+import { STREAM_EVENTS, SHORTCUT_EVENTS } from '@/events'
+import { useSettingsStore } from '@/stores/settings'
+import { useChatStore } from '@/stores/chat'
+import { useCleanDialog } from '@/composables/message/useCleanDialog'
+import { useI18n } from 'vue-i18n'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter
+} from '@shadcn/components/ui/dialog'
+import { Button } from '@shadcn/components/ui/button'
+
+const { t } = useI18n()
+const route = useRoute()
+const settingsStore = useSettingsStore()
+const chatStore = useChatStore()
+const cleanDialog = useCleanDialog()
+
+const messageList = ref()
+const chatInput = ref()
+
+const scrollToBottom = (smooth = true) => {
+  messageList.value?.scrollToBottom(smooth)
+}
+const isGenerating = computed(() => {
+  if (!chatStore.getActiveThreadId()) return false
+  return chatStore.generatingThreadIds.has(chatStore.getActiveThreadId()!)
+})
+const handleSend = async (msg: UserMessageContent) => {
+  scrollToBottom()
+  await chatStore.sendMessage(msg)
+  setTimeout(() => {
+    chatInput.value?.restoreFocus()
+  }, 100)
+}
+
+const handleFileUpload = () => {
+  scrollToBottom()
+}
+
+// 监听流式响应
+onMounted(async () => {
+  window.electron.ipcRenderer.on(STREAM_EVENTS.RESPONSE, (_, msg) => {
+    // console.log('stream-response', msg)
+    chatStore.handleStreamResponse(msg)
+  })
+
+  window.electron.ipcRenderer.on(STREAM_EVENTS.END, (_, msg) => {
+    chatStore.handleStreamEnd(msg)
+    // 当用户没有主动向上滚动时才自动滚动到底部
+    nextTick(() => {
+      if (messageList.value && !messageList.value.aboveThreshold) {
+        scrollToBottom(false)
+      }
+    })
+    setTimeout(() => {
+      chatInput.value?.restoreFocus()
+    }, 200)
+  })
+
+  window.electron.ipcRenderer.on(STREAM_EVENTS.ERROR, (_, msg) => {
+    chatStore.handleStreamError(msg)
+    setTimeout(() => {
+      chatInput.value?.restoreFocus()
+    }, 200)
+  })
+
+  window.electron.ipcRenderer.on(SHORTCUT_EVENTS.CLEAN_CHAT_HISTORY, () => {
+    cleanDialog.open()
+  })
+
+  if (route.query.modelId && route.query.providerId) {
+    const threadId = await chatStore.createThread('新会话', {
+      modelId: route.query.modelId as string,
+      providerId: route.query.providerId as string,
+      artifacts: settingsStore.artifactsEffectEnabled ? 1 : 0
+    })
+    chatStore.setActiveThread(threadId)
+  }
+})
+
+// 监听路由变化，创建新线程
+watch(
+  () => route.query,
+  async () => {
+    if (route.query.modelId && route.query.providerId) {
+      const threadId = await chatStore.createThread('新会话', {
+        modelId: route.query.modelId as string,
+        providerId: route.query.providerId as string,
+        artifacts: settingsStore.artifactsEffectEnabled ? 1 : 0
+      })
+      chatStore.setActiveThread(threadId)
+    }
+  }
+)
+
+// 清理事件监听
+onUnmounted(async () => {
+  window.electron.ipcRenderer.removeAllListeners(STREAM_EVENTS.RESPONSE)
+  window.electron.ipcRenderer.removeAllListeners(STREAM_EVENTS.END)
+  window.electron.ipcRenderer.removeAllListeners(STREAM_EVENTS.ERROR)
+  window.electron.ipcRenderer.removeAllListeners(SHORTCUT_EVENTS.CLEAN_CHAT_HISTORY)
+})
+
+defineExpose({
+  messageList
+})
+</script>

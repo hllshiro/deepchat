@@ -1,0 +1,68 @@
+{
+  "input": {
+    "placeholder": "Задайте вопрос? Вы можете ссылаться на инструменты, файлы, ресурсы через {'@'}...",
+    "fileArea": "Область файлов",
+    "inputArea": "Область ввода",
+    "functionSwitch": "Переключатель функций",
+    "fileSelect": "Выберите файл",
+    "pasteFiles": "Вставить файлы из буфера обмена",
+    "dropFiles": "Перетащите файлы сюда",
+    "promptFilesAdded": "Файлы промпта добавлены",
+    "promptFilesAddedDesc": "Успешно добавлено {count} файлов",
+    "promptFilesError": "Ошибка обработки файлов",
+    "promptFilesErrorDesc": "Не удалось обработать {count} файлов",
+    "historyPlaceholder": "(Нажмите Tab для автозаполнения)",
+    "rateLimitQueue": "Очередь {count}",
+    "rateLimitWait": "Ожидание {seconds}с",
+    "rateLimitQueueTooltip": "{count} запросов в очереди, интервал {interval} секунд",
+    "rateLimitReadyTooltip": "Готов к отправке, интервал {interval} секунд",
+    "rateLimitWaitingTooltip": "Ещё {seconds} секунд ожидания, интервал {interval} секунд"
+  },
+  "features": {
+    "webSearch": "Поиск в интернете",
+    "artifactThinking": "Артефакт мышление",
+    "thoughtForSeconds": "Мышление {seconds} секунд",
+    "thoughtForSecondsLoading": "Мышление ({seconds} секунд)"
+  },
+  "search": {
+    "results": "Найдено {0} веб-страниц",
+    "searching": "Поиск...",
+    "title": "Результаты поиска",
+    "description": "Найдено {0} связанных результатов",
+    "optimizing": "Извлечение поискового запроса...",
+    "reading": "Поиск и чтение веб-страниц...",
+    "error": "Ошибка поиска"
+  },
+  "messages": {
+    "thinking": "Думаю ...",
+    "rateLimitWaiting": "Ограничение скорости, ожидание в очереди...",
+    "rateLimitTitle": "Ограничение скорости запросов",
+    "rateLimitQueue": "Позиция в очереди",
+    "rateLimitEstimated": "Предполагаемое время ожидания",
+    "rateLimitQuickSettings": "Настроить ограничение",
+    "rateLimitSwitchProvider": "Сменить провайдера",
+    "rateLimitImmediately": "Немедленно",
+    "rateLimitSeconds": "секунд",
+    "rateLimitMinutes": "минут"
+  },
+  "rateLimit": {
+    "queueTooltip": "{count} запросов в очереди, интервал {interval} секунд",
+    "readyTooltip": "Готов к отправке, интервал {interval} секунд",
+    "waitingTooltip": "Ещё {seconds} секунд ожидания, интервал {interval} секунд"
+  },
+  "notify": {
+    "generationComplete": "Поколение завершено",
+    "generationError": "Поколение не удалось"
+  },
+  "navigation": {
+    "title": "Навигация по сообщениям",
+    "searchPlaceholder": "Поиск сообщений...",
+    "noResults": "Подходящих сообщений не найдено",
+    "noMessages": "Пока сообщений нет",
+    "totalMessages": "Всего {count} сообщений",
+    "searchResults": "Найдено {count} результатов из {total} сообщений",
+    "userMessage": "Сообщение пользователя",
+    "assistantMessage": "Ответ ассистента",
+    "unknownMessage": "Неизвестное сообщение"
+  }
+}

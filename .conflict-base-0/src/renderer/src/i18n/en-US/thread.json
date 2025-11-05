@@ -1,0 +1,35 @@
+{
+  "actions": {
+    "rename": "Rename",
+    "delete": "Delete",
+    "cleanMessages": "Clear Messages",
+    "pin": "Pin",
+    "unpin": "Unpin",
+    "export": "Export",
+    "exportText": "Plain Text"
+  },
+  "toolbar": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "previousVariant": "Previous Variant",
+    "nextVariant": "Next Variant",
+    "copy": "Copy as Markdown",
+    "copyImage": "Copy as Image",
+    "copyImageWithLongPress": "Copy as Image (long-press to capture from top)",
+    "copyFromTopSuccess": "Full conversation image copied",
+    "capturing": "Capturing...",
+    "retry": "Regenerate",
+    "fork": "Branch to New Chat",
+    "edit": "Edit message",
+    "delete": "Delete message"
+  },
+  "message": {
+    "toolbar": {
+      "save": "Save"
+    }
+  },
+  "export": {
+    "failed": "Export failed",
+    "failedDesc": "An error occurred during the export process, please try again"
+  }
+}

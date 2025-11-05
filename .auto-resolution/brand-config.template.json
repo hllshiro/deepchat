@@ -1,0 +1,85 @@
+{
+  "_comment": "请修改以下配置为您的品牌信息",
+  "app": {
+    "name": "Star-Agent",
+    "productName": "Star-Agent",
+    "appId": "com.wefonk.deepchat",
+    "description": "Star-Agent，一个简单易用的AI客户端",
+    "author": "星穹科技",
+    "website": "https://deepchatai.cn",
+    "copyright": "© 2025 星穹科技",
+    "executableName": "Star-Agent"
+  },
+  "update": {
+    "baseUrl": "https://cdn.senjone.cn/upgrade/"
+  },
+  "i18n": {
+    "appTitle": {
+      "en-US": "Star-Agent",
+      "zh-CN": "Star-Agent",
+      "zh-TW": "Star-Agent",
+      "zh-HK": "Star-Agent",
+      "ja-JP": "Star-Agent",
+      "ko-KR": "Star-Agent",
+      "ru-RU": "Star-Agent",
+      "fr-FR": "Star-Agent",
+      "fa-IR": "Star-Agent",
+      "pt-BR": "Star-Agent"
+    },
+    "appDescription": {
+      "en-US": "Star-Agent is a cross-platform AI client, dedicated to making AI accessible to more people.",
+      "zh-CN": "Star-Agent是一个跨平台AI客户端，致力于让更多人便捷地使用AI。",
+      "zh-TW": "Star-Agent 是一款跨平台 AI 應用程式，致力於讓更多人輕鬆使用 AI。",
+      "zh-HK": "Star-Agent是一個跨平台AI客戶端，致力於讓更多人便捷地使用AI。",
+      "ja-JP": "Star-Agentは、より多くの人々にAIへのアクセスを提供することを目的としたクロスプラットフォームAIクライアントです。",
+      "ko-KR": "Star-Agent은 더 많은 사람들이 AI에 접근할 수 있도록 하는 크로스 플랫폼 AI 클라이언트입니다。",
+      "ru-RU": "Star-Agent - это кроссплатформенный AI-клиент, предназначенный для того, чтобы сделать AI доступным для большего количества людей.",
+      "fr-FR": "Star-Agent est un client IA multiplateforme, dédié à rendre l'IA accessible à plus de personnes.",
+      "fa-IR": "دیپ چت یک کلاینت هوش مصنوعی چندپلتفرمه که هدفش در دسترس قرار دادن هوش مصنوعی برای افراد بیشتری است.",
+      "pt-BR": "Star-Agent é um cliente de IA multiplataforma, dedicado a tornar a IA acessível a mais pessoas."
+    },
+    "websiteText": {
+      "en-US": "Visit Our Website",
+      "zh-CN": "访问我们的网站",
+      "zh-TW": "造訪我們的網站",
+      "zh-HK": "訪問我們的網站",
+      "ja-JP": "ウェブサイトを訪問",
+      "ko-KR": "웹사이트 방문",
+      "ru-RU": "Посетить наш сайт",
+      "fr-FR": "Visitez notre site web",
+      "fa-IR": "وبسایت ما را ببینید",
+      "pt-BR": "Visite nosso site"
+    },
+    "welcomeTitle": {
+      "en-US": "Welcome to Star-Agent",
+      "zh-CN": "欢迎使用 Star-Agent",
+      "zh-TW": "歡迎使用 Star-Agent",
+      "zh-HK": "歡迎使用 Star-Agent",
+      "ja-JP": "Star-Agentへようこそ",
+      "ko-KR": "Star-Agent에 오신 것을 환영합니다",
+      "ru-RU": "Добро пожаловать в Star-Agent",
+      "fr-FR": "Bienvenue sur Star-Agent",
+      "fa-IR": "به Star-Agent خوش آمدید",
+      "pt-BR": "Bem-vindo ao Star-Agent"
+    },
+    "welcomeSetupDescription": {
+      "en-US": "Let's start setting up Star-Agent",
+      "zh-CN": "让我们开始设置 Star-Agent",
+      "zh-TW": "讓我們開始設定 Star-Agent",
+      "zh-HK": "讓我們開始設置 Star-Agent",
+      "ja-JP": "Star-Agentの設定を始めましょう",
+      "ko-KR": "Star-Agent 설정을 시작합시다",
+      "ru-RU": "Начнем настройку Star-Agent",
+      "fr-FR": "Commençons la configuration de Star-Agent",
+      "fa-IR": "بیایید تنظیم Star-Agent را شروع کنیم",
+      "pt-BR": "Vamos começar a configurar o Star-Agent"
+    }
+  },
+  "github": {
+    "repository": "星穹科技/star-agent"
+  },
+  "mcp": {
+    "serverDescriptionSuffix": "Star-Agent内置",
+    "serverDescriptionSuffixEn": "Star-Agent built-in"
+  }
+}

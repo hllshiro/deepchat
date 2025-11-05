@@ -1,0 +1,68 @@
+{
+  "input": {
+    "placeholder": "چیزی بپرسید؟ می‌توانید با {'@'} به ابزارها، پرونده‌ها، منابع ارجاع دهید...",
+    "fileArea": "ناحیه پرونده",
+    "inputArea": "ناحیه ورودی",
+    "functionSwitch": "کلید کارکرد",
+    "fileSelect": "انتخاب فایل",
+    "pasteFiles": "چسباندن فایل‌ها از بریده‌دان",
+    "dropFiles": "پرونده‌ها را اینجا رها کنید",
+    "promptFilesAdded": "پرونده‌ها افزوده شد",
+    "promptFilesAddedDesc": "{count} پرونده با موفقیت افزوده شد",
+    "promptFilesError": "خطا در پردازش پرونده",
+    "promptFilesErrorDesc": "پردازش {count} پرونده ناموفق بود",
+    "historyPlaceholder": "(برای تکمیل، Tab را فشار دهید)",
+    "rateLimitQueue": "صف {count}",
+    "rateLimitWait": "انتظار {seconds}ث",
+    "rateLimitQueueTooltip": "{count} درخواست در صف، فاصله {interval} ثانیه",
+    "rateLimitReadyTooltip": "آماده ارسال، فاصله {interval} ثانیه",
+    "rateLimitWaitingTooltip": "باید {seconds} ثانیه دیگر منتظر بمانید، فاصله {interval} ثانیه"
+  },
+  "features": {
+    "webSearch": "جستجوی وب",
+    "artifactThinking": "تفکر مصنوعی",
+    "thoughtForSeconds": "تفکر به مدت {seconds} ثانیه",
+    "thoughtForSecondsLoading": "در حال تفکر ({seconds} ثانیه)"
+  },
+  "search": {
+    "results": "{0} صفحه وب یافت شد",
+    "searching": "در حال جستجو...",
+    "title": "یافته‌های جستجو",
+    "description": "{0} نتیجه مرتبط یافت شد",
+    "optimizing": "در حال بهینه‌سازی عبارت جستجو...",
+    "reading": "در حال جستجو و خواندن صفحات وب...",
+    "error": "جستجو ناموفق بود"
+  },
+  "messages": {
+    "thinking": "در حال تفکر...",
+    "rateLimitWaiting": "محدودیت نرخ درخواست، در صف انتظار...",
+    "rateLimitTitle": "محدودیت نرخ درخواست",
+    "rateLimitQueue": "موقعیت صف",
+    "rateLimitEstimated": "زمان تخمینی انتظار",
+    "rateLimitQuickSettings": "تنظیم محدودیت",
+    "rateLimitSwitchProvider": "تغییر ارائه‌دهنده",
+    "rateLimitImmediately": "فوری",
+    "rateLimitSeconds": "ثانیه",
+    "rateLimitMinutes": "دقیقه"
+  },
+  "rateLimit": {
+    "queueTooltip": "{count} درخواست در صف، فاصله {interval} ثانیه",
+    "readyTooltip": "آماده ارسال، فاصله {interval} ثانیه",
+    "waitingTooltip": "باید {seconds} ثانیه دیگر منتظر بمانید، فاصله {interval} ثانیه"
+  },
+  "notify": {
+    "generationComplete": "ساخت تکمیل شد",
+    "generationError": "ساخت ناموفق بود"
+  },
+  "navigation": {
+    "title": "ناوبری پیام‌ها",
+    "searchPlaceholder": "جستجوی پیام‌ها...",
+    "noResults": "پیام منطبق پیدا نشد",
+    "noMessages": "هنوز پیامی وجود ندارد",
+    "totalMessages": "مجموع {count} پیام",
+    "searchResults": "{count} نتیجه از {total} پیام پیدا شد",
+    "userMessage": "پیام کاربر",
+    "assistantMessage": "پاسخ دستیار",
+    "unknownMessage": "پیام ناشناخته"
+  }
+}

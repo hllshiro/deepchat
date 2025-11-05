@@ -1,0 +1,19 @@
+{
+  "title": "Star-Agent",
+  "description": "Star-Agent은 더 많은 사람들이 AI에 접근할 수 있도록 하는 크로스 플랫폼 AI 클라이언트입니다。",
+  "website": "웹사이트 방문",
+  "disclaimerButton": "면책 조항",
+  "disclaimerTitle": "이용 약관 면책 조항",
+  "checkUpdateButton": "업데이트 확인",
+  "updateChannel": "업데이트 채널",
+  "stableChannel": "안정 버전",
+  "canaryChannel": "테스트 버전",
+  "deviceInfo": {
+    "title": "장치 정보",
+    "platform": "플랫폼",
+    "arch": "아키텍처",
+    "cpuModel": "CPU 모델",
+    "totalMemory": "총 메모리",
+    "osVersion": "시스템 버전"
+  }
+}

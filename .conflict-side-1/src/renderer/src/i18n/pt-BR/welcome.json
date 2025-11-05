@@ -1,0 +1,37 @@
+{
+  "steps": {
+    "welcome": {
+      "title": "Bem-vindo",
+      "description": "Vamos começar a configurar o Star-Agent"
+    },
+    "provider": {
+      "title": "Provedor",
+      "description": "Escolha seu provedor de modelo preferido"
+    },
+    "configuration": {
+      "title": "Configuração",
+      "description": "Configure os modelos que você deseja usar"
+    },
+    "complete": {
+      "title": "Concluído",
+      "description": "Tudo configurado e pronto para começar!"
+    }
+  },
+  "title": "Bem-vindo ao Star-Agent",
+  "description": "Vamos guiá-lo através da configuração.",
+  "provider": {
+    "select": "Selecione um Provedor",
+    "apiUrl": "URL da API",
+    "apiKey": "Chave da API",
+    "verifyLink": "Verificar Link"
+  },
+  "complete": {
+    "title": "Tudo Pronto!",
+    "description": "Está tudo configurado. Vamos começar!"
+  },
+  "buttons": {
+    "getStarted": "Começar",
+    "next": "Próximo",
+    "back": "Voltar"
+  }
+}

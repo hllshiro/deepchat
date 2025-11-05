@@ -1,0 +1,35 @@
+{
+  "actions": {
+    "rename": "Renommer",
+    "delete": "Supprimer",
+    "cleanMessages": "Nettoyer les messages",
+    "pin": "Épingler",
+    "unpin": "Détacher",
+    "export": "Exporter",
+    "exportText": "Texte brut"
+  },
+  "toolbar": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "previousVariant": "Variante précédente",
+    "nextVariant": "Variante suivante",
+    "copy": "Copier en Markdown",
+    "copyImage": "Copier en tant qu'image",
+    "retry": "Régénérer",
+    "fork": "Créer une branche",
+    "edit": "Modifier le message",
+    "delete": "Supprimer le message",
+    "capturing": "Capture en cours...",
+    "copyFromTopSuccess": "Image de session complète copiée",
+    "copyImageWithLongPress": "Copier en image (appui long pour capturer depuis le haut)"
+  },
+  "message": {
+    "toolbar": {
+      "save": "Enregistrer"
+    }
+  },
+  "export": {
+    "failed": "Échec de l'exportation",
+    "failedDesc": "Une erreur s'est produite pendant le processus d'exportation, veuillez réessayer"
+  }
+}

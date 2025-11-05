@@ -1,0 +1,68 @@
+{
+  "input": {
+    "placeholder": "질문하세요. {'@'}를 통해 도구, 파일, 리소스를 인용할 수 있습니다...",
+    "fileArea": "파일 영역",
+    "inputArea": "입력 영역",
+    "functionSwitch": "기능 전환",
+    "fileSelect": "파일 선택",
+    "pasteFiles": "파일 복사 붙여넣기 지원",
+    "dropFiles": "파일을 여기로 드래그하세요",
+    "promptFilesAdded": "프롬프트 파일이 추가됨",
+    "promptFilesAddedDesc": "{count}개 파일이 성공적으로 추가되었습니다",
+    "promptFilesError": "파일 처리 오류",
+    "promptFilesErrorDesc": "{count}개 파일 처리에 실패했습니다",
+    "historyPlaceholder": "(Tab 키로 입력)",
+    "rateLimitQueue": "대기열 {count}",
+    "rateLimitWait": "대기 {seconds}초",
+    "rateLimitQueueTooltip": "대기열에 {count}개 요청, 간격 {interval}초",
+    "rateLimitReadyTooltip": "전송 준비 완료, 간격 {interval}초",
+    "rateLimitWaitingTooltip": "{seconds}초 더 대기, 간격 {interval}초"
+  },
+  "features": {
+    "webSearch": "웹 검색",
+    "artifactThinking": "아티팩트 추론",
+    "thoughtForSeconds": "{seconds}초 동안 생각했습니다",
+    "thoughtForSecondsLoading": "{seconds}초째 생각 중..."
+  },
+  "search": {
+    "results": "{0}개의 웹 페이지를 찾았습니다",
+    "searching": "검색 중...",
+    "title": "검색 결과",
+    "description": "{0}개의 관련 결과를 찾았습니다",
+    "optimizing": "검색 의도 추출 중...",
+    "reading": "웹 페이지 검색 중...",
+    "error": "검색 실패"
+  },
+  "messages": {
+    "thinking": "생각...",
+    "rateLimitWaiting": "속도 제한으로 대기열에서 대기 중...",
+    "rateLimitTitle": "요청 속도 제한",
+    "rateLimitQueue": "대기열 위치",
+    "rateLimitEstimated": "예상 대기 시간",
+    "rateLimitQuickSettings": "제한 조정",
+    "rateLimitSwitchProvider": "제공자 변경",
+    "rateLimitImmediately": "즉시",
+    "rateLimitSeconds": "초",
+    "rateLimitMinutes": "분"
+  },
+  "rateLimit": {
+    "queueTooltip": "대기열에 {count}개 요청, 간격 {interval}초",
+    "readyTooltip": "전송 준비 완료, 간격 {interval}초",
+    "waitingTooltip": "{seconds}초 더 대기, 간격 {interval}초"
+  },
+  "notify": {
+    "generationComplete": "생성이 완료되었습니다",
+    "generationError": "생성에 실패했습니다"
+  },
+  "navigation": {
+    "title": "메시지 내비게이션",
+    "searchPlaceholder": "메시지 검색...",
+    "noResults": "일치하는 메시지를 찾을 수 없습니다",
+    "noMessages": "아직 메시지가 없습니다",
+    "totalMessages": "총 {count}개의 메시지",
+    "searchResults": "{total}개 중 {count}개의 결과를 찾았습니다",
+    "userMessage": "사용자 메시지",
+    "assistantMessage": "어시스턴트 답변",
+    "unknownMessage": "알 수 없는 메시지"
+  }
+}

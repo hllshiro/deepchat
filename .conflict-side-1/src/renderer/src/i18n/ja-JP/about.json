@@ -1,0 +1,19 @@
+{
+  "title": "Star-Agent",
+  "description": "Star-Agentは、より多くの人々にAIへのアクセスを提供することを目的としたクロスプラットフォームAIクライアントです。",
+  "website": "ウェブサイトを訪問",
+  "disclaimerButton": "免責事項",
+  "disclaimerTitle": "利用規約",
+  "checkUpdateButton": "アップデートを確認",
+  "updateChannel": "アップデートチャンネル",
+  "stableChannel": "安定版",
+  "canaryChannel": "テスト版",
+  "deviceInfo": {
+    "title": "デバイス情報",
+    "platform": "プラットフォーム",
+    "arch": "アーキテクチャ",
+    "cpuModel": "CPUモデル",
+    "totalMemory": "総メモリ",
+    "osVersion": "システムバージョン"
+  }
+}

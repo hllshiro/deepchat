@@ -1,0 +1,35 @@
+{
+  "actions": {
+    "rename": "ویرایش نام",
+    "delete": "پاک کردن",
+    "cleanMessages": "پاک کردن پیام‌ها",
+    "pin": "سنجاق کردن",
+    "unpin": "برداشتن سنجاق",
+    "export": "صادر کردن",
+    "exportText": "متن ساده"
+  },
+  "toolbar": {
+    "save": "ذخیره",
+    "cancel": "رد کردن",
+    "previousVariant": "گونه قبلی",
+    "nextVariant": "گونه بعدی",
+    "copy": "رونوشت به Markdown",
+    "copyImage": "رونوشت در قالب تصویر",
+    "copyImageWithLongPress": "رونوشت در قالب تصویر (فشار طولانی برای گرفتن از بالا)",
+    "copyFromTopSuccess": "تصویر کامل گفتگو رونویسی شد",
+    "capturing": "در حال گرفتن...",
+    "retry": "تولید دوباره",
+    "fork": "ساخت شاخه",
+    "edit": "ویرایش پیام",
+    "delete": "پاک کردن پیام"
+  },
+  "message": {
+    "toolbar": {
+      "save": "ذخیره"
+    }
+  },
+  "export": {
+    "failed": "صادرات شکست خورد",
+    "failedDesc": "در طی فرآیند صادرات خطایی رخ داده است ، لطفاً دوباره امتحان کنید"
+  }
+}
